@@ -1,0 +1,7 @@
+1. [Android Performance Tips](Android-Performance-Tips.md)
+2. [Android binder 笔记](Android-binder-笔记.md)
+3. [Android多线程准则及Tips总结](Android多线程准则及Tips总结.md)
+4. [Git rebase 使用流程总结](Git-rebase-使用流程总结.md)
+5. [失败轮子-我怎么设计AIDL API](失败轮子-我怎么设计AIDL-API.md)
+6. [怎么设计API](怎么设计API.md)
+7. [怎么面试](怎么面试.md)
