@@ -1,0 +1,226 @@
+{
+    "code": 0,
+    "msg": {
+        "onlySummary": "false"
+    },
+    "content": [{
+        "_id": "59dcf99249e7df2e66f87b93",
+        "updatedAt": "2017-10-10T16:47:58.182Z",
+        "createdAt": "2017-10-10T16:47:14.548Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# 怎么当面试官  \n毕业之后，第一次\b当面试官，总结一些心得。\n\n## 目标差\n作为面试官，你想知道什么？或者是说，面试官的目标是什么？  \n我希望知道面试者的这些方面\n\n1. 技术水平  \n一个是深度，一个是广度。  \n2. 自学能力  \n自学了什么？学到了什么水平？学了什么新技术？\n3. 团队意识  \nCode Review 怎么执行？碰到有争议的代码，怎么处理?  \n怎么跟后端协商API? 怎么跟设计协商UI实现？\n\n## \b怎么问？\n两个步骤\n1. 广度  \n有没有更多的实现方案？\b有没有类似的东西？\n2. 深度  \n原理，\b优缺点\n\n首先是一个简单的实现，随后就这个知识相关的知识点广度展开，然后深度展开。\n\n### 举例  \n我需要实现一个动画，例如平移一个`TextView`。  \n有几种实现方式？(基础，广度)  \n还有其他的实现方式吗？(广度，\b扩散思维能力)  \n\b\b每种的优劣？(深度)  \n\b某种实现方式的原理？为什么要这样？比如，ValueAnimator 的实现原理. (深度) \n动画的实现原理(深度)\n\n## \b其他\n\n1. 推荐5本\b技术书籍\n2. 非技术类的书\n3. 常见工具的使用\n    1. Git 的常见操作，merge, rebase, reset\n    2. 基本的 Linux 命令行\n\n\n## \b问题举例\n\n### 多线程水平\n1. 怎么写一个线程安全的单例？为什么这样是线程安全的or不安全的？（基础）\n2. volatile, synchronized 的用法？(\b基础)\n2. synchronized 原理？存在的问题？(深度)\n\n### Android 相关多线程\n1. \b在 非UI线程可以更新 UI 吗？ 为什么？（广度)\n3. 可以在子线程调Toast，Dialog吗？为什么? (广度)\n2. Handler 的实现原理（广度, 深度）\n\n### 内存管理\n1. GC 回收的流程(基础)\n2. 内存泄露原因？怎么查找？怎么解决？(基础)\n1. GC 算法，优劣(广度，深度)\n3. 写一个缓存类（基础). 为什么这样写？GC的时候，存在什么问题？(实践能力)\n\n### class 加载 \n这部分我也不懂。。\n1. 什么时候加载？存在\b哪里？什么时候回收？会加载不到吗？(基础)\n2. 有几种加载方式？优劣？(基础，广度)\n\n## Todo  \n结合其他人的面试经验，总结出适合我用的\b方式（套路）\n\n\n",
+        "__v": 0,
+        "title": "怎么面试",
+        "tags": ["面试"],
+        "comments": []
+    }, {
+        "_id": "5919ae057cd4bf5300156ea7",
+        "updatedAt": "2017-05-15T13:46:21.755Z",
+        "createdAt": "2017-05-15T13:32:53.336Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "",
+        "__v": 0,
+        "title": "这是个Bug...",
+        "tags": [],
+        "comments": []
+    }, {
+        "_id": "591964587cd4bf5300156ea6",
+        "updatedAt": "2017-05-15T13:44:36.877Z",
+        "createdAt": "2017-05-15T08:18:32.175Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# 单个API\n\n评定的标准\n1. *简洁易用*： 参数不超过4个，不需要注释就知道用途及使用方式\n2. *易扩展*：更改逻辑不需要动原先的代码，只需要注入新的实现。  \n比如注入新的接口实现。一般的做法是，预留一些可重载的接口，或提供注入的接口。  \n例如OkHttp 提供了 addIntercetor 更改 Request, Response 流程的逻辑; Gson 的 addTypeAdapter 自定义类型转换。\n\n如何检验？记住 ‘rule of three’。思考至少3个调用场景，3个扩展的情况。参考 Qt API 设计\n+ [Qt: API Design Principles](https://wiki.qt.io/API_Design_Principles)\n+ [The Little Manual of API Design](http://www4.in.tum.de/~blanchet/api-design.pdf)  \n\n例如登录接口，用户输入用户名，密码登录，对应的后台接口需要 用户名，加密sign，时间戳等。  \n\n## 标准: 简洁易用  \n前端的API有以下几种写法：\n\n### 1. 大对象传输参数型  \n```java\npublic class LoginParam {\n    String password;\n    String userName;\n    String sign;\n}\npublic void login(LoginParam param, Callback callback);\n```\n\n如果参数少于5个，这种方式更像是过度封装了，多一个不必要的**参数对象**。如果参数过多，使用 *Builder Pattern* 更合适。  \n弊端是，阅读&使用不方便，需要配合文档，否则使用者容易漏掉某些必选参数。  \n这种方式在某些动态语言中运用的较多，因为书写及其方便优雅，在PHP，JavaScript 中尤其常见. 例如  \n```javascript\n// JavaScript\nlogin({\n    'user': 'xechoz'\n    'password'： 'hello',\n    'from': 'mainPage',\n    'autoLogin': true\n}, result => {\n    \n});\n```\n参见[Node.js Api: http.request(options[, callback])](https://nodejs.org/api/http.html#http_http_request_options_callback), 其options包含了 10+ 个参数。\n\n### 2. 罗列参数型\n\n```java\n\n// 情形1：把计算参数的逻辑丢给调用者，如 sign = makeSign(...)\npublic void login(String userName, String sign, Callback callback)；\npublic static String makeSign(String userName, String passoword, long timeStemp, ...);\n\n// 情形2：用最少的参数，不暴露底层接口细节\npublic void login(String userName, String password, Callback callback);\n```\n简洁，易用。但是实际的开发中，只有一个逻辑的接口是比较少见的。更多的情况是，还有一个前置或后置的依赖流程接口，  \n这时login的接口很可能就必须带上相应的参数了，虽然这些不是**登录**所必须的。\n\n### 3. 长龙参数型  \n```java\n// 情形1：长参数列表\n/**\n* 登录。from, isForceLogin, isAd, adId 用于统计用户来源\n* ...\n* @param isFromAd 是否为广告页面带来的登录\n* @param adId 广告id。只有 isFromAd = true 时才需要。默认0\n**/\npublic void login(String userName, String password, Callback callback, Activity from, boolean isForceLogin, boolean isAd, int adId)\n\n// 情形2： 分离接口\n// 还是分为两个接口？让调用者保证调用login 之前调用 postLoginEvent?\npublic void login(String userName, String password, Callback callback);\npublic void postLoginEvent(String userName,  Activity from, boolean isForceLogin, boolean isAd, int adId);\n```\n实际的开发场景中，**长龙参数型**并不少见，因为不断添加需求，不同的业务逻辑耦合在同一个接口里，  \n如登录的时候需要统计用户来源，到底是写在同一个接口里，还是另外写一个接口，让使用者调用login之前，先调用统计接口？\n\n最后，似乎没有一种实现方式符合*简洁易用*的评定标准。只能根据具体的参数依赖，数量等选择当前最合适的API实现方式，  \n不久之后，随着业务的更改，这种实现方式就会显得臃肿，不合适，需要一次重构。这就是理论与现实的距离。\n\n## 标准: 扩展性\n易扩展的基础是，基于接口编程。依赖接口，并提供一个默认的接口实现，后期的更改&扩展可以注入新的接口实现。  \n\n```java\npublic interface ILogin {\n    void login(String userName, String password);\n}\n\nclass DefaultLogin implements ILogin {\n    ...\n}\n\nclass ApiLogin implements ILogin {\n    private ILogin loginImpl = new DefaultLogin();\n\n    public void setLoginImpl(ILogin loginImpl) {\n        this.loginImpl = loginImpl;\n    }\n\n    @Override\n    public void login(String userName, String password) {\n        loginImpl.login(userName, password);\n    }\n}\n\n// .. inject you implement\napiLogin.setLoginImpl(new MyLoginImpl());\n```\n\n又或者使用 `template/hook` 模式。这种适合在主流程不改动的情况下，扩展某一个步骤的实现。如登录完成执行的操作。  \n如Android View 的 draw -> onDraw, layout -> onLayout，使用者通过 hook 扩展自定义的行为。\n```java\n@Override\nprotected void onPreLogin() {\n    // 保存登录来源信息\n}\n\n@Overide\nprotected void onLogin(UserInfo info) {\n    super.onLogin(info);\n\n    if (info != null && info.isLogin()) {\n        // 保存统计信息\n    } else {\n        // 发送登录失败\n    }\n}\n\n@Override\nprotected void onDraw(Canvas canvas) {\n    // 自定义的绘制内容\n}\n```\n\n# API 集\n我把 API 设计风格分为两种： 分布式，集中式  \n假设现在有个需求，账户模块。从业务逻辑上可以分为，登录注册逻辑，账户信息，数据存储 等子模块。\n\n## 分布式\n顾名思义，分布式的api是各自独立的，尽量减少不必要中间依赖模块。比如，登录模块，注册模块 可以各自独立，不必有一个中间模块把两者强行耦合在一块。\n\n```java\nclass ApiLogin {\n    public void login() {...}\n}\n\nclass ApiData {\n    public void save(data) {...}\n}\n\nclass ApiSession {\n    public void setSession(String token, int timeOut) {...}\n}\n```\n\n## 集中式\n可以理解为把分布式的接口集中到一块的方式。这是最常见的设计方式，也是最容易被滥用的方式。用得好，接口可以很易用，因为入口唯一；用得烂，接口容易变得臃肿。 \n\n集中式的设计分为:\n+ *一层设计：core module 暴露所有api*   \ncore module 实现所有的 api 或者组合 子module，具体api由 子module 实现。  \n适合api少量的情况，如果api过多， core 模块容易臃肿，越到后期维护学习成本越大。一般我设计的API类，API 数量不超过10个, 以5个为标准；  \n另外，这种方式，每次添加接口都要改动 core api, 不相干的api也因为这个 core 类而存在被改动的风险。比如 core 包含了 登录，支付,   \n现在需要添加一个数据保存，而 登录支付 跟 数据保存 这些业务逻辑或api本应各自独立的。\n+ *二层设计：core api 暴露 sub module + 各个 sub module 暴露&实现各自的api*  \n如果某个 sub module 包含的api 很多，可能也会采用分层的方式包含自己的子api层。递归地包含更多的层级。  \ncore api 暴露这几个子模块，具体的api由子模块暴露。\n\n### 代码示例\n```java\n// 一层设计：\nclass CoreApi {\n    public void login() {\n        // login implement here\n        // or  \n        // apiLogin.login();\n    }\n\n    public void setUserInfo(UserInfo info) {...}\n}\n\n// 二层\nclass CoreApi {\n    ApiLogin getApiLogin() {\n        return apiLogin;\n    }\n\n    ApiUser getApiUser() {\n        return apiUser;\n    }\n}\n\nclass ApiLogin {\n    public void login() {\n        // login implements\n    }\n}\n\nclass ApiUser {\n    public void setUserInfo(UserInfo info) {}\n    //...\n}\n```\n\n# 注意事项\n\n1. observer pattern 的 API 注意内存泄露。考虑 WeakRefrence 等。最常见的如注册某个事件监听。\n2. Singleton & static 谨慎使用。释放不及时，或者 static 对象过多，都是OOM的罪魁祸首。\n",
+        "__v": 0,
+        "title": "怎么设计API",
+        "tags": ["架构", "设计"],
+        "comments": []
+    }, {
+        "_id": "590ecab47cd4bf5300156ea5",
+        "updatedAt": "2017-05-07T15:50:40.510Z",
+        "createdAt": "2017-05-07T07:20:20.888Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# 目标: \nGson 工具类，解决常见的json反序列化时的兼容问题。  \n例如，\"\" 空字符 转成 number 出错，\"12345 \" 前后空格 等。  \n\n# 兼容规则\n\n1. 通用  \n    所有非法的类型都转成默认值，如 null, 0, 空值，Arrays.EMTPY\n\n2. Number\n    - 空字符，空格 -> 0， null\n    - 字符.trim() \n\n3. Array \n    1. “”， {} -> 空数组\n\n# 实现\n\n1. Number  \n    兼容“”， “1234 ”，“ “， ” 123 “, null 的 Number\n\n因为 Number 是一个基类，对应地有一个  NumberTypeAdapter，  \n抽象公共的逻辑。\n\n```java\npublic abstract class  NumberTypeAdapter<T extends Number> extends TypeAdapter<T> {\n\n    @Override\n    public void write(JsonWriter out, T value) throws IOException {\n        out.value(value);\n    }\n\n    @Override\n    public T read(JsonReader in) throws IOException {\n        JsonToken jsonToken = in.peek();\n        switch (jsonToken) {\n            case NULL:\n                in.nextNull();\n                return null;\n            case NUMBER:\n            case STRING:\n                String value = in.nextString();\n\n                if (value != null) {\n                    value = value.trim();\n                }\n\n                if (value == null || value.isEmpty()) {\n                    return null;\n                } else {\n                    return read(value);\n                }\n            default:\n                throw new JsonSyntaxException(\"Expecting number, got: \" + jsonToken);\n        }\n    }\n\n    abstract protected T read(String value);\n}\n```\n\n具体的子类实现对应的类型转换，比如 LongTypeAdapter\n\n```java\npublic class LongTypeAdapter extends NumberTypeAdapter<Long> {\n    public final static TypeAdapterFactory FACTORY = TypeAdapters.newFactory(long.class, Long.class, new LongTypeAdapter());\n\n    @Override\n    protected Long read(String value) {\n        return Long.parseLong(value);\n    }\n}\n```\n\n2. Array \n\n    todo\n\n# API 封装\n\n两种方式 \n\n1. annotation\n    todo\n\n2. 主动调用\n\n入口API 把所有的 TypeAdpater 写入 GsonBuilder。另外，每个 XxTypeAdpater 都有一个  FACTORY, 供单独使用。\n\n```java\npublic class NumberBuilder {\n    public static GsonBuilder with() {\n        return new GsonBuilder()\n                .registerTypeAdapterFactory(DoubleTypeAdapter.FACTORY)\n                .registerTypeAdapterFactory(FloatTypeAdapter.FACTORY)\n                .registerTypeAdapterFactory(IntegerTypeAdapter.FACTORY)\n                .registerTypeAdapterFactory(LongTypeAdapter.FACTORY);\n    }\n}\n```",
+        "__v": 0,
+        "title": "Gson TypeAdapter 工具类",
+        "tags": ["gson"],
+        "comments": []
+    }, {
+        "_id": "58e905907cd4bf5300156ea4",
+        "updatedAt": "2017-04-09T12:37:33.181Z",
+        "createdAt": "2017-04-08T15:45:20.287Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# 单一入口api\n\n类似于后台的接口设计, 分为3层\n\n```\nclient -> api service -> router -> controller \n```\n\n1. api: 实现 aidl stub 的 service。跨进程的调用入口，将请求重定向到本进程的 router\n2. router: 根据请求参数分发到各自的 controller \n3. controller: 处理请求\n\n\n为了扩展性，aidl 提供的接口是通用的，必须可以接收后期各种新的功能。入口不能是 `doA(xx), doB(xx), doC(xx)` 这种具体的形式，\n\n而是 `do(request)`。为了使用方便，可以在client加一层 **ApiSdk** 负责 `doXX(xx) -> do(request)`。\n\n之后更改功能，只需要改对应的Controller实现。\n\n这个设计的优点是，aidl 只需定义一次，之后的接口更改，不需要更新 aidl, 可以向下兼容; \n\n弊端也很明显，失去了 aidl `in， out， inout` 参数跨进程同步修改的能力，object 变成单向的，值传递的，而不是 **引用**。\n\n注意，aidl 的 **引用object** 实质是 binder 实现的实时双向 marshalling, unmashalling, 是两个进程间不同内存地址的对象同步，\n\n跟一般的**Reference引用** 使用同一个进程的同一处内存是不一样的。\n\n举例说，**实现下载及上传文件功能**。按照以往的习惯AIDL接口设计为\n\n```\n# 使用 Callback 传输结果，callback 是需要 client 实现的 aidl 接口\noneway api.download(String fileType, String url, String fileName, Callback response);\n\n# 或者 通过aidl 的 in, out 同步参数\n# 接口1\napi.download(in Request request, out Response response);\n# 接口2\napi.upload(in Request request, out Response response);\n.\n.\n.\n# 接口N\napi.xx(x, y, z);\n```\n\n现在是，\n```\n# aidl: remote api 只有一个\noneway api.post(in request, Callback response);\n\n# Request\nclass Request implement Parcelable {\n    int code,\n    int apiCode,\n    String param\n}\n\n# Param json 格式的字符串\nparam:\n{\n    fileType: 'string',\n    url: 'string',\n    fileName: 'string'\n}\n\n# java: 每次新加接口，都是 client 加上接口封装 java ApiSdk \nclass ApiSdk {\n    void download(String fileType, String url, String fileName, Callback response) {\n        request.code = xx;\n        request.apiCode = ApiCode.DOWNLOAD;\n        request.param = {\n            fileType,\n            url,\n            fileName\n        };\n\n        api.post(request, response);\n    }\n\n    void upload(...) {\n\n    }\n\n    void xx(x, y, z) {\n\n    }\n}\n```\n\n----\n\n\n# 适合场景\n\n不需要靠引用传参获取处理结果的情况。\n\n这个设计的api还是多线程的，入口单一却没处理多线程调用，似乎不合理，到底是要多线程还是单线程模型，可以根据具体的业务场景需要在remote 的入口统一处理，比如使用 `MessageQueue` 转成单线程模型。\n\n想到这里才发现，单线程的模型这个就是 `Messenger` 的实现。。。#_#。\n\n我所想到的特性, `Messenger`的设计者都考虑到了。对方真是高手。\n\n\n----\n\n\n# 与Messenger的设计对比\n\n\n## api & Messager aidl: 接口及逻辑层\n\n`Messenger` 用于处理发送请求逻辑，相当于 api.aidl。核心接口及逻辑层。\n\naidl 部分的实现是在  `Handler` 的内部类 实现了 `IMessenger.aidl` 定义的 `send` 接口\n\n```\nprivate final class MessengerImpl extends IMessenger.Stub {\n    public void send(Message msg) {\n        msg.sendingUid = Binder.getCallingUid();\n        Handler.this.sendMessage(msg);\n    }\n}\n\n```\n\n\n对应关系是: `Messenger.send(), IMessenger.send() <--> api.post()`\n\n\n## Request & Message：数据层\n\n\n`Message` 作为实体类，存放请求数据，对应 `Request`\n\n**Message**\n\n```\npublic final class Message implements Parcelable {\n    public int what; // 可用于区分接口\n    public int arg1; // 简单参数\n    public int arg2; \n\n    /**\n     * An arbitrary object to send to the recipient.  When using\n     * {@link Messenger} to send the message across processes this can only\n     * be non-null if it contains a Parcelable of a framework class (not one\n     * implemented by the application).   For other data transfer use\n     * {@link #setData}.\n     * \n     * <p>Note that Parcelable objects here are not supported prior to\n     * the {@link android.os.Build.VERSION_CODES#FROYO} release.\n     */\n    public Object obj; // 复杂参数\n\n    /**\n     * Optional Messenger where replies to this message can be sent.  The\n     * semantics of exactly how this is used are up to the sender and\n     * receiver.\n     */\n    public Messenger replyTo; // 相当于 Callback 或 Response \n\n \n    public int sendingUid = -1;\n\n\n    // 传输复杂的参数。相当于 Request.params \n     /**\n     * Sets a Bundle of arbitrary data values. Use arg1 and arg2 members\n     * as a lower cost way to send a few simple integer values, if you can.\n     * @see #getData() \n     * @see #peekData()\n     */\n    public void setData(Bundle data) {\n        this.data = data;\n    } \n```\n\nMessage 还设计了 arg1, arg2 用于只需要传输简单参数的情形。\n\n`Messenger replyTo` 用于 remote 回调结果。client & remote 的来回通讯都是 `Messenger`, \n\n用同一个机制实现了请求&回调的功能。相比之下，我还特意实现了一个 `Callback.aidl`，有点多余。\n\n\n我又造了一个不及格的轮子。\n\n\n# doc\n\n1. [API 常用设计模式：Facade pattern](https://en.wikipedia.org/wiki/Facade_pattern)\n",
+        "__v": 0,
+        "title": "失败轮子-我怎么设计AIDL API",
+        "tags": ["API", "AIDL"],
+        "comments": []
+    }, {
+        "_id": "58e8f1a87cd4bf5300156ea3",
+        "updatedAt": "2017-04-08T14:23:45.869Z",
+        "createdAt": "2017-04-08T14:20:24.708Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "[Ubuntu 18.04 To Ship with GNOME Desktop, Not Unity](https://www.reddit.com/r/linux/comments/63mxms/ubuntu_1804_to_ship_with_gnome_desktop_not_unity/)\n\nUbuntu 宣布下个版本不要Unity了。这是今年2017年至4月8日 为止，令我最伤心的事了。\n\n从大一到今天，一个陪伴了我6年的老朋友就要走了，以后都不会见到他。\n\n我可以翻到他旧时的镜像，然后下载，安装，启动。仿佛在翻一本旧相册，看到逝去的背影。\n\n\n这是唯一一个没有多余菜单栏的桌面，每一个像素都用到了，没有一个点浪费。 \n\n在这个UX设计上，Unity 是做得最好的桌面，没有之一。Windows，Mac OS，其他Linux 桌面都没有他好。\n\n因此，我深爱这个极度简洁的设计，以及Unity。\n\n一个与我有着相同UX理念的老朋友。\n\n别了。",
+        "__v": 0,
+        "title": "别了，Unity",
+        "tags": ["Ubuntu"],
+        "comments": []
+    }, {
+        "_id": "58e258c97cd4bf5300156ea2",
+        "updatedAt": "2017-05-15T05:51:26.898Z",
+        "createdAt": "2017-04-03T14:14:33.867Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "Todo",
+        "__v": 0,
+        "title": "webview & java 通信架构",
+        "tags": ["Android", "IPC"],
+        "comments": []
+    }, {
+        "_id": "58c3ad4dd1311b3bee2f512d",
+        "updatedAt": "2017-03-18T05:38:33.147Z",
+        "createdAt": "2017-03-11T07:54:53.270Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# 一些基础概念\n\nkernel space：内核，驱动 等，一般是系统必须程序，所在的内存地址\n\nuser spspace：非kernel的，一般的Application, Library 运行的内存地址\n\n# 关于进程及内存空间的一些规则:\n1. 每个进程所在的 user space 是相互隔离的。\n2. user space 的进程，可以调用系统api（system calls），间接操作 kernel space。\n3. kernel space 的进程，可以直接操作 user space。通过`uacess`接口。\n\n我有几个地方是有疑问的：\n\n1. kernel space 存在进程吗？还是说，只有 kernel 本身？\n\n    kernel space 包括了 init 进程，及 fork 衍生出的其他进程。fork()->process, clone()->thread。\n\n    Linux 下 thread 相当于 共享资源的 process；因为kerenl process 是 light weight process, 所以一般称为 kernel thread, 而不是 kernel  process\n\n2. kernel space 的进程也是相互隔离的吗？IPC 是怎么样的？\n\n    进程间的IPC是统一的，并没有为 kernel space 的进程使用其他机制。\n\n3. process isolation 是怎么实现的？\n\n    (From Wikipedia: Process isolation)[https://en.wikipedia.org/wiki/Process_isolation]\n\n    > Process isolation can be implemented with virtual address space,\n    > where process A's address space is different from process B's\n    > address space – preventing A from writing onto B.\n\n    通过 *virtual address space* 控制进程的内存映射到物理地址的过程，避免不同进程的*越权*读写。\n    \n    另外，内存共享IPC，是kernel可以通过控制不同的虚拟内存映射到相同的物理内存实现。\n\n# Android Binder 的角色\n\n因为 user space 是相互隔离的，所以 user space 的两个 process, 假设为 A, B, 要进行交互&通信，必须存在一个负责连接 A, B 的中间人。\n\n而且，如果不采用传统的IPC，那这个中间人一定是要可以跟user space 的进程通信的，所以这个中间人要是运行在 kernel space 的进程。\n\nAndroid Binder 就是这个中间人。也就是说 Binder Driver 是运行在 kernel space 的。\n\n至于为什么Android要额外写一个 Binder Framework ，而不是复用Linux 下已有的IPC框架。\n这里 (Embedded Linux: Android Binder)[http://elinux.org/Android_Binder] 及文章内的外链有很详细&底层的解释，值得深读。\n\n# Android binder 调用流程及解释\n\nmarshaling: convert an object to multi primitive types\nunmarshaling: convert multi primitive types to an object\n\n我先约定以下概念及名称：\n\n1. **api**：对外接口\n2. **service**：提供api的程序&进程。运行在 user space\n3. **client**: service api 的使用者。运行在 user space\n\nclient calls `api.hello(msg)` workflow:\n\n```\n             (1)                             (2)\nuserspace  ------->     kernel space      -------->  userspace\nclient               Binder Framewrok                service\n           <-------                       <---------\n             (4)                             (3)\n```\n\n(1): client call service api through binder,\n    binder driver marshaling objects to primitive data, then stores primitive data in kernel space\n\n(2): binder driver unmarshaling primitive data to object, then  call service api passing object params\n\n(3) service api finish, pass result back to binder, binder marshaling object to primitive data, pass primitive datas to kernel space\n\n(4) binder driver read primitive data from kernel space, then marshaling back to object, pass object to client\n\nso we can define api result or params in complex data types, not only primitive types\n\n## 核心原理\n\n1. Binder 机制的 marshaling 及 unmarshaling\n\n    marshalling: convert user space object to primitive types. 然后，Binder Driver 把 primitive types data 保存到 kernel space\n    unmarshalling: Composite kernel space primitive types to object. 然后，把 object copy 到 user space.\n\n    大概理解为，Binder 把 process A 需传输的对象 复制，保存到 kernel space， 再从 kernel space 复制 到 process B 的内存空间。\n\n    kernel space 作为一个数据传输的中转站。\n\n2. user space process <-- data --> kernel space \n\n    `ioct`: user space 传输数据到 kernel space 的 Binder Driver\n\n    `uacess`： kernel space 的 Binder Driver 把数据传给 user space\n\n# 参考文档\n\n1. [必读-Deep Dive into Android IPC/Binder Framework at Android Builders Summit 2013](https://events.linuxfoundation.org/images/stories/slides/abs2013_gargentas.pdf)\n10. [必读-User space memory access from the Linux kernel](http://www.ibm.com/developerworks/library/l-kernel-memory-access/)\n3. [必读-Android Binder && Android Interprocess Communication](http://www.nds.rub.de/media/attachments/files/2012/03/binder.pdf)\n9. [推荐-Gityuan: Binder 系列](http://gityuan.com/2015/10/31/binder-prepare/)\n2. [基础概念-ELinux: Android Binder](http://elinux.org/Android_Binder)\n4. [基础概念-Marshalling](https://en.wikipedia.org/wiki/Marshalling_%28computer_science%29)\n5. [基础概念-Kernel space](http://www.linfo.org/kernel_space.html)\n6. [基础概念-User space](http://www.linfo.org/user_space.html)\n7. [基础概念-Kernel space vs User space](http://www.ruanyifeng.com/blog/2016/12/user_space_vs_kernel_space.html)\n8. [基础概念-IOCT](https://en.wikipedia.org/wiki/Ioctl)",
+        "__v": 0,
+        "title": "Android binder 笔记",
+        "tags": ["Android", "多进程"],
+        "comments": []
+    }, {
+        "_id": "589a8990b7af4e2d46790abd",
+        "updatedAt": "2017-02-08T02:59:28.255Z",
+        "createdAt": "2017-02-08T02:59:28.255Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# 一. 多线程准则\n\n`sychronized`的原理&机制，From Orocle Java Doc- [Intrinsic Locks and Synchronization](https://docs.oracle.com/javase/tutorial/essential/concurrency/locksync.html)\n\n> Synchronization is built around an internal entity known as the intrinsic lock or monitor lock. \n> (The API specification often refers to this entity simply as a \"monitor.\") Intrinsic locks play a role in both aspects of synchronization: \n> enforcing exclusive access to an object's state and > > establishing happens-before relationships that are essential to visibility.\n> Every object has an intrinsic lock associated with it. By convention, a thread that needs exclusive \n> and consistent access to an object's fields has to acquire the object's intrinsic lock before accessing them, \n> and then release the intrinsic lock when it's done with them. \n> A thread is said to own the intrinsic lock between the time it has acquired the lock and released the lock. \n> As long as a thread owns an intrinsic lock, no other thread can acquire the same lock. The other thread will block when it attempts to acquire the lock.\n> When a thread releases an intrinsic lock, a happens-before relationship is established between that action and any subsequent acquisition of the same lock.\n\n1. 可能在多个线程读写的对象，需要做好同步。\n\t\n\t最简单的方法是在读写的地方使用 `synchronized `，或者定义变量的时候用 `volatile`。\n\t但要适度，因为会引起性能问题，虽然影响的性能对一般的应用来说很小，但对于对并发性能敏感的场景要小心。\n\n    `volatile` 相关文章\n\n    1. [Java Volatile Keyword - Jenkov Tutorials](http://tutorials.jenkov.com/java-concurrency/volatile.html)\n    2. [InfoQ: 聊聊并发（一）——深入分析Volatile的实现原理](http://www.infoq.com/cn/articles/ftf-java-volatile#anch83442)\n\n2. `synchronized ` 的 作用范围越小越好。\n\n\t因为 **sychronized 同步是阻塞的，会降低多线程的性能**。\n\n3. `synchronized ` block 的执行时间一定要 **短**。\n\n    ```\n        private void demo() {\n            sychronized(objectA) {\n                doIt(); // 一定要快\n            }\n\n            afterWork();\n        }\n    ```\n\n\t理由同上，**sychronized 同步是阻塞的，会降低多线程的性能**。\n\n4. `synchronized method` 要少用\n\n    因为是整个 Object 的 sychronized\n    \n5. 多线程导致内存泄露\n\n\t对于提供了 callback， listener， register 等 注入行为的线程，要注意：\n\n\t1. 注入&引用的外部对象 最好使用非 StrongReference 的引用方式。比如用 WeakReference\n\n\t2. 在线程销毁的时候要释放引用的外部对象。\n\nTODO： 列出依据来源\n\n# 2. 多线程规范用法\n\n## 2.1 什么时候使用线程\n\n1. 频繁调用或者公共的子线程，放在 ThreadPool\n\n## 2.2 Android 中使用线程的规范\n\n1. Handler 及 HandlerThread 的规范用法\n\nTODO: 示例\n\n```Java\n```\n\n2. View.post 原理及注意事项\n\n3. Looper, MessageQueue 相关原理简单概括\n\n### 精简伪代码\n\n```java\nloop() {\n\t// loop forever until quit() is called\n\tfor (;;) {\n\t\tMessage msg = nextMsg();\n\n\t\tif (msg != null) {\n\t\t\trunMessageCallbackTask()\n\t\t} else {\n\t\t\tif (isQuit) {\n\t\t\t\tquitLoop();\n\t\t\t\treturn;\n\t\t\t}\n\n\t\t\tdoIdelTask();\n\t\t}\n\t}\n}\n\nnextMsg() {\n\treturn system_call_epoll(); // 如果没有event，则block 线程，等待event\n}\n```\n\n\n ### 轮询 调用流程\n\n```\nJAVA: Looper.loop() ->\nJAVA: MessageQueue.next() ->\nJNI: nativePollOnce(), android_os_MessageQueue_nativePollOnce() ->\nC++: NativeMessageQueue::pollOnce() ->\nC++: Looper::pollOnce(): 遍历消息列表,找到则返回；否则下一步 ->\nC++: Looper::pollInner() ->\nC: epoll_wait(): 轮询等待event，epoll, Linux 系统调用\n```\n\nepoll_wait 说明: [Linux Programmer's Manual: EPOLL(7)](http://man7.org/linux/man-pages/man7/epoll.7.html)\n> epoll_wait(2) waits for I/O events, blocking the calling thread if\n> no events are currently available.\n\n\n# 二. 多线程实践Tips\n\n1. 优先使用标志对象同步，避免使用 sychronized method 或 整个顶部对象\n\n适用场景: TODO\n\n```Java\npublic class Demo <T> {\n\tprivate Object lockList = new Object();\n\tprivate List<T> publicList;\n\n\t...\n\n\t// 首选写法\n\tpublic void addItem(T item) {\n\t\tsychronized(lockList) {\n\t\t\t...\n\t\t\tpublicList.addItem(item);\n\t\t\t... \n\t\t}\n\t}\n\n\t// 尽量不要这样用。因为调用此方法的线程都会阻塞? TODO: 待验证。列出原因\n\tsychronized public void addItem(T item) {\n\t\tpublicList.addItem(item);\n\n\t\t... \n\t}\n\n\t// 不要这样写。sychronized(this) 导致此对象的读写阻塞? TODO： 待验证\n\tpublic void addItem(T item) {\n\t\tsychronized(this) {\n\t\t\tpublicList.addItem(item);\n\t\t}\n\t}\n}\n```\n\n注意 **需要同步的对象，不要暴露给外部**, 因为调用者直接对同步对象的读写会导致不同步的问题\n\n```\n\t// NEVER DO THIS !!!\n\tpublic List<T> getList() {\n\t\treturn publicList; \n\t}\n```\n\n参考 Effective Java, Item#xx\n\n2. Singleton 的写法\n\n没有用到 `sychronized` 实现，性能是最好的。\n\n```Java\n\npublic class Demo {\n\tprivate static class InstanceHolder {\n\t\tprivate static Demo INSTANCE = new Demo();\n\t}\n\n\tprivate Demo() {\n\t\t...\n\t}\n\n\tpublic static getInstance() {\n\t\treturn InstanceHolder.INSTANCE;\n\t}\n}\n```\n\n\n# 三. 必读文章\n\n1. [Intrinsic Locks and Synchronization](https://docs.oracle.com/javase/tutorial/essential/concurrency/locksync.html)\n2. [Oracle Doc: Java Concurrency](https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html)\n3. [Understanding Android/Java Processes and Threads Related Concepts ](http://codetheory.in/android-handlers-runnables-loopers-messagequeue-handlerthread/)\n\n# 参考: \n\n1. [docs.oracle.com：Chapter 17. Threads and Locks](http://docs.oracle.com/javase/specs/jls/se7/html/jls-17.html)\n2. [docs.oracle.com: Atomic Access](https://docs.oracle.com/javase/tutorial/essential/concurrency/atomic.html)\n3. [StackOverflow: Java Singleton and Synchronization](http://stackoverflow.com/questions/11165852/java-singleton-and-synchronization)\n4. [Linux Programmer's Manual: EPOLL(7)](http://man7.org/linux/man-pages/man7/epoll.7.html)",
+        "__v": 0,
+        "title": "Android多线程准则及Tips总结",
+        "tags": [],
+        "comments": []
+    }, {
+        "_id": "58989e40b7af4e2d46790abc",
+        "updatedAt": "2017-05-15T13:49:28.605Z",
+        "createdAt": "2017-02-06T16:03:12.987Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# 准则\n\n1. 易用：离线, 缓存\n2. 简洁：没有多余的功能，没有用户不需要的功能。比如 点赞，分享 也可能是多余的。\n\n# TODO: 2017-02 \n\n## 1. Optimize\n1. move static files to Nginx: TODO\n\n2. front-end: split `bundle.js` && lazy load js files: DONE ，2017-2-9\n\n3. Nginx, NodeJS optimize: TODO\n\n4. SEO 优化: 评定标准，Google 搜索 xechoz blog 第一条。\n\n## 2. 功能\n\nTODO\n\n1. 标签 Doing\n\n2. 点赞：用于评估一篇文章的受欢迎程度。不一定是要点赞。可能还需要记录浏览次数。\n\n3. 手机版: 导航栏。大屏幕，单手操作，因为H5 swipe tab 性能不好，导航栏应该在底部，点击的形式；\n\n4. 离线缓存\n\n5. dev.xechoz.xyz： 开发文档. 使用 Gitbook 制作\n\n6. 博客根据更新时间 > 热度（比如 点赞，浏览数量） 排序 : 目前是 时间新到旧\n\n## Bug\n1. markdown +，- 标签无法显示。\n2. 代码块显示与其他编辑器的预览不一致\n3. 登录后没有自动跳转到首页。vue.js 使用lazy load 后出现的。\n4. 预览会导致编辑内容丢失\n5. 预览有时会创建一个新的空白blog\n\n-----",
+        "__v": 0,
+        "title": "本网站开发管理",
+        "tags": ["个人"],
+        "comments": []
+    }, {
+        "_id": "58974099d6c1f6575ff08a1a",
+        "updatedAt": "2017-03-18T07:34:55.812Z",
+        "createdAt": "2017-02-05T15:11:21.060Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# 1. git rebase work flow\n\n1. checkout public branch **ParentBranch**: \n\n\t`git checkout ParentBranch`\n\n\tupdate ParentBranch, or add, modified on ParentBranch. \n\n\tcommit your changes.\n\n2. checkout personal private working branch\n\t\n\tPersonalBranch which's parent branch is ParentBranch: \n\n\t`git checkout PersonalBranch`\n\n3. add, modified files on working branch PersonalBranch.\n4. commit changes: git commit -m 'do something cool'\n5. rebase working branch: git rebase -i ParentBranch PersonalBranch\n6. checkout ParentBranch: git checkout ParentBranch\n7. merge working branch `PersonalBranch` into public branch `ParentBranch`: git merge -v PersonalBranch\n\n------\n\n# 2. code example\n\n1. step 1: pull remote public branch\n\n```bash\ngit clone https://github.com/xechoz/demo.git \n\ngit checkout -b feature-hello # create working branch\ngit checkout master # back to public branch\n\n# add some files on public branch\necho \"public branch file\" >> public.md\n\ngit add public.md\n\n# Note: this commit is on public branch, but not private working branch feature-hello\ngit commit -m 'add public file' \n```\n\n2. step 2: checkout working branch\n\n```bash\ngit checkout -b feature-hello\n\n# or if feature-hello is exist\ngit checkout feature-hello\n```\n\n3. step 3 : add, modified files\n\n```\necho \"hello\" >> public.md\n\n# add more files\necho \"hello file\" >> hello.md\n```\n4. step 4: commit changes\n\n```\ngit add public.md\ngit commit -m 'update public file'\n\n\ngit add hello.md\ngit commit -m 'hello world'\n```\n\n5. step 5: rebase working branch\n\n```bash\n# Note: this make feature-hello update-to-date with master\ngit rebase -i master feature-hello \n```\n\n6. step 6: checkout back to public branch\n\n```bash\ngit checkout master\n```\n\n7. step 7: merge commits on private working branch\n\n```\n# because feature-hello is update-to-date with master, so there is no redundant 'merge-commit' here\ngit merge -v feature-hello\n```\n\n# 3. 正确的使用习惯\n\n## 3.1 什么时候使用 rebase， merge ？\n\n个人分支首选 rebase， 公共分支使用 merge。\n\n对非 upstream 的分支使用 merge 优先于 rebase， 如 `git merge -v origin/feature dev`, `git rebase -i origin/dev dev`\n\n## 3.2 举例\n\n1. remote origin branch: foo\n2. user A branch: foo_a -> origin/foo\n3. user B branch: foo_b -> origin/foo\n\n假如 A, B 的最近共同 commit 是 commit-1;\n\nUser A's local commits is `commit-a1, commit-a2`, and pushed to remote. \n\nNow, remote commits become `commit-1 -> commit-a1 -> commit-a2`;\n\n\nAnd user B commits to local : `commit-b1`. B's commit history becomes: `commit-1 -> commit-b1`\n\nNow comes the key point, should user B run  `git merge origin/foo fooB` or `git rebase origin/foo fooB ` ?\n\nBoth of the commands can **merge(not git's merge)** A's work into B's, but with `git merge origin/foo fooB` a redundant **merge commit**  \n\nlike `Merge remote-tracking branch 'origin/foo' into fooB` or some what will be added to the commit history. \n\nAnd with `rebase`, B only get what he what, with all A's work without an additional commit.\n\nwith ``git merge origin/foo fooB``: commit-1 -> commit-b1 -> commit-a1 -> commit-a2 -> redundant merge commit\n\nwith `git merge origin/foo fooB`: commit-1 -> commit-a1 -> commit-a2 -> commit-b1 \n\n我习惯在使用 rebase 合并远程 `origin upstream` 分支代码到个人本地分支， 比如  dev_local <--> origin/dev , 我会用 `git rebase origin/dev dev_local`合并代码， \n\n对于 **upstream 对应的分支**， 使用merge， 例如要合并 feature 分支到 dev_local, 使用 `git merge origin/feature dev_local` 而不是 `git rebase origin/feature dev_local`;\n\n而对公共分支的代码合并 我用 merge， 比如 develop 分支的代码 合并到 master。\n  \n# 参考\n\n1. [Merging vs. Rebasing](https://www.atlassian.com/git/tutorials/merging-vs-rebasing)",
+        "__v": 0,
+        "title": " Git rebase 使用流程总结",
+        "tags": ["Tips", "Git"],
+        "comments": []
+    }, {
+        "_id": "58884b693ec65671ecb19e1e",
+        "updatedAt": "2017-03-13T10:17:35.646Z",
+        "createdAt": "2017-01-25T06:53:29.311Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# 1. `javac` 对代码的优化可以忽略不计。\n\n可能的优化是 用更少bit的类型存放变量，例如 `int a=0`, javac 可能用 `boolean a = false` 表示。\n\n源码：\n\n```Java\nsynchronized public void one() {\n    int a = 20;\n    String b = \"b\";\n\n    if (100 > 10) {\n        Integer i = Integer.valueOf(\"2\");\n    }\n}\n```\n\n.class decompiled 得到的代码: \n```\npublic synchronized void one() {\n    boolean a = true;\n    String b = \"b\";\n    Integer var3 = Integer.valueOf(\"2\");\n}\n```\n\n# 2. javac 在编译代码的时候，可能会对源码做一些修改.\n\n比如`synchronized block` 在实现**同步**的功能时会加一个 `try-catch`，保证即使出现异常，也能及时释放对应的lock\n\n## 3. 优化是在运行时，由 JIT，HotSpot 等做的。\n\n# 参考\n\n1. [Why Java compiler add “Redundant read” before “synchronized block”?](https://stackoverflow.com/questions/41801613/why-java-compiler-add-redundant-read-before-synchronized-block)\n\n2. [jvms-Synchronization](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-3.html#jvms-3.14)",
+        "__v": 0,
+        "title": "关于 Java compiler & optimize code",
+        "tags": ["Java"],
+        "comments": []
+    }, {
+        "_id": "5880cf273ec65671ecb19e1d",
+        "updatedAt": "2017-03-13T10:38:58.105Z",
+        "createdAt": "2017-01-19T14:37:27.690Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# Android IntentFilter\n\n1. [filter: blog.xechoz.xyz/xx?a=1&b=2#post](https://blog.xechoz.xyz/xx?a=1&b=2#post)\n2. [filter demo://xxx/xx?a=xx&b=2#post](demo://xxx/xx?a=xx#post)\n3. [filter demo://blog.xechoz.xyz/xx?a=1#post](demo://blog.xechoz.xyz/xx?a=1post)\n\ntest filter use adb shell \n```bash\nadb shell am start -a android.intent.action.VIEW \\\n    -c android.intent.category.BROWSABLE \\\n    -d \"scheme://host:port/path?query1=1&query2=2#hello\"\n```",
+        "__v": 0,
+        "title": "Online Test Page",
+        "tags": ["DevTest"],
+        "comments": []
+    }, {
+        "_id": "5880c2703ec65671ecb19e1c",
+        "updatedAt": "2017-03-13T10:18:11.266Z",
+        "createdAt": "2017-01-19T13:43:12.215Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# Web\n\n## 1. [How to handle `Tab` in textarea?](https://stackoverflow.com/questions/6140632/how-to-handle-tab-in-textarea)\n\n```Javascript\nconst KEY_TAB = 0x00\nhtmlElement.addEventListener('keydown', (event) => {\n    if (event.code == KEY_TAB || event.key.toUpperCase() == 'TAB') {\n        // do something\n\n    \n        event.preventDefault();\n    }\n});\n\n// code example\n$(\"textarea\").keydown(function(e) {\n    if(e.keyCode === 9) { // tab was pressed\n        // get caret position/selection\n        var start = this.selectionStart;\n        var end = this.selectionEnd;\n\n        var $this = $(this);\n        var value = $this.val();\n\n        // set textarea value to: text before caret + tab + text after caret\n        $this.val(value.substring(0, start)\n                    + \"\\t\"\n                    + value.substring(end));\n\n        // put caret at right position again (add one for the tab)\n        this.selectionStart = this.selectionEnd = start + 1;\n\n        // prevent the focus lose\n        e.preventDefault();\n    }\n});\n```\n\n### doc\n\n1. [KeyboardEvent.code](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code)\n2. https://stackoverflow.com/questions/6140632/how-to-handle-tab-in-textarea\n\n## 2. ",
+        "__v": 0,
+        "title": "Tips",
+        "tags": ["Tips"],
+        "comments": []
+    }, {
+        "_id": "5880bede3ec65671ecb19e1b",
+        "updatedAt": "2017-01-19T13:27:58.539Z",
+        "createdAt": "2017-01-19T13:27:58.539Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "Android 数据压缩\n\n1. apk\n2. file\n  \n  1. image\n  2. network stream\n  3. persistent data：json files ， database ",
+        "__v": 0,
+        "title": "Android Data Compress",
+        "tags": [],
+        "comments": []
+    }, {
+        "_id": "587ceebb3ec65671ecb19e1a",
+        "updatedAt": "2017-03-13T10:18:30.188Z",
+        "createdAt": "2017-01-16T16:03:07.887Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "\n## 核心类\n\n1. ThreadPool\n2. Handler\n3. HandlerThread\n4. Looper\n\n## 问题\n\n1. Looper，Handler, MessageQueue, Thread 的架构，关系。\n2. 怎么实现定时任务？怎么实现定时循环的任务？\n",
+        "__v": 0,
+        "title": "Android 多线程",
+        "tags": [],
+        "comments": []
+    }, {
+        "_id": "587ceb363ec65671ecb19e19",
+        "updatedAt": "2017-01-16T15:48:06.715Z",
+        "createdAt": "2017-01-16T15:48:06.715Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# 功能需求整理\n\n核心是**开发Tips**。\n\n1. 从其他App分享内容，保存为笔记\n2. 编辑\n3. Tips 列表",
+        "__v": 0,
+        "title": "Android Blog Client",
+        "tags": [],
+        "comments": []
+    }, {
+        "_id": "587ce2da3ec65671ecb19e18",
+        "updatedAt": "2017-01-16T15:12:26.413Z",
+        "createdAt": "2017-01-16T15:12:26.413Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "    @Override\n    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {\n        super.onMeasure(widthMeasureSpec, heightMeasureSpec);\n\n        int width = getMeasuredWidth() + Math.abs(dotMargin.left + dotMargin.right);\n        int height =  getMeasuredHeight() + Math.abs(dotMargin.top + dotMargin.bottom);\n\n        ...\n        setMeasuredDimension(width, height);\n    }\n\n\nonMeasure 决定View的宽高，所以必须知道自己所写的CustomView 宽高有哪些部分组成。\n\n比如，提示消息数量的小红点View，其 width = 一般View的 with + 提示部分 width - 重叠部分的width；\n\n高度height的计算方式可类比得出。\n\n这是 [练手Demo](https://github.com/xechoz/demo) 里的 [DotView](https://github.com/xechoz/demo/blob/master/app/src/main/java/xyz/xechoz/demo/view/DotView.java) 第一版的实现方式：\n```java\n    @Override\n    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {\n        super.onMeasure(widthMeasureSpec, heightMeasureSpec);\n\n        int width = getMeasuredWidth() + Math.abs(dotMargin.left + dotMargin.right);\n        int height =  getMeasuredHeight() + Math.abs(dotMargin.top + dotMargin.bottom);\n\n        ...\n        setMeasuredDimension(width, height);\n    }\n```\n\n这里的计算公式还有很大缺陷。主要是没考虑到 小红点的各种相对位置。\n\n先改进公式：\n```\ncontentArea: 内容区\ndotArea: 小红点区域\n\ndotAreaWidth = dotMargin + content;\ncontentAreaWidth = margin + contnt;\n\nif (dotArea in contentArea) {\n    mixWidth = dotAreaWidth;\n} else {\n    // TODO: ? 这里怎么算\n}\n\nwidth = contentAreaWidth + dotAreaWidth - mixWidth\n```\n\n",
+        "__v": 0,
+        "title": "Custom View- onMeasure",
+        "tags": [],
+        "comments": []
+    }, {
+        "_id": "585a89673ec65671ecb19e17",
+        "updatedAt": "2016-12-21T13:53:43.084Z",
+        "createdAt": "2016-12-21T13:53:43.084Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# Android VM\n\n# Dex\n\n# ART\n\n# Dalvik\n\n# TODO",
+        "__v": 0,
+        "title": "Android VM- Dex & ART & Dalvik",
+        "tags": [],
+        "comments": []
+    }, {
+        "_id": "585a87773ec65671ecb19e16",
+        "updatedAt": "2016-12-21T13:45:27.756Z",
+        "createdAt": "2016-12-21T13:45:27.756Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# Android 中的 window \n\n# what's window\n\n# wiki\n",
+        "__v": 0,
+        "title": "window in Android",
+        "tags": [],
+        "comments": []
+    }, {
+        "_id": "584ecb473ec65671ecb19e15",
+        "updatedAt": "2016-12-12T16:07:35.674Z",
+        "createdAt": "2016-12-12T16:07:35.674Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "## 组合View、Composite View： Extend Layout/ViewGroup\n\n最常用的自定义View方式。根据毕业第一年的经验，绝大部分情况下 组合View 是实现自定组件最方便的方式。\n\n因为其开发简单快速，维护成本低。也可认为是 我不熟悉直接 extend view 的形式。最常用于实现列表的Item。\n\n在开发者模式开启“显示布局边界”，打开常用的App，可以看出其到底是*Composite View*还是*Flat View*。\n\n如微信朋友圈，聊天信息列表的item；Google Allo 的聊天内容item。\n\n组合View的优点在于，不需要控制 View 的绘制流程。只管使用现有的View，不必关心 Layout，Draw，Measure 等过程。\n\n最重要的是，可方便且快速实现。Easy and Simple to use.\n\n但是，缺点也很明显，性能不是最好的。性能损耗是因为包含的每个ChildView都有其 Layout，Draw，Measure 过程。\n\n所以Composite View 不适合用在对性能要求苛刻的地方，需要频繁调用的控件就不适合，\n\n比如 直播点赞动画。若用组合View的形式，每个点赞就需要不断addView，moveView，removeView。可能直接Extends View，然后draw & move 动画更合适。\n\n推荐看 [Custom Layouts on Android][#custom_layout]，关于自定义View的，写的非常有深度。\n\n实现步骤：\n\n1. extend a subclass of viewgroup. RelativeLayout, LinearLayout, FrameLayout, etc.\n2. pass a 'merge' layout as your view's content. \n3. (optional) add custom style attributes. `custom:state='loading'`, `custom:icon_gravity='left'`, etc.\n4. (optional)export API of your view. `CompositeView.setIcon(R.mipmap.app_icon)`, etc\n\n举例：\n\n*`CompositeView`*\n\n```Java\npublic class CompositeView extends RelativeLayout {\n    //... more code \n    public CompositeView() {\n\n    }\n}\n```\n\n*`composite-view.xml`*\n\n```xml\n\n```\n\n## Flat View：Extend View\n\nFlat View 的优缺点 跟 *Composite View* 刚好相反：实现困难，高性能。\n\n好吧，“困难”这个词要看个人能力，“高性能”也是。功力不够，直接*extends view*实现的效果，性能未必比*Composite View*好。\n\n比如 左边是输入验证码，右侧显示倒计时的发送验证码的控件, `SmsCodeEditext extends EditText`.\n\n困难在于，内容的Layout, Measure, Draw，Style 等，大部分都需要自己实现。比如 SmsCodeEditext 的 ‘Loading’ 是需要在 `onDraw` 中绘制上去。\n\n如果是包含了多个可点击的区域，那事件Event的分发处理, 点击效果也是要实现的。(考虑到要实现这么多功能，实际开发这个用*Composite View*更合适，这里仅为举例说明），\n\n“点击发送”，“输入验证码” 这些Event是要处理的，点击发送的效果也是要实现。\n\n所以，Flat View 通常需要处理：\n\n1. onDraw\n2. onMeasure\n3. (optional)onLayout\n4. (optional)Event Dispatch \n5. (optional)Touch Style\n\n## Custom View: Extends View\n\n这里的 *Custom View* 就是一般情况下说的 *自定义View*。适合用在*单个*的控件上。\n\n大部分的效果都是要使用Canvas绘制的，所以与此相关的 Canvas，Matrix，Path，Animator 等需要熟悉。\n\n常见的自定义控件，如 LoadingButton，其 Loading 图案需要draw上去；显示未读消息的小红点控件，小红点及小红点内文字适合绘制上去。\n\n可显示百分比的ProgressBar 等。\n\n步骤\n\n1. onDraw \n2. onMeasure\n\n## 注意事项\n\n## 实践\n\n### Code \n\nHere is the Android Demo project.\n\nJava code \n\n```Java\n```\n\nXML layout code \n\n```xml\n\n```\n\nCustom attributes xml code\n\n```xml\n\n```\n\n## Wiki\n\n[#custom_layout]: http://lucasr.org/2014/05/12/custom-layouts-on-android/ \"Custom Layouts on Android\"\n\n[#demo]: https://github.com/ \"Demo代码\"\n\n\n",
+        "__v": 0,
+        "tags": [],
+        "comments": []
+    }, {
+        "_id": "583c4b5fb51c8a13848183cc",
+        "updatedAt": "2017-03-13T10:18:52.265Z",
+        "createdAt": "2016-11-28T15:21:03.367Z",
+        "author": "583c3ebe77385dfc463a134c",
+        "content": "# Batch & Cache\n\n1. 减少不必要的计算\n\n一般在调用频繁的代码，有些代码是每次都一样的，可以移到其他地方，循环loop， 或重复调用的方法，如 View.onDraw(), View.onMeasure() 等。\n\nonDraw:\n\n```java\n\n// before\npublic void onDraw(Canvas canvas) {\n\tpaint.setTextColor(textColor); // 固定color\n\tpaint.setTextSize(textSize); // 固定 size\n\tpaint.setxxx(...); // 变动的\n\t...\n}\n\n\n// after\n\npublic void CustomView(...) {\n\t...\n\tinit();\n\t...\n}\n\nprivate init() {\n\t...\n\tpaint.setTextColor(textColor);\n\tpaint.setTextSize(textSize);\n\t...\n}\n\npublic void onDraw(Canvas canvas) {\n\tpaint.setxxx(...); // 只留下变动的\n\t...\n}\n\n```\n\n\nloop:\n\n```java\n// before\nfor (int i=0; i<size; i++) {\n\tint width = margin.left + margin.right; // 每次都计算\n\n\tif (width < MAX_WIDTH) {\n\t\t...\n\t} else {\n\t\t...\n\t}\n}\n\n\n// after, width 只算一次\nfor (int i=0, width = margin.left + margin.right; i<size; i++) {\n\n\tif (width < MAX_WIDTH) {\n\t\t...\n\t} else {\n\t\t...\n\t}\n}\n\n```\n\n2. cache 计算结果\n\n```\n\n```\n\n3. 减少方法调用次数\n\n写递归的时候要注意\n\n```java\n// 会出现 stack over flow： 性能最差，但易懂\npublic long computeFibonacci(int positionInFibSequence) {\n    if (positionInFibSequence <= 2) {\n        return 1;\n    } else {\n        return computeFibonacci(positionInFibSequence - 1)\n                + computeFibonacci(positionInFibSequence - 2);\n    }\n}\n\n// 会出现 stack over flow：性能一般，比较难懂\npublic long computeFibonacci(int term, long value, long prev) {\n    if (term == 0) {\n        return prev;\n    }\n\n    if (term == 1) {\n        return value;\n    }\n\n    return computeFibonacci(term - 1, value+prev, value);\n}\n\n/**\n * 性能最好, 比较难懂\n * \n * calculate from fib(0), fib(1) , fib(2), fib(3)...  until fib(term)\n */\npublic long fib(int term) {\n    if (term == 0) {\n        return 0;\n    }\n\n    if (term == 1) {\n        return 1;\n    }\n\n    long a = 0;\n    long b = 1;\n\n    long temp = a+b;\n\n    for (int i=2; i <= term; i++) {\n        temp = a+b; // store next result\n        a = b; // move b to a\n        b = temp; // b now stores the new result\n    }\n\n    return temp;\n}\n```\n\n# Doc\n\n1. [Udacity: Android Performance](https://classroom.udacity.com/courses/ud825/lessons/3764448604/concepts/37310891220923)",
+        "__v": 0,
+        "title": "Android Performance Tips",
+        "tags": ["Android", "Tips"],
+        "comments": []
+    }]
+}
