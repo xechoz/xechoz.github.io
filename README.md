@@ -1,3 +1,4 @@
+1. [BoringTabLayout: A Simplified version of TabLayout](https://github.com/xechoz/BoringTabLayout)
 1. [Android Performance Tips](Android-Performance-Tips.md)
 2. [Android binder 笔记](Android-binder-笔记.md)
 3. [Android多线程准则及Tips总结](Android多线程准则及Tips总结.md)
