@@ -1,3 +1,4 @@
+1. [A simple redux like framework for android](https://github.com/xechoz/android-kotlin-redux.git)
 1. [BoringTabLayout: A Simplified version of TabLayout](https://github.com/xechoz/BoringTabLayout)
 1. [Android Performance Tips](Android-Performance-Tips.md)
 2. [Android binder 笔记](Android-binder-笔记.md)
