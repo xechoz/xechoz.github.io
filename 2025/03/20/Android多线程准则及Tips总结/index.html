@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xechoz.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="一. 多线程准则sychronized的原理&amp;机制，From Orocle Java Doc- Intrinsic Locks and Synchronization  Synchronization is built around an internal entity known as the intrinsic lock or monitor lock.(The API specifi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android多线程准则及Tips总结">
+<meta property="og:url" content="https://xechoz.github.io/2025/03/20/Android%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%87%86%E5%88%99%E5%8F%8ATips%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="石头汤的博客">
+<meta property="og:description" content="一. 多线程准则sychronized的原理&amp;机制，From Orocle Java Doc- Intrinsic Locks and Synchronization  Synchronization is built around an internal entity known as the intrinsic lock or monitor lock.(The API specifi">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-20T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-19T19:13:28.067Z">
+<meta property="article:author" content="石头汤">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="threads">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xechoz.github.io/2025/03/20/Android%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%87%86%E5%88%99%E5%8F%8ATips%E6%80%BB%E7%BB%93/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xechoz.github.io/2025/03/20/Android%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%87%86%E5%88%99%E5%8F%8ATips%E6%80%BB%E7%BB%93/","path":"2025/03/20/Android多线程准则及Tips总结/","title":"Android多线程准则及Tips总结"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Android多线程准则及Tips总结 | 石头汤的博客</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">石头汤的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%87%86%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">一. 多线程准则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%A7%84%E8%8C%83%E7%94%A8%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">2. 多线程规范用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 什么时候使用线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Android-%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B%E7%9A%84%E8%A7%84%E8%8C%83"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Android 中使用线程的规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AE%E8%AF%A2-%E8%B0%83%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text">轮询 调用流程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E8%B7%B5Tips"><span class="nav-number">3.</span> <span class="nav-text">二. 多线程实践Tips</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-%E5%BF%85%E8%AF%BB%E6%96%87%E7%AB%A0"><span class="nav-number">4.</span> <span class="nav-text">三. 必读文章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考:</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">石头汤</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xechoz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xechoz" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/Android%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%87%86%E5%88%99%E5%8F%8ATips%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Android多线程准则及Tips总结 | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android多线程准则及Tips总结
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-20 12:00:00 / Modified: 03:13:28" itemprop="dateCreated datePublished" datetime="2025-03-20T12:00:00+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="一-多线程准则"><a href="#一-多线程准则" class="headerlink" title="一. 多线程准则"></a>一. 多线程准则</h1><p><code>sychronized</code>的原理&amp;机制，From Orocle Java Doc- <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/essential/concurrency/locksync.html">Intrinsic Locks and Synchronization</a></p>
+<blockquote>
+<p>Synchronization is built around an internal entity known as the intrinsic lock or monitor lock.<br>(The API specification often refers to this entity simply as a “monitor.”) Intrinsic locks play a role in both aspects of synchronization:<br>enforcing exclusive access to an object’s state and &gt; &gt; establishing happens-before relationships that are essential to visibility.<br>Every object has an intrinsic lock associated with it. By convention, a thread that needs exclusive<br>and consistent access to an object’s fields has to acquire the object’s intrinsic lock before accessing them,<br>and then release the intrinsic lock when it’s done with them.<br>A thread is said to own the intrinsic lock between the time it has acquired the lock and released the lock.<br>As long as a thread owns an intrinsic lock, no other thread can acquire the same lock. The other thread will block when it attempts to acquire the lock.<br>When a thread releases an intrinsic lock, a happens-before relationship is established between that action and any subsequent acquisition of the same lock.</p>
+</blockquote>
+<ol>
+<li><p>可能在多个线程读写的对象，需要做好同步。</p>
+<p> 最简单的方法是在读写的地方使用 <code>synchronized </code>，或者定义变量的时候用 <code>volatile</code>。<br> 但要适度，因为会引起性能问题，虽然影响的性能对一般的应用来说很小，但对于对并发性能敏感的场景要小心。</p>
+<p> <code>volatile</code> 相关文章</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://tutorials.jenkov.com/java-concurrency/volatile.html">Java Volatile Keyword - Jenkov Tutorials</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.infoq.com/cn/articles/ftf-java-volatile#anch83442">InfoQ: 聊聊并发（一）——深入分析Volatile的实现原理</a></li>
+</ol>
+</li>
+<li><p><code>synchronized </code> 的 作用范围越小越好。</p>
+<p> 因为 <strong>sychronized 同步是阻塞的，会降低多线程的性能</strong>。</p>
+</li>
+<li><p><code>synchronized </code> block 的执行时间一定要 <strong>短</strong>。</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private void demo() &#123;</span><br><span class="line">    sychronized(objectA) &#123;</span><br><span class="line">        doIt(); // 一定要快</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    afterWork();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 理由同上，<strong>sychronized 同步是阻塞的，会降低多线程的性能</strong>。</p>
+</li>
+<li><p><code>synchronized method</code> 要少用</p>
+<p> 因为是整个 Object 的 sychronized</p>
+</li>
+<li><p>多线程导致内存泄露</p>
+<p> 对于提供了 callback， listener， register 等 注入行为的线程，要注意：</p>
+<ol>
+<li><p>注入&amp;引用的外部对象 最好使用非 StrongReference 的引用方式。比如用 WeakReference</p>
+</li>
+<li><p>在线程销毁的时候要释放引用的外部对象。</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>TODO： 列出依据来源</p>
+<h1 id="2-多线程规范用法"><a href="#2-多线程规范用法" class="headerlink" title="2. 多线程规范用法"></a>2. 多线程规范用法</h1><h2 id="2-1-什么时候使用线程"><a href="#2-1-什么时候使用线程" class="headerlink" title="2.1 什么时候使用线程"></a>2.1 什么时候使用线程</h2><ol>
+<li>频繁调用或者公共的子线程，放在 ThreadPool</li>
+</ol>
+<h2 id="2-2-Android-中使用线程的规范"><a href="#2-2-Android-中使用线程的规范" class="headerlink" title="2.2 Android 中使用线程的规范"></a>2.2 Android 中使用线程的规范</h2><ol>
+<li>Handler 及 HandlerThread 的规范用法</li>
+</ol>
+<p>TODO: 示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> View.post 原理及注意事项</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> Looper, MessageQueue 相关原理简单概括</span><br><span class="line"></span><br><span class="line">### 精简伪代码</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="title function_">loop</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="comment">// loop forever until quit() is called</span></span><br><span class="line">	<span class="keyword">for</span> (;;) &#123;</span><br><span class="line">		<span class="type">Message</span> <span class="variable">msg</span> <span class="operator">=</span> nextMsg();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (msg != <span class="literal">null</span>) &#123;</span><br><span class="line">			runMessageCallbackTask()</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (isQuit) &#123;</span><br><span class="line">				quitLoop();</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			doIdelTask();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">nextMsg() &#123;</span><br><span class="line">	<span class="keyword">return</span> system_call_epoll(); <span class="comment">// 如果没有event，则block 线程，等待event</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="轮询-调用流程"><a href="#轮询-调用流程" class="headerlink" title="轮询 调用流程"></a>轮询 调用流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JAVA: Looper.loop() -&gt;</span><br><span class="line">JAVA: MessageQueue.next() -&gt;</span><br><span class="line">JNI: nativePollOnce(), android_os_MessageQueue_nativePollOnce() -&gt;</span><br><span class="line">C++: NativeMessageQueue::pollOnce() -&gt;</span><br><span class="line">C++: Looper::pollOnce(): 遍历消息列表,找到则返回；否则下一步 -&gt;</span><br><span class="line">C++: Looper::pollInner() -&gt;</span><br><span class="line">C: epoll_wait(): 轮询等待event，epoll, Linux 系统调用</span><br></pre></td></tr></table></figure>
+
+<p>epoll_wait 说明: <a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man7/epoll.7.html">Linux Programmer’s Manual: EPOLL(7)</a></p>
+<blockquote>
+<p>epoll_wait(2) waits for I&#x2F;O events, blocking the calling thread if<br>no events are currently available.</p>
+</blockquote>
+<h1 id="二-多线程实践Tips"><a href="#二-多线程实践Tips" class="headerlink" title="二. 多线程实践Tips"></a>二. 多线程实践Tips</h1><ol>
+<li>优先使用标志对象同步，避免使用 sychronized method 或 整个顶部对象</li>
+</ol>
+<p>适用场景: TODO</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &lt;T&gt; &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">Object</span> <span class="variable">lockList</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">	<span class="keyword">private</span> List&lt;T&gt; publicList;</span><br><span class="line"></span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 首选写法</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addItem</span><span class="params">(T item)</span> &#123;</span><br><span class="line">		sychronized(lockList) &#123;</span><br><span class="line">			...</span><br><span class="line">			publicList.addItem(item);</span><br><span class="line">			... </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 尽量不要这样用。因为调用此方法的线程都会阻塞? <span class="doctag">TODO:</span> 待验证。列出原因</span></span><br><span class="line">	sychronized <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addItem</span><span class="params">(T item)</span> &#123;</span><br><span class="line">		publicList.addItem(item);</span><br><span class="line"></span><br><span class="line">		... </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 不要这样写。sychronized(this) 导致此对象的读写阻塞? TODO： 待验证</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addItem</span><span class="params">(T item)</span> &#123;</span><br><span class="line">		sychronized(<span class="built_in">this</span>) &#123;</span><br><span class="line">			publicList.addItem(item);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意 <strong>需要同步的对象，不要暴露给外部</strong>, 因为调用者直接对同步对象的读写会导致不同步的问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// NEVER DO THIS !!!</span><br><span class="line">public List&lt;T&gt; getList() &#123;</span><br><span class="line">	return publicList; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参考 Effective Java, Item#xx</p>
+<ol start="2">
+<li>Singleton 的写法</li>
+</ol>
+<p>没有用到 <code>sychronized</code> 实现，性能是最好的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">InstanceHolder</span> &#123;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Demo</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Demo</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Demo</span><span class="params">()</span> &#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> InstanceHolder.INSTANCE;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="三-必读文章"><a href="#三-必读文章" class="headerlink" title="三. 必读文章"></a>三. 必读文章</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/essential/concurrency/locksync.html">Intrinsic Locks and Synchronization</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html">Oracle Doc: Java Concurrency</a></li>
+<li><a target="_blank" rel="noopener" href="http://codetheory.in/android-handlers-runnables-loopers-messagequeue-handlerthread/">Understanding Android&#x2F;Java Processes and Threads Related Concepts </a></li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h1><ol>
+<li><a target="_blank" rel="noopener" href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-17.html">docs.oracle.com：Chapter 17. Threads and Locks</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/essential/concurrency/atomic.html">docs.oracle.com: Atomic Access</a></li>
+<li><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/11165852/java-singleton-and-synchronization">StackOverflow: Java Singleton and Synchronization</a></li>
+<li><a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man7/epoll.7.html">Linux Programmer’s Manual: EPOLL(7)</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/android/" rel="tag"># android</a>
+              <a href="/tags/threads/" rel="tag"># threads</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/20/Git-rebase-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93/" rel="prev" title="Git Rebase">
+                  <i class="fa fa-angle-left"></i> Git Rebase
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/20/Android-binder-%E7%AC%94%E8%AE%B0/" rel="next" title="Learn Android Binder">
+                  Learn Android Binder <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">石头汤</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

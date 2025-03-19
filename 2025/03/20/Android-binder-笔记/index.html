@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xechoz.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="一些基础概念kernel space：内核，驱动 等，一般是系统必须程序，所在的内存地址 user spspace：非kernel的，一般的Application, Library 运行的内存地址 关于进程及内存空间的一些规则: 每个进程所在的 user space 是相互隔离的。 user space 的进程，可以调用系统api（system calls），间接操作 kernel space。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Learn Android Binder">
+<meta property="og:url" content="https://xechoz.github.io/2025/03/20/Android-binder-%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="石头汤的博客">
+<meta property="og:description" content="一些基础概念kernel space：内核，驱动 等，一般是系统必须程序，所在的内存地址 user spspace：非kernel的，一般的Application, Library 运行的内存地址 关于进程及内存空间的一些规则: 每个进程所在的 user space 是相互隔离的。 user space 的进程，可以调用系统api（system calls），间接操作 kernel space。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-20T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-19T19:13:35.304Z">
+<meta property="article:author" content="石头汤">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="binder">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xechoz.github.io/2025/03/20/Android-binder-%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xechoz.github.io/2025/03/20/Android-binder-%E7%AC%94%E8%AE%B0/","path":"2025/03/20/Android-binder-笔记/","title":"Learn Android Binder"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Learn Android Binder | 石头汤的博客</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">石头汤的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">一些基础概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E8%BF%9B%E7%A8%8B%E5%8F%8A%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%E7%9A%84%E4%B8%80%E4%BA%9B%E8%A7%84%E5%88%99"><span class="nav-number">2.</span> <span class="nav-text">关于进程及内存空间的一些规则:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-Binder-%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">3.</span> <span class="nav-text">Android Binder 的角色</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-binder-%E8%B0%83%E7%94%A8%E6%B5%81%E7%A8%8B%E5%8F%8A%E8%A7%A3%E9%87%8A"><span class="nav-number">4.</span> <span class="nav-text">Android binder 调用流程及解释</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="nav-number">4.1.</span> <span class="nav-text">核心原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">石头汤</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xechoz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xechoz" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/Android-binder-%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Learn Android Binder | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Learn Android Binder
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-20 12:00:00 / Modified: 03:13:35" itemprop="dateCreated datePublished" datetime="2025-03-20T12:00:00+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="一些基础概念"><a href="#一些基础概念" class="headerlink" title="一些基础概念"></a>一些基础概念</h1><p>kernel space：内核，驱动 等，一般是系统必须程序，所在的内存地址</p>
+<p>user spspace：非kernel的，一般的Application, Library 运行的内存地址</p>
+<h1 id="关于进程及内存空间的一些规则"><a href="#关于进程及内存空间的一些规则" class="headerlink" title="关于进程及内存空间的一些规则:"></a>关于进程及内存空间的一些规则:</h1><ol>
+<li>每个进程所在的 user space 是相互隔离的。</li>
+<li>user space 的进程，可以调用系统api（system calls），间接操作 kernel space。</li>
+<li>kernel space 的进程，可以直接操作 user space。通过<code>uacess</code>接口。</li>
+</ol>
+<p>我有几个地方是有疑问的：</p>
+<ol>
+<li><p>kernel space 存在进程吗？还是说，只有 kernel 本身？</p>
+<p> kernel space 包括了 init 进程，及 fork 衍生出的其他进程。fork()-&gt;process, clone()-&gt;thread。</p>
+<p> Linux 下 thread 相当于 共享资源的 process；因为kerenl process 是 light weight process, 所以一般称为 kernel thread, 而不是 kernel  process</p>
+</li>
+<li><p>kernel space 的进程也是相互隔离的吗？IPC 是怎么样的？</p>
+<p> 进程间的IPC是统一的，并没有为 kernel space 的进程使用其他机制。</p>
+</li>
+<li><p>process isolation 是怎么实现的？</p>
+<p> (From Wikipedia: Process isolation)[<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Process_isolation]">https://en.wikipedia.org/wiki/Process_isolation]</a></p>
+<blockquote>
+<p>Process isolation can be implemented with virtual address space,<br>where process A’s address space is different from process B’s<br>address space – preventing A from writing onto B.</p>
+</blockquote>
+<p> 通过 <em>virtual address space</em> 控制进程的内存映射到物理地址的过程，避免不同进程的<em>越权</em>读写。</p>
+<p> 另外，内存共享IPC，是kernel可以通过控制不同的虚拟内存映射到相同的物理内存实现。</p>
+</li>
+</ol>
+<h1 id="Android-Binder-的角色"><a href="#Android-Binder-的角色" class="headerlink" title="Android Binder 的角色"></a>Android Binder 的角色</h1><p>因为 user space 是相互隔离的，所以 user space 的两个 process, 假设为 A, B, 要进行交互&amp;通信，必须存在一个负责连接 A, B 的中间人。</p>
+<p>而且，如果不采用传统的IPC，那这个中间人一定是要可以跟user space 的进程通信的，所以这个中间人要是运行在 kernel space 的进程。</p>
+<p>Android Binder 就是这个中间人。也就是说 Binder Driver 是运行在 kernel space 的。</p>
+<p>至于为什么Android要额外写一个 Binder Framework ，而不是复用Linux 下已有的IPC框架。<br>这里 (Embedded Linux: Android Binder)[<a target="_blank" rel="noopener" href="http://elinux.org/Android_Binder]">http://elinux.org/Android_Binder]</a> 及文章内的外链有很详细&amp;底层的解释，值得深读。</p>
+<h1 id="Android-binder-调用流程及解释"><a href="#Android-binder-调用流程及解释" class="headerlink" title="Android binder 调用流程及解释"></a>Android binder 调用流程及解释</h1><p>marshaling: convert an object to multi primitive types<br>unmarshaling: convert multi primitive types to an object</p>
+<p>我先约定以下概念及名称：</p>
+<ol>
+<li><strong>api</strong>：对外接口</li>
+<li><strong>service</strong>：提供api的程序&amp;进程。运行在 user space</li>
+<li><strong>client</strong>: service api 的使用者。运行在 user space</li>
+</ol>
+<p>client calls <code>api.hello(msg)</code> workflow:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">             (1)                             (2)</span><br><span class="line">userspace  -------&gt;     kernel space      --------&gt;  userspace</span><br><span class="line">client               Binder Framewrok                service</span><br><span class="line">           &lt;-------                       &lt;---------</span><br><span class="line">             (4)                             (3)</span><br></pre></td></tr></table></figure>
+
+<p>(1): client call service api through binder,<br>    binder driver marshaling objects to primitive data, then stores primitive data in kernel space</p>
+<p>(2): binder driver unmarshaling primitive data to object, then  call service api passing object params</p>
+<p>(3) service api finish, pass result back to binder, binder marshaling object to primitive data, pass primitive datas to kernel space</p>
+<p>(4) binder driver read primitive data from kernel space, then marshaling back to object, pass object to client</p>
+<p>so we can define api result or params in complex data types, not only primitive types</p>
+<h2 id="核心原理"><a href="#核心原理" class="headerlink" title="核心原理"></a>核心原理</h2><ol>
+<li><p>Binder 机制的 marshaling 及 unmarshaling</p>
+<p> marshalling: convert user space object to primitive types. 然后，Binder Driver 把 primitive types data 保存到 kernel space<br> unmarshalling: Composite kernel space primitive types to object. 然后，把 object copy 到 user space.</p>
+<p> 大概理解为，Binder 把 process A 需传输的对象 复制，保存到 kernel space， 再从 kernel space 复制 到 process B 的内存空间。</p>
+<p> kernel space 作为一个数据传输的中转站。</p>
+</li>
+<li><p>user space process &lt;– data –&gt; kernel space </p>
+<p> <code>ioct</code>: user space 传输数据到 kernel space 的 Binder Driver</p>
+<p> <code>uacess</code>： kernel space 的 Binder Driver 把数据传给 user space</p>
+</li>
+</ol>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://events.linuxfoundation.org/images/stories/slides/abs2013_gargentas.pdf">必读-Deep Dive into Android IPC&#x2F;Binder Framework at Android Builders Summit 2013</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.ibm.com/developerworks/library/l-kernel-memory-access/">必读-User space memory access from the Linux kernel</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.nds.rub.de/media/attachments/files/2012/03/binder.pdf">必读-Android Binder &amp;&amp; Android Interprocess Communication</a></li>
+<li><a target="_blank" rel="noopener" href="http://gityuan.com/2015/10/31/binder-prepare/">推荐-Gityuan: Binder 系列</a></li>
+<li><a target="_blank" rel="noopener" href="http://elinux.org/Android_Binder">基础概念-ELinux: Android Binder</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Marshalling_%28computer_science%29">基础概念-Marshalling</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.linfo.org/kernel_space.html">基础概念-Kernel space</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.linfo.org/user_space.html">基础概念-User space</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/12/user_space_vs_kernel_space.html">基础概念-Kernel space vs User space</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ioctl">基础概念-IOCT</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/android/" rel="tag"># android</a>
+              <a href="/tags/binder/" rel="tag"># binder</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/20/Android%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%87%86%E5%88%99%E5%8F%8ATips%E6%80%BB%E7%BB%93/" rel="prev" title="Android多线程准则及Tips总结">
+                  <i class="fa fa-angle-left"></i> Android多线程准则及Tips总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/20/Android-Performance-Tips/" rel="next" title="Android-Performance-Tips">
+                  Android-Performance-Tips <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">石头汤</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xechoz.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="1. git rebase work flow checkout public branch ParentBranch:   git checkout ParentBranch  update ParentBranch, or add, modified on ParentBranch.   commit your changes.  checkout personal private worki">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git Rebase">
+<meta property="og:url" content="https://xechoz.github.io/2025/03/20/Git-rebase-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="石头汤的博客">
+<meta property="og:description" content="1. git rebase work flow checkout public branch ParentBranch:   git checkout ParentBranch  update ParentBranch, or add, modified on ParentBranch.   commit your changes.  checkout personal private worki">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-20T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-19T19:15:57.307Z">
+<meta property="article:author" content="石头汤">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xechoz.github.io/2025/03/20/Git-rebase-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xechoz.github.io/2025/03/20/Git-rebase-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93/","path":"2025/03/20/Git-rebase-使用流程总结/","title":"Git Rebase"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Git Rebase | 石头汤的博客</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">石头汤的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-git-rebase-work-flow"><span class="nav-number">1.</span> <span class="nav-text">1. git rebase work flow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-code-example"><span class="nav-number">2.</span> <span class="nav-text">2. code example</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%AD%A3%E7%A1%AE%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B9%A0%E6%83%AF"><span class="nav-number">3.</span> <span class="nav-text">3. 正确的使用习惯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8-rebase%EF%BC%8C-merge-%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 什么时候使用 rebase， merge ？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E4%B8%BE%E4%BE%8B"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 举例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">石头汤</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xechoz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xechoz" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/Git-rebase-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Git Rebase | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git Rebase
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-20 12:00:00 / Modified: 03:15:57" itemprop="dateCreated datePublished" datetime="2025-03-20T12:00:00+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="1-git-rebase-work-flow"><a href="#1-git-rebase-work-flow" class="headerlink" title="1. git rebase work flow"></a>1. git rebase work flow</h1><ol>
+<li><p>checkout public branch <strong>ParentBranch</strong>: </p>
+<p> <code>git checkout ParentBranch</code></p>
+<p> update ParentBranch, or add, modified on ParentBranch. </p>
+<p> commit your changes.</p>
+</li>
+<li><p>checkout personal private working branch</p>
+<p> PersonalBranch which’s parent branch is ParentBranch: </p>
+<p> <code>git checkout PersonalBranch</code></p>
+</li>
+<li><p>add, modified files on working branch PersonalBranch.</p>
+</li>
+<li><p>commit changes: git commit -m ‘do something cool’</p>
+</li>
+<li><p>rebase working branch: git rebase -i ParentBranch PersonalBranch</p>
+</li>
+<li><p>checkout ParentBranch: git checkout ParentBranch</p>
+</li>
+<li><p>merge working branch <code>PersonalBranch</code> into public branch <code>ParentBranch</code>: git merge -v PersonalBranch</p>
+</li>
+</ol>
+<hr>
+<h1 id="2-code-example"><a href="#2-code-example" class="headerlink" title="2. code example"></a>2. code example</h1><ol>
+<li>step 1: pull remote public branch</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/xechoz/demo.git </span><br><span class="line"></span><br><span class="line">git checkout -b feature-hello <span class="comment"># create working branch</span></span><br><span class="line">git checkout master <span class="comment"># back to public branch</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># add some files on public branch</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;public branch file&quot;</span> &gt;&gt; public.md</span><br><span class="line"></span><br><span class="line">git add public.md</span><br><span class="line"></span><br><span class="line"><span class="comment"># Note: this commit is on public branch, but not private working branch feature-hello</span></span><br><span class="line">git commit -m <span class="string">&#x27;add public file&#x27;</span> </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>step 2: checkout working branch</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature-hello</span><br><span class="line"></span><br><span class="line"><span class="comment"># or if feature-hello is exist</span></span><br><span class="line">git checkout feature-hello</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>step 3 : add, modified files</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;hello&quot; &gt;&gt; public.md</span><br><span class="line"></span><br><span class="line"># add more files</span><br><span class="line">echo &quot;hello file&quot; &gt;&gt; hello.md</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>step 4: commit changes</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git add public.md</span><br><span class="line">git commit -m &#x27;update public file&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">git add hello.md</span><br><span class="line">git commit -m &#x27;hello world&#x27;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>step 5: rebase working branch</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Note: this make feature-hello update-to-date with master</span></span><br><span class="line">git rebase -i master feature-hello </span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>step 6: checkout back to public branch</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>step 7: merge commits on private working branch</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># because feature-hello is update-to-date with master, so there is no redundant &#x27;merge-commit&#x27; here</span><br><span class="line">git merge -v feature-hello</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-正确的使用习惯"><a href="#3-正确的使用习惯" class="headerlink" title="3. 正确的使用习惯"></a>3. 正确的使用习惯</h1><h2 id="3-1-什么时候使用-rebase，-merge-？"><a href="#3-1-什么时候使用-rebase，-merge-？" class="headerlink" title="3.1 什么时候使用 rebase， merge ？"></a>3.1 什么时候使用 rebase， merge ？</h2><p>个人分支首选 rebase， 公共分支使用 merge。</p>
+<p>对非 upstream 的分支使用 merge 优先于 rebase， 如 <code>git merge -v origin/feature dev</code>, <code>git rebase -i origin/dev dev</code></p>
+<h2 id="3-2-举例"><a href="#3-2-举例" class="headerlink" title="3.2 举例"></a>3.2 举例</h2><ol>
+<li>remote origin branch: foo</li>
+<li>user A branch: foo_a -&gt; origin&#x2F;foo</li>
+<li>user B branch: foo_b -&gt; origin&#x2F;foo</li>
+</ol>
+<p>假如 A, B 的最近共同 commit 是 commit-1;</p>
+<p>User A’s local commits is <code>commit-a1, commit-a2</code>, and pushed to remote. </p>
+<p>Now, remote commits become <code>commit-1 -&gt; commit-a1 -&gt; commit-a2</code>;</p>
+<p>And user B commits to local : <code>commit-b1</code>. B’s commit history becomes: <code>commit-1 -&gt; commit-b1</code></p>
+<p>Now comes the key point, should user B run  <code>git merge origin/foo fooB</code> or <code>git rebase origin/foo fooB </code> ?</p>
+<p>Both of the commands can <strong>merge(not git’s merge)</strong> A’s work into B’s, but with <code>git merge origin/foo fooB</code> a redundant <strong>merge commit</strong>  </p>
+<p>like <code>Merge remote-tracking branch &#39;origin/foo&#39; into fooB</code> or some what will be added to the commit history. </p>
+<p>And with <code>rebase</code>, B only get what he what, with all A’s work without an additional commit.</p>
+<p>with <code>git merge origin/foo fooB</code>: commit-1 -&gt; commit-b1 -&gt; commit-a1 -&gt; commit-a2 -&gt; redundant merge commit</p>
+<p>with <code>git merge origin/foo fooB</code>: commit-1 -&gt; commit-a1 -&gt; commit-a2 -&gt; commit-b1 </p>
+<p>我习惯在使用 rebase 合并远程 <code>origin upstream</code> 分支代码到个人本地分支， 比如  dev_local &lt;–&gt; origin&#x2F;dev , 我会用 <code>git rebase origin/dev dev_local</code>合并代码， </p>
+<p>对于 <strong>upstream 对应的分支</strong>， 使用merge， 例如要合并 feature 分支到 dev_local, 使用 <code>git merge origin/feature dev_local</code> 而不是 <code>git rebase origin/feature dev_local</code>;</p>
+<p>而对公共分支的代码合并 我用 merge， 比如 develop 分支的代码 合并到 master。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing">Merging vs. Rebasing</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/20/README/" rel="prev" title="README">
+                  <i class="fa fa-angle-left"></i> README
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/20/Android%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%87%86%E5%88%99%E5%8F%8ATips%E6%80%BB%E7%BB%93/" rel="next" title="Android多线程准则及Tips总结">
+                  Android多线程准则及Tips总结 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">石头汤</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

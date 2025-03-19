@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xechoz.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta property="og:type" content="website">
+<meta property="og:title" content="石头汤的博客">
+<meta property="og:url" content="https://xechoz.github.io/index.html">
+<meta property="og:site_name" content="石头汤的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="石头汤">
+<meta property="article:tag" content="android, git, kotlin">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xechoz.github.io/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>石头汤的博客</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">石头汤的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">石头汤</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xechoz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xechoz" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/21/Redux-for-Android/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/21/Redux-for-Android/" class="post-title-link" itemprop="url">Redux-for-Android</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-03-21 12:00:00" itemprop="dateCreated datePublished" datetime="2025-03-21T12:00:00+08:00">2025-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-03-20 03:37:14" itemprop="dateModified" datetime="2025-03-20T03:37:14+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="About"><a href="#About" class="headerlink" title="About"></a>About</h1><p>一个精简的 Redux 库，去掉了一些 Redux 官方实例中冗余的设计</p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p><img src="/art/redux.png" alt="alt text"></p>
+<p>GUI 开发，通常有3个角色：</p>
+<ol>
+<li>state: 描述数据状态</li>
+<li>action: 管理 state</li>
+<li>view: 消费 state，触发 action 逻辑</li>
+</ol>
+<p>换成 Android 开发容易理解的话，就是</p>
+<ol>
+<li>state &#x3D; immutable data class</li>
+<li>actions &#x3D; repository, viewmodel, presenter, service, controller, manager</li>
+<li>view &#x3D; view, activity, fragment</li>
+</ol>
+<p>一个简单的 counter 示例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// state</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">State</span>(</span><br><span class="line">    <span class="keyword">val</span> count: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// action</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CounterViewModel</span> &#123;</span><br><span class="line">    privte <span class="keyword">val</span> stateListeners = mutableList&lt;(State)-&gt;<span class="built_in">Unit</span>&gt;()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> state = State()</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">set</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">increment</span><span class="params">()</span></span> &#123;</span><br><span class="line">        state = state.copy(count = state.count + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        stateListeners.foreach &#123;</span><br><span class="line">            it(state)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">onStateChange</span><span class="params">(listener: (<span class="type">State</span>)-&gt;<span class="type">Unit</span>)</span></span> &#123;</span><br><span class="line">        stateListeners.add(listener)</span><br><span class="line"></span><br><span class="line">        listenter(state)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// view</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CounterFrament</span>(viewModel: CounterViewModel) &#123;</span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        viewMode.onStateChange &#123;</span><br><span class="line">            counterText =  viewmodel.state.count</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        setOnClickListener &#123;</span><br><span class="line">            viewModel.increment()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为 Android Architect 里边，把数据层称为 Repository，为了更符合Android 平台的称呼，所以接下来说的 Repsitory &#x3D; Action。</p>
+<h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><p>看了上面的示例，就会发现，核心只有两个:</p>
+<ol>
+<li>immutable data class( &#x3D; state)</li>
+<li>Repository( &#x3D; action)： 管理数据</li>
+</ol>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>state 是 任意 immutable data class 就可以。不需要另外多余的抽象。</p>
+<p>所以把实现的重点放到 Repository</p>
+<p>Repository 需要关心:</p>
+<ol>
+<li>存储 state</li>
+<li>分发 state</li>
+<li>更新 state</li>
+<li>逻辑的生命周期管理</li>
+</ol>
+<p>分发 state，对应就有 接收state，这里是 1:N 的关系，1 个 state 可能有 N 个接收者，<br>Repository 作为 state 生产者，定位类似 kotlin flow, 只管分发数据，<br>消费者决定怎么使用数据，<br>通常只有使用者知道什么时候不需要数据了，所以我们可以把监听数据这部分的生命周期管理交给使用者，这样就可以借助 kotlin coroutine scope，消费者自己管理监听&amp;取消监听数据。</p>
+<p>Repository 作为数据容器，action 可能很简单，也可能很复杂，<br>业务上很可能是需要有 诸如 启动，销毁的流程，但是 RxStateRepository 不知道如何处理，这部分属于不能抽象的部分，只能留给使用方（RxStateRepository 的 子类等）处理</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typealias</span> RxState = Any</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> &lt;State: RxState&gt; RxStateRepository &#123;</span><br><span class="line">    <span class="comment">// 存储 state，对外 只读</span></span><br><span class="line">    <span class="keyword">val</span> state: State</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分发 state</span></span><br><span class="line">    <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;A:Any&gt;</span> <span class="title">onEach</span><span class="params">(property: <span class="type">KProperty1</span>&lt;<span class="type">State</span>, A&gt;, reducer: (<span class="type">A</span>)-&gt;<span class="type">Unit</span>)</span></span> </span><br><span class="line"></span><br><span class="line">    <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">onEach</span><span class="params">(reducer: (<span class="type">State</span>)-&gt;<span class="type">Unit</span>)</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">asFlow</span><span class="params">()</span></span>: Flow&lt;State&gt;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新 state，限制 只能在 RxStateRepository 的实现类 或者 \</span></span><br><span class="line">    extension 方法可用</span><br><span class="line">    <span class="comment">// data 是 immutable 的，每次 setState 都是 copy 一个新的数据</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> RxStateRepository<span class="type">&lt;State&gt;</span>.<span class="title">setState</span><span class="params">(reducer: <span class="type">State</span>.()-&gt;<span class="type">State</span>)</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现类</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> &lt;State: RxState&gt; RxStateRepositoryImpl(initState: State) : RxStateRepository&lt;State&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> stateFlow = mutableStateFlow(initState)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span></span><br><span class="line">    <span class="keyword">val</span> state: State = stateFlow.value</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">setState</span><span class="params">(reducer: <span class="type">State</span>.()-&gt;<span class="type">State</span>)</span></span> &#123;</span><br><span class="line">        stateFlow.value = reducer(state)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span></span><br><span class="line">    <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">onEach</span><span class="params">()</span></span> &#123;</span><br><span class="line">         supervisorScope &#123; chilScope -&gt;</span><br><span class="line">            childScope.launch &#123;</span><br><span class="line">                stateFlow.</span><br><span class="line">                .collectLatest(reducer)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-Demo"><a href="#使用-Demo" class="headerlink" title="使用 Demo"></a>使用 Demo</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">CounterState</span>(</span><br><span class="line">    <span class="keyword">val</span> count:<span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CounterRepository</span>: <span class="type">RxStateRepository</span>(CounterState(<span class="number">0</span>)) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">increment</span><span class="params">()</span></span> &#123;</span><br><span class="line">        setState &#123;</span><br><span class="line">            copy( count = count + <span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CounterView</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> counter = CounterRepository()</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> scope = MainScope()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        scope.launch &#123;</span><br><span class="line">            counter.onEach(CounterState::count) &#123;</span><br><span class="line">                text = <span class="string">&quot;Click <span class="variable">$it</span>&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        setOnClickListener &#123;</span><br><span class="line">            counter.increment()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="结合-ViewModel-使用"><a href="#结合-ViewModel-使用" class="headerlink" title="结合 ViewModel 使用"></a>结合 ViewModel 使用</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FooViewModel</span>: <span class="type">ViewModel</span>(), </span><br><span class="line">                    RxStateRepository <span class="keyword">by</span> RxStateRepositoryImpl(FooState()) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">updateFooToBar</span><span class="params">(bar: <span class="type">Any</span>)</span></span> &#123;</span><br><span class="line">        setState &#123;</span><br><span class="line">            copy(foo = bar)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://redux.js.org/tutorials/essentials/part-1-overview-concepts">https://redux.js.org/tutorials/essentials/part-1-overview-concepts</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/airbnb/mavericks">https://github.com/airbnb/mavericks</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/xechoz/android-kotlin-redux/tree/master">RxState for Android</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/Android-Performance-Tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/20/Android-Performance-Tips/" class="post-title-link" itemprop="url">Android-Performance-Tips</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-20 12:00:00 / Modified: 03:16:08" itemprop="dateCreated datePublished" datetime="2025-03-20T12:00:00+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Batch-Cache"><a href="#Batch-Cache" class="headerlink" title="Batch &amp; Cache"></a>Batch &amp; Cache</h1><ol>
+<li>减少不必要的计算</li>
+</ol>
+<p>一般在调用频繁的代码，有些代码是每次都一样的，可以移到其他地方，循环loop， 或重复调用的方法，如 View.onDraw(), View.onMeasure() 等。</p>
+<p>onDraw:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// before</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onDraw</span><span class="params">(Canvas canvas)</span> &#123;</span><br><span class="line">	paint.setTextColor(textColor); <span class="comment">// 固定color</span></span><br><span class="line">	paint.setTextSize(textSize); <span class="comment">// 固定 size</span></span><br><span class="line">	paint.setxxx(...); <span class="comment">// 变动的</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// after</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">CustomView</span><span class="params">(...)</span> &#123;</span><br><span class="line">	...</span><br><span class="line">	init();</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="title function_">init</span><span class="params">()</span> &#123;</span><br><span class="line">	...</span><br><span class="line">	paint.setTextColor(textColor);</span><br><span class="line">	paint.setTextSize(textSize);</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onDraw</span><span class="params">(Canvas canvas)</span> &#123;</span><br><span class="line">	paint.setxxx(...); <span class="comment">// 只留下变动的</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>loop:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// before</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;size; i++) &#123;</span><br><span class="line">	<span class="type">int</span> <span class="variable">width</span> <span class="operator">=</span> margin.left + margin.right; <span class="comment">// 每次都计算</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (width &lt; MAX_WIDTH) &#123;</span><br><span class="line">		...</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// after, width 只算一次</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>, width = margin.left + margin.right; i&lt;size; i++) &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (width &lt; MAX_WIDTH) &#123;</span><br><span class="line">		...</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>cache 计算结果</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>减少方法调用次数</li>
+</ol>
+<p>写递归的时候要注意</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 会出现 stack over flow： 性能最差，但易懂</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">long</span> <span class="title function_">computeFibonacci</span><span class="params">(<span class="type">int</span> positionInFibSequence)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (positionInFibSequence &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> computeFibonacci(positionInFibSequence - <span class="number">1</span>)</span><br><span class="line">                + computeFibonacci(positionInFibSequence - <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 会出现 stack over flow：性能一般，比较难懂</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">long</span> <span class="title function_">computeFibonacci</span><span class="params">(<span class="type">int</span> term, <span class="type">long</span> value, <span class="type">long</span> prev)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (term == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> prev;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (term == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> computeFibonacci(term - <span class="number">1</span>, value+prev, value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 性能最好, 比较难懂</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * calculate from fib(0), fib(1) , fib(2), fib(3)...  until fib(term)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">long</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> term)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (term == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (term == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">long</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">long</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">long</span> <span class="variable">temp</span> <span class="operator">=</span> a+b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">2</span>; i &lt;= term; i++) &#123;</span><br><span class="line">        temp = a+b; <span class="comment">// store next result</span></span><br><span class="line">        a = b; <span class="comment">// move b to a</span></span><br><span class="line">        b = temp; <span class="comment">// b now stores the new result</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Doc"><a href="#Doc" class="headerlink" title="Doc"></a>Doc</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://classroom.udacity.com/courses/ud825/lessons/3764448604/concepts/37310891220923">Udacity: Android Performance</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/Android-binder-%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/20/Android-binder-%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Learn Android Binder</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-20 12:00:00 / Modified: 03:13:35" itemprop="dateCreated datePublished" datetime="2025-03-20T12:00:00+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="一些基础概念"><a href="#一些基础概念" class="headerlink" title="一些基础概念"></a>一些基础概念</h1><p>kernel space：内核，驱动 等，一般是系统必须程序，所在的内存地址</p>
+<p>user spspace：非kernel的，一般的Application, Library 运行的内存地址</p>
+<h1 id="关于进程及内存空间的一些规则"><a href="#关于进程及内存空间的一些规则" class="headerlink" title="关于进程及内存空间的一些规则:"></a>关于进程及内存空间的一些规则:</h1><ol>
+<li>每个进程所在的 user space 是相互隔离的。</li>
+<li>user space 的进程，可以调用系统api（system calls），间接操作 kernel space。</li>
+<li>kernel space 的进程，可以直接操作 user space。通过<code>uacess</code>接口。</li>
+</ol>
+<p>我有几个地方是有疑问的：</p>
+<ol>
+<li><p>kernel space 存在进程吗？还是说，只有 kernel 本身？</p>
+<p> kernel space 包括了 init 进程，及 fork 衍生出的其他进程。fork()-&gt;process, clone()-&gt;thread。</p>
+<p> Linux 下 thread 相当于 共享资源的 process；因为kerenl process 是 light weight process, 所以一般称为 kernel thread, 而不是 kernel  process</p>
+</li>
+<li><p>kernel space 的进程也是相互隔离的吗？IPC 是怎么样的？</p>
+<p> 进程间的IPC是统一的，并没有为 kernel space 的进程使用其他机制。</p>
+</li>
+<li><p>process isolation 是怎么实现的？</p>
+<p> (From Wikipedia: Process isolation)[<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Process_isolation]">https://en.wikipedia.org/wiki/Process_isolation]</a></p>
+<blockquote>
+<p>Process isolation can be implemented with virtual address space,<br>where process A’s address space is different from process B’s<br>address space – preventing A from writing onto B.</p>
+</blockquote>
+<p> 通过 <em>virtual address space</em> 控制进程的内存映射到物理地址的过程，避免不同进程的<em>越权</em>读写。</p>
+<p> 另外，内存共享IPC，是kernel可以通过控制不同的虚拟内存映射到相同的物理内存实现。</p>
+</li>
+</ol>
+<h1 id="Android-Binder-的角色"><a href="#Android-Binder-的角色" class="headerlink" title="Android Binder 的角色"></a>Android Binder 的角色</h1><p>因为 user space 是相互隔离的，所以 user space 的两个 process, 假设为 A, B, 要进行交互&amp;通信，必须存在一个负责连接 A, B 的中间人。</p>
+<p>而且，如果不采用传统的IPC，那这个中间人一定是要可以跟user space 的进程通信的，所以这个中间人要是运行在 kernel space 的进程。</p>
+<p>Android Binder 就是这个中间人。也就是说 Binder Driver 是运行在 kernel space 的。</p>
+<p>至于为什么Android要额外写一个 Binder Framework ，而不是复用Linux 下已有的IPC框架。<br>这里 (Embedded Linux: Android Binder)[<a target="_blank" rel="noopener" href="http://elinux.org/Android_Binder]">http://elinux.org/Android_Binder]</a> 及文章内的外链有很详细&amp;底层的解释，值得深读。</p>
+<h1 id="Android-binder-调用流程及解释"><a href="#Android-binder-调用流程及解释" class="headerlink" title="Android binder 调用流程及解释"></a>Android binder 调用流程及解释</h1><p>marshaling: convert an object to multi primitive types<br>unmarshaling: convert multi primitive types to an object</p>
+<p>我先约定以下概念及名称：</p>
+<ol>
+<li><strong>api</strong>：对外接口</li>
+<li><strong>service</strong>：提供api的程序&amp;进程。运行在 user space</li>
+<li><strong>client</strong>: service api 的使用者。运行在 user space</li>
+</ol>
+<p>client calls <code>api.hello(msg)</code> workflow:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">             (1)                             (2)</span><br><span class="line">userspace  -------&gt;     kernel space      --------&gt;  userspace</span><br><span class="line">client               Binder Framewrok                service</span><br><span class="line">           &lt;-------                       &lt;---------</span><br><span class="line">             (4)                             (3)</span><br></pre></td></tr></table></figure>
+
+<p>(1): client call service api through binder,<br>    binder driver marshaling objects to primitive data, then stores primitive data in kernel space</p>
+<p>(2): binder driver unmarshaling primitive data to object, then  call service api passing object params</p>
+<p>(3) service api finish, pass result back to binder, binder marshaling object to primitive data, pass primitive datas to kernel space</p>
+<p>(4) binder driver read primitive data from kernel space, then marshaling back to object, pass object to client</p>
+<p>so we can define api result or params in complex data types, not only primitive types</p>
+<h2 id="核心原理"><a href="#核心原理" class="headerlink" title="核心原理"></a>核心原理</h2><ol>
+<li><p>Binder 机制的 marshaling 及 unmarshaling</p>
+<p> marshalling: convert user space object to primitive types. 然后，Binder Driver 把 primitive types data 保存到 kernel space<br> unmarshalling: Composite kernel space primitive types to object. 然后，把 object copy 到 user space.</p>
+<p> 大概理解为，Binder 把 process A 需传输的对象 复制，保存到 kernel space， 再从 kernel space 复制 到 process B 的内存空间。</p>
+<p> kernel space 作为一个数据传输的中转站。</p>
+</li>
+<li><p>user space process &lt;– data –&gt; kernel space </p>
+<p> <code>ioct</code>: user space 传输数据到 kernel space 的 Binder Driver</p>
+<p> <code>uacess</code>： kernel space 的 Binder Driver 把数据传给 user space</p>
+</li>
+</ol>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://events.linuxfoundation.org/images/stories/slides/abs2013_gargentas.pdf">必读-Deep Dive into Android IPC&#x2F;Binder Framework at Android Builders Summit 2013</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.ibm.com/developerworks/library/l-kernel-memory-access/">必读-User space memory access from the Linux kernel</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.nds.rub.de/media/attachments/files/2012/03/binder.pdf">必读-Android Binder &amp;&amp; Android Interprocess Communication</a></li>
+<li><a target="_blank" rel="noopener" href="http://gityuan.com/2015/10/31/binder-prepare/">推荐-Gityuan: Binder 系列</a></li>
+<li><a target="_blank" rel="noopener" href="http://elinux.org/Android_Binder">基础概念-ELinux: Android Binder</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Marshalling_%28computer_science%29">基础概念-Marshalling</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.linfo.org/kernel_space.html">基础概念-Kernel space</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.linfo.org/user_space.html">基础概念-User space</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/12/user_space_vs_kernel_space.html">基础概念-Kernel space vs User space</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ioctl">基础概念-IOCT</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/Android%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%87%86%E5%88%99%E5%8F%8ATips%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/20/Android%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%87%86%E5%88%99%E5%8F%8ATips%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">Android多线程准则及Tips总结</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-20 12:00:00 / Modified: 03:13:28" itemprop="dateCreated datePublished" datetime="2025-03-20T12:00:00+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="一-多线程准则"><a href="#一-多线程准则" class="headerlink" title="一. 多线程准则"></a>一. 多线程准则</h1><p><code>sychronized</code>的原理&amp;机制，From Orocle Java Doc- <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/essential/concurrency/locksync.html">Intrinsic Locks and Synchronization</a></p>
+<blockquote>
+<p>Synchronization is built around an internal entity known as the intrinsic lock or monitor lock.<br>(The API specification often refers to this entity simply as a “monitor.”) Intrinsic locks play a role in both aspects of synchronization:<br>enforcing exclusive access to an object’s state and &gt; &gt; establishing happens-before relationships that are essential to visibility.<br>Every object has an intrinsic lock associated with it. By convention, a thread that needs exclusive<br>and consistent access to an object’s fields has to acquire the object’s intrinsic lock before accessing them,<br>and then release the intrinsic lock when it’s done with them.<br>A thread is said to own the intrinsic lock between the time it has acquired the lock and released the lock.<br>As long as a thread owns an intrinsic lock, no other thread can acquire the same lock. The other thread will block when it attempts to acquire the lock.<br>When a thread releases an intrinsic lock, a happens-before relationship is established between that action and any subsequent acquisition of the same lock.</p>
+</blockquote>
+<ol>
+<li><p>可能在多个线程读写的对象，需要做好同步。</p>
+<p> 最简单的方法是在读写的地方使用 <code>synchronized </code>，或者定义变量的时候用 <code>volatile</code>。<br> 但要适度，因为会引起性能问题，虽然影响的性能对一般的应用来说很小，但对于对并发性能敏感的场景要小心。</p>
+<p> <code>volatile</code> 相关文章</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://tutorials.jenkov.com/java-concurrency/volatile.html">Java Volatile Keyword - Jenkov Tutorials</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.infoq.com/cn/articles/ftf-java-volatile#anch83442">InfoQ: 聊聊并发（一）——深入分析Volatile的实现原理</a></li>
+</ol>
+</li>
+<li><p><code>synchronized </code> 的 作用范围越小越好。</p>
+<p> 因为 <strong>sychronized 同步是阻塞的，会降低多线程的性能</strong>。</p>
+</li>
+<li><p><code>synchronized </code> block 的执行时间一定要 <strong>短</strong>。</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private void demo() &#123;</span><br><span class="line">    sychronized(objectA) &#123;</span><br><span class="line">        doIt(); // 一定要快</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    afterWork();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 理由同上，<strong>sychronized 同步是阻塞的，会降低多线程的性能</strong>。</p>
+</li>
+<li><p><code>synchronized method</code> 要少用</p>
+<p> 因为是整个 Object 的 sychronized</p>
+</li>
+<li><p>多线程导致内存泄露</p>
+<p> 对于提供了 callback， listener， register 等 注入行为的线程，要注意：</p>
+<ol>
+<li><p>注入&amp;引用的外部对象 最好使用非 StrongReference 的引用方式。比如用 WeakReference</p>
+</li>
+<li><p>在线程销毁的时候要释放引用的外部对象。</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>TODO： 列出依据来源</p>
+<h1 id="2-多线程规范用法"><a href="#2-多线程规范用法" class="headerlink" title="2. 多线程规范用法"></a>2. 多线程规范用法</h1><h2 id="2-1-什么时候使用线程"><a href="#2-1-什么时候使用线程" class="headerlink" title="2.1 什么时候使用线程"></a>2.1 什么时候使用线程</h2><ol>
+<li>频繁调用或者公共的子线程，放在 ThreadPool</li>
+</ol>
+<h2 id="2-2-Android-中使用线程的规范"><a href="#2-2-Android-中使用线程的规范" class="headerlink" title="2.2 Android 中使用线程的规范"></a>2.2 Android 中使用线程的规范</h2><ol>
+<li>Handler 及 HandlerThread 的规范用法</li>
+</ol>
+<p>TODO: 示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> View.post 原理及注意事项</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> Looper, MessageQueue 相关原理简单概括</span><br><span class="line"></span><br><span class="line">### 精简伪代码</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="title function_">loop</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="comment">// loop forever until quit() is called</span></span><br><span class="line">	<span class="keyword">for</span> (;;) &#123;</span><br><span class="line">		<span class="type">Message</span> <span class="variable">msg</span> <span class="operator">=</span> nextMsg();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (msg != <span class="literal">null</span>) &#123;</span><br><span class="line">			runMessageCallbackTask()</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (isQuit) &#123;</span><br><span class="line">				quitLoop();</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			doIdelTask();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">nextMsg() &#123;</span><br><span class="line">	<span class="keyword">return</span> system_call_epoll(); <span class="comment">// 如果没有event，则block 线程，等待event</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="轮询-调用流程"><a href="#轮询-调用流程" class="headerlink" title="轮询 调用流程"></a>轮询 调用流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JAVA: Looper.loop() -&gt;</span><br><span class="line">JAVA: MessageQueue.next() -&gt;</span><br><span class="line">JNI: nativePollOnce(), android_os_MessageQueue_nativePollOnce() -&gt;</span><br><span class="line">C++: NativeMessageQueue::pollOnce() -&gt;</span><br><span class="line">C++: Looper::pollOnce(): 遍历消息列表,找到则返回；否则下一步 -&gt;</span><br><span class="line">C++: Looper::pollInner() -&gt;</span><br><span class="line">C: epoll_wait(): 轮询等待event，epoll, Linux 系统调用</span><br></pre></td></tr></table></figure>
+
+<p>epoll_wait 说明: <a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man7/epoll.7.html">Linux Programmer’s Manual: EPOLL(7)</a></p>
+<blockquote>
+<p>epoll_wait(2) waits for I&#x2F;O events, blocking the calling thread if<br>no events are currently available.</p>
+</blockquote>
+<h1 id="二-多线程实践Tips"><a href="#二-多线程实践Tips" class="headerlink" title="二. 多线程实践Tips"></a>二. 多线程实践Tips</h1><ol>
+<li>优先使用标志对象同步，避免使用 sychronized method 或 整个顶部对象</li>
+</ol>
+<p>适用场景: TODO</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &lt;T&gt; &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">Object</span> <span class="variable">lockList</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">	<span class="keyword">private</span> List&lt;T&gt; publicList;</span><br><span class="line"></span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 首选写法</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addItem</span><span class="params">(T item)</span> &#123;</span><br><span class="line">		sychronized(lockList) &#123;</span><br><span class="line">			...</span><br><span class="line">			publicList.addItem(item);</span><br><span class="line">			... </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 尽量不要这样用。因为调用此方法的线程都会阻塞? <span class="doctag">TODO:</span> 待验证。列出原因</span></span><br><span class="line">	sychronized <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addItem</span><span class="params">(T item)</span> &#123;</span><br><span class="line">		publicList.addItem(item);</span><br><span class="line"></span><br><span class="line">		... </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 不要这样写。sychronized(this) 导致此对象的读写阻塞? TODO： 待验证</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addItem</span><span class="params">(T item)</span> &#123;</span><br><span class="line">		sychronized(<span class="built_in">this</span>) &#123;</span><br><span class="line">			publicList.addItem(item);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意 <strong>需要同步的对象，不要暴露给外部</strong>, 因为调用者直接对同步对象的读写会导致不同步的问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// NEVER DO THIS !!!</span><br><span class="line">public List&lt;T&gt; getList() &#123;</span><br><span class="line">	return publicList; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参考 Effective Java, Item#xx</p>
+<ol start="2">
+<li>Singleton 的写法</li>
+</ol>
+<p>没有用到 <code>sychronized</code> 实现，性能是最好的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">InstanceHolder</span> &#123;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Demo</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Demo</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Demo</span><span class="params">()</span> &#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> InstanceHolder.INSTANCE;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="三-必读文章"><a href="#三-必读文章" class="headerlink" title="三. 必读文章"></a>三. 必读文章</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/essential/concurrency/locksync.html">Intrinsic Locks and Synchronization</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html">Oracle Doc: Java Concurrency</a></li>
+<li><a target="_blank" rel="noopener" href="http://codetheory.in/android-handlers-runnables-loopers-messagequeue-handlerthread/">Understanding Android&#x2F;Java Processes and Threads Related Concepts </a></li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h1><ol>
+<li><a target="_blank" rel="noopener" href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-17.html">docs.oracle.com：Chapter 17. Threads and Locks</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/essential/concurrency/atomic.html">docs.oracle.com: Atomic Access</a></li>
+<li><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/11165852/java-singleton-and-synchronization">StackOverflow: Java Singleton and Synchronization</a></li>
+<li><a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man7/epoll.7.html">Linux Programmer’s Manual: EPOLL(7)</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/Git-rebase-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/20/Git-rebase-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">Git Rebase</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-20 12:00:00 / Modified: 03:15:57" itemprop="dateCreated datePublished" datetime="2025-03-20T12:00:00+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="1-git-rebase-work-flow"><a href="#1-git-rebase-work-flow" class="headerlink" title="1. git rebase work flow"></a>1. git rebase work flow</h1><ol>
+<li><p>checkout public branch <strong>ParentBranch</strong>: </p>
+<p> <code>git checkout ParentBranch</code></p>
+<p> update ParentBranch, or add, modified on ParentBranch. </p>
+<p> commit your changes.</p>
+</li>
+<li><p>checkout personal private working branch</p>
+<p> PersonalBranch which’s parent branch is ParentBranch: </p>
+<p> <code>git checkout PersonalBranch</code></p>
+</li>
+<li><p>add, modified files on working branch PersonalBranch.</p>
+</li>
+<li><p>commit changes: git commit -m ‘do something cool’</p>
+</li>
+<li><p>rebase working branch: git rebase -i ParentBranch PersonalBranch</p>
+</li>
+<li><p>checkout ParentBranch: git checkout ParentBranch</p>
+</li>
+<li><p>merge working branch <code>PersonalBranch</code> into public branch <code>ParentBranch</code>: git merge -v PersonalBranch</p>
+</li>
+</ol>
+<hr>
+<h1 id="2-code-example"><a href="#2-code-example" class="headerlink" title="2. code example"></a>2. code example</h1><ol>
+<li>step 1: pull remote public branch</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/xechoz/demo.git </span><br><span class="line"></span><br><span class="line">git checkout -b feature-hello <span class="comment"># create working branch</span></span><br><span class="line">git checkout master <span class="comment"># back to public branch</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># add some files on public branch</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;public branch file&quot;</span> &gt;&gt; public.md</span><br><span class="line"></span><br><span class="line">git add public.md</span><br><span class="line"></span><br><span class="line"><span class="comment"># Note: this commit is on public branch, but not private working branch feature-hello</span></span><br><span class="line">git commit -m <span class="string">&#x27;add public file&#x27;</span> </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>step 2: checkout working branch</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature-hello</span><br><span class="line"></span><br><span class="line"><span class="comment"># or if feature-hello is exist</span></span><br><span class="line">git checkout feature-hello</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>step 3 : add, modified files</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;hello&quot; &gt;&gt; public.md</span><br><span class="line"></span><br><span class="line"># add more files</span><br><span class="line">echo &quot;hello file&quot; &gt;&gt; hello.md</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>step 4: commit changes</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git add public.md</span><br><span class="line">git commit -m &#x27;update public file&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">git add hello.md</span><br><span class="line">git commit -m &#x27;hello world&#x27;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>step 5: rebase working branch</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Note: this make feature-hello update-to-date with master</span></span><br><span class="line">git rebase -i master feature-hello </span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>step 6: checkout back to public branch</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>step 7: merge commits on private working branch</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># because feature-hello is update-to-date with master, so there is no redundant &#x27;merge-commit&#x27; here</span><br><span class="line">git merge -v feature-hello</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-正确的使用习惯"><a href="#3-正确的使用习惯" class="headerlink" title="3. 正确的使用习惯"></a>3. 正确的使用习惯</h1><h2 id="3-1-什么时候使用-rebase，-merge-？"><a href="#3-1-什么时候使用-rebase，-merge-？" class="headerlink" title="3.1 什么时候使用 rebase， merge ？"></a>3.1 什么时候使用 rebase， merge ？</h2><p>个人分支首选 rebase， 公共分支使用 merge。</p>
+<p>对非 upstream 的分支使用 merge 优先于 rebase， 如 <code>git merge -v origin/feature dev</code>, <code>git rebase -i origin/dev dev</code></p>
+<h2 id="3-2-举例"><a href="#3-2-举例" class="headerlink" title="3.2 举例"></a>3.2 举例</h2><ol>
+<li>remote origin branch: foo</li>
+<li>user A branch: foo_a -&gt; origin&#x2F;foo</li>
+<li>user B branch: foo_b -&gt; origin&#x2F;foo</li>
+</ol>
+<p>假如 A, B 的最近共同 commit 是 commit-1;</p>
+<p>User A’s local commits is <code>commit-a1, commit-a2</code>, and pushed to remote. </p>
+<p>Now, remote commits become <code>commit-1 -&gt; commit-a1 -&gt; commit-a2</code>;</p>
+<p>And user B commits to local : <code>commit-b1</code>. B’s commit history becomes: <code>commit-1 -&gt; commit-b1</code></p>
+<p>Now comes the key point, should user B run  <code>git merge origin/foo fooB</code> or <code>git rebase origin/foo fooB </code> ?</p>
+<p>Both of the commands can <strong>merge(not git’s merge)</strong> A’s work into B’s, but with <code>git merge origin/foo fooB</code> a redundant <strong>merge commit</strong>  </p>
+<p>like <code>Merge remote-tracking branch &#39;origin/foo&#39; into fooB</code> or some what will be added to the commit history. </p>
+<p>And with <code>rebase</code>, B only get what he what, with all A’s work without an additional commit.</p>
+<p>with <code>git merge origin/foo fooB</code>: commit-1 -&gt; commit-b1 -&gt; commit-a1 -&gt; commit-a2 -&gt; redundant merge commit</p>
+<p>with <code>git merge origin/foo fooB</code>: commit-1 -&gt; commit-a1 -&gt; commit-a2 -&gt; commit-b1 </p>
+<p>我习惯在使用 rebase 合并远程 <code>origin upstream</code> 分支代码到个人本地分支， 比如  dev_local &lt;–&gt; origin&#x2F;dev , 我会用 <code>git rebase origin/dev dev_local</code>合并代码， </p>
+<p>对于 <strong>upstream 对应的分支</strong>， 使用merge， 例如要合并 feature 分支到 dev_local, 使用 <code>git merge origin/feature dev_local</code> 而不是 <code>git rebase origin/feature dev_local</code>;</p>
+<p>而对公共分支的代码合并 我用 merge， 比如 develop 分支的代码 合并到 master。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing">Merging vs. Rebasing</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/20/README/" class="post-title-link" itemprop="url">README</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-20 12:00:00 / Modified: 03:13:13" itemprop="dateCreated datePublished" datetime="2025-03-20T12:00:00+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/xechoz/android-kotlin-redux.git">A simple redux like framework for android</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/xechoz/BoringTabLayout">BoringTabLayout: A Simplified version of TabLayout</a></li>
+<li><a href="Android-Performance-Tips.md">Android Performance Tips</a></li>
+<li><a href="Android-binder-%E7%AC%94%E8%AE%B0.md">Android binder 笔记</a></li>
+<li><a href="Android%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%87%86%E5%88%99%E5%8F%8ATips%E6%80%BB%E7%BB%93.md">Android多线程准则及Tips总结</a></li>
+<li><a href="Git-rebase-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93.md">Git rebase 使用流程总结</a></li>
+<li><a href="%E5%A4%B1%E8%B4%A5%E8%BD%AE%E5%AD%90-%E6%88%91%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1AIDL-API.md">失败轮子-我怎么设计AIDL API</a></li>
+<li><a href="%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1API.md">怎么设计API</a></li>
+<li><a href="%E6%80%8E%E4%B9%88%E9%9D%A2%E8%AF%95.md">怎么面试</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/%E5%A4%B1%E8%B4%A5%E8%BD%AE%E5%AD%90-%E6%88%91%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1AIDL-API/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/20/%E5%A4%B1%E8%B4%A5%E8%BD%AE%E5%AD%90-%E6%88%91%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1AIDL-API/" class="post-title-link" itemprop="url">How to Design a AIDL</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-20 12:00:00 / Modified: 03:14:39" itemprop="dateCreated datePublished" datetime="2025-03-20T12:00:00+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="单一入口api"><a href="#单一入口api" class="headerlink" title="单一入口api"></a>单一入口api</h1><p>类似于后台的接口设计, 分为3层</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">client -&gt; api service -&gt; router -&gt; controller </span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>api: 实现 aidl stub 的 service。跨进程的调用入口，将请求重定向到本进程的 router</li>
+<li>router: 根据请求参数分发到各自的 controller </li>
+<li>controller: 处理请求</li>
+</ol>
+<p>为了扩展性，aidl 提供的接口是通用的，必须可以接收后期各种新的功能。入口不能是 <code>doA(xx), doB(xx), doC(xx)</code> 这种具体的形式，</p>
+<p>而是 <code>do(request)</code>。为了使用方便，可以在client加一层 <strong>ApiSdk</strong> 负责 <code>doXX(xx) -&gt; do(request)</code>。</p>
+<p>之后更改功能，只需要改对应的Controller实现。</p>
+<p>这个设计的优点是，aidl 只需定义一次，之后的接口更改，不需要更新 aidl, 可以向下兼容; </p>
+<p>弊端也很明显，失去了 aidl <code>in， out， inout</code> 参数跨进程同步修改的能力，object 变成单向的，值传递的，而不是 <strong>引用</strong>。</p>
+<p>注意，aidl 的 <strong>引用object</strong> 实质是 binder 实现的实时双向 marshalling, unmashalling, 是两个进程间不同内存地址的对象同步，</p>
+<p>跟一般的<strong>Reference引用</strong> 使用同一个进程的同一处内存是不一样的。</p>
+<p>举例说，<strong>实现下载及上传文件功能</strong>。按照以往的习惯AIDL接口设计为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 使用 Callback 传输结果，callback 是需要 client 实现的 aidl 接口</span><br><span class="line">oneway api.download(String fileType, String url, String fileName, Callback response);</span><br><span class="line"></span><br><span class="line"># 或者 通过aidl 的 in, out 同步参数</span><br><span class="line"># 接口1</span><br><span class="line">api.download(in Request request, out Response response);</span><br><span class="line"># 接口2</span><br><span class="line">api.upload(in Request request, out Response response);</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line"># 接口N</span><br><span class="line">api.xx(x, y, z);</span><br></pre></td></tr></table></figure>
+
+<p>现在是，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"># aidl: remote api 只有一个</span><br><span class="line">oneway api.post(in request, Callback response);</span><br><span class="line"></span><br><span class="line"># Request</span><br><span class="line">class Request implement Parcelable &#123;</span><br><span class="line">    int code,</span><br><span class="line">    int apiCode,</span><br><span class="line">    String param</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Param json 格式的字符串</span><br><span class="line">param:</span><br><span class="line">&#123;</span><br><span class="line">    fileType: &#x27;string&#x27;,</span><br><span class="line">    url: &#x27;string&#x27;,</span><br><span class="line">    fileName: &#x27;string&#x27;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># java: 每次新加接口，都是 client 加上接口封装 java ApiSdk </span><br><span class="line">class ApiSdk &#123;</span><br><span class="line">    void download(String fileType, String url, String fileName, Callback response) &#123;</span><br><span class="line">        request.code = xx;</span><br><span class="line">        request.apiCode = ApiCode.DOWNLOAD;</span><br><span class="line">        request.param = &#123;</span><br><span class="line">            fileType,</span><br><span class="line">            url,</span><br><span class="line">            fileName</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        api.post(request, response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void upload(...) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void xx(x, y, z) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="适合场景"><a href="#适合场景" class="headerlink" title="适合场景"></a>适合场景</h1><p>不需要靠引用传参获取处理结果的情况。</p>
+<p>这个设计的api还是多线程的，入口单一却没处理多线程调用，似乎不合理，到底是要多线程还是单线程模型，可以根据具体的业务场景需要在remote 的入口统一处理，比如使用 <code>MessageQueue</code> 转成单线程模型。</p>
+<p>想到这里才发现，单线程的模型这个就是 <code>Messenger</code> 的实现。。。#_#。</p>
+<p>我所想到的特性, <code>Messenger</code>的设计者都考虑到了。对方真是高手。</p>
+<hr>
+<h1 id="与Messenger的设计对比"><a href="#与Messenger的设计对比" class="headerlink" title="与Messenger的设计对比"></a>与Messenger的设计对比</h1><h2 id="api-Messager-aidl-接口及逻辑层"><a href="#api-Messager-aidl-接口及逻辑层" class="headerlink" title="api &amp; Messager aidl: 接口及逻辑层"></a>api &amp; Messager aidl: 接口及逻辑层</h2><p><code>Messenger</code> 用于处理发送请求逻辑，相当于 api.aidl。核心接口及逻辑层。</p>
+<p>aidl 部分的实现是在  <code>Handler</code> 的内部类 实现了 <code>IMessenger.aidl</code> 定义的 <code>send</code> 接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private final class MessengerImpl extends IMessenger.Stub &#123;</span><br><span class="line">    public void send(Message msg) &#123;</span><br><span class="line">        msg.sendingUid = Binder.getCallingUid();</span><br><span class="line">        Handler.this.sendMessage(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>对应关系是: <code>Messenger.send(), IMessenger.send() &lt;--&gt; api.post()</code></p>
+<h2 id="Request-Message：数据层"><a href="#Request-Message：数据层" class="headerlink" title="Request &amp; Message：数据层"></a>Request &amp; Message：数据层</h2><p><code>Message</code> 作为实体类，存放请求数据，对应 <code>Request</code></p>
+<p><strong>Message</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public final class Message implements Parcelable &#123;</span><br><span class="line">    public int what; // 可用于区分接口</span><br><span class="line">    public int arg1; // 简单参数</span><br><span class="line">    public int arg2; </span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * An arbitrary object to send to the recipient.  When using</span><br><span class="line">     * &#123;@link Messenger&#125; to send the message across processes this can only</span><br><span class="line">     * be non-null if it contains a Parcelable of a framework class (not one</span><br><span class="line">     * implemented by the application).   For other data transfer use</span><br><span class="line">     * &#123;@link #setData&#125;.</span><br><span class="line">     * </span><br><span class="line">     * &lt;p&gt;Note that Parcelable objects here are not supported prior to</span><br><span class="line">     * the &#123;@link android.os.Build.VERSION_CODES#FROYO&#125; release.</span><br><span class="line">     */</span><br><span class="line">    public Object obj; // 复杂参数</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Optional Messenger where replies to this message can be sent.  The</span><br><span class="line">     * semantics of exactly how this is used are up to the sender and</span><br><span class="line">     * receiver.</span><br><span class="line">     */</span><br><span class="line">    public Messenger replyTo; // 相当于 Callback 或 Response </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">    public int sendingUid = -1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    // 传输复杂的参数。相当于 Request.params </span><br><span class="line">     /**</span><br><span class="line">     * Sets a Bundle of arbitrary data values. Use arg1 and arg2 members</span><br><span class="line">     * as a lower cost way to send a few simple integer values, if you can.</span><br><span class="line">     * @see #getData() </span><br><span class="line">     * @see #peekData()</span><br><span class="line">     */</span><br><span class="line">    public void setData(Bundle data) &#123;</span><br><span class="line">        this.data = data;</span><br><span class="line">    &#125; </span><br></pre></td></tr></table></figure>
+
+<p>Message 还设计了 arg1, arg2 用于只需要传输简单参数的情形。</p>
+<p><code>Messenger replyTo</code> 用于 remote 回调结果。client &amp; remote 的来回通讯都是 <code>Messenger</code>, </p>
+<p>用同一个机制实现了请求&amp;回调的功能。相比之下，我还特意实现了一个 <code>Callback.aidl</code>，有点多余。</p>
+<p>我又造了一个不及格的轮子。</p>
+<h1 id="doc"><a href="#doc" class="headerlink" title="doc"></a>doc</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Facade_pattern">API 常用设计模式：Facade pattern</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1API/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/20/%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1API/" class="post-title-link" itemprop="url">怎么设计API</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-20 12:00:00 / Modified: 03:15:14" itemprop="dateCreated datePublished" datetime="2025-03-20T12:00:00+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="单个API"><a href="#单个API" class="headerlink" title="单个API"></a>单个API</h1><p>评定的标准</p>
+<ol>
+<li><em>简洁易用</em>： 参数不超过4个，不需要注释就知道用途及使用方式</li>
+<li><em>易扩展</em>：更改逻辑不需要动原先的代码，只需要注入新的实现。<br>比如注入新的接口实现。一般的做法是，预留一些可重载的接口，或提供注入的接口。<br>例如OkHttp 提供了 addIntercetor 更改 Request, Response 流程的逻辑; Gson 的 addTypeAdapter 自定义类型转换。</li>
+</ol>
+<p>如何检验？记住 ‘rule of three’。思考至少3个调用场景，3个扩展的情况。参考 Qt API 设计</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.qt.io/API_Design_Principles">Qt: API Design Principles</a></li>
+<li><a target="_blank" rel="noopener" href="http://www4.in.tum.de/~blanchet/api-design.pdf">The Little Manual of API Design</a></li>
+</ul>
+<p>例如登录接口，用户输入用户名，密码登录，对应的后台接口需要 用户名，加密sign，时间戳等。  </p>
+<h2 id="标准-简洁易用"><a href="#标准-简洁易用" class="headerlink" title="标准: 简洁易用"></a>标准: 简洁易用</h2><p>前端的API有以下几种写法：</p>
+<h3 id="1-大对象传输参数型"><a href="#1-大对象传输参数型" class="headerlink" title="1. 大对象传输参数型"></a>1. 大对象传输参数型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginParam</span> &#123;</span><br><span class="line">    String password;</span><br><span class="line">    String userName;</span><br><span class="line">    String sign;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(LoginParam param, Callback callback)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果参数少于5个，这种方式更像是过度封装了，多一个不必要的<strong>参数对象</strong>。如果参数过多，使用 <em>Builder Pattern</em> 更合适。<br>弊端是，阅读&amp;使用不方便，需要配合文档，否则使用者容易漏掉某些必选参数。<br>这种方式在某些动态语言中运用的较多，因为书写及其方便优雅，在PHP，JavaScript 中尤其常见. 例如  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JavaScript</span></span><br><span class="line"><span class="title function_">login</span>(&#123;</span><br><span class="line">    <span class="string">&#x27;user&#x27;</span>: <span class="string">&#x27;xechoz&#x27;</span></span><br><span class="line">    <span class="string">&#x27;password&#x27;</span>： <span class="string">&#x27;hello&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;from&#x27;</span>: <span class="string">&#x27;mainPage&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;autoLogin&#x27;</span>: <span class="literal">true</span></span><br><span class="line">&#125;, <span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>参见<a target="_blank" rel="noopener" href="https://nodejs.org/api/http.html#http_http_request_options_callback">Node.js Api: http.request(options[, callback])</a>, 其options包含了 10+ 个参数。</p>
+<h3 id="2-罗列参数型"><a href="#2-罗列参数型" class="headerlink" title="2. 罗列参数型"></a>2. 罗列参数型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 情形1：把计算参数的逻辑丢给调用者，如 sign = makeSign(...)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String userName, String sign, Callback callback)</span>；</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">makeSign</span><span class="params">(String userName, String passoword, <span class="type">long</span> timeStemp, ...)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 情形2：用最少的参数，不暴露底层接口细节</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String userName, String password, Callback callback)</span>;</span><br></pre></td></tr></table></figure>
+<p>简洁，易用。但是实际的开发中，只有一个逻辑的接口是比较少见的。更多的情况是，还有一个前置或后置的依赖流程接口，<br>这时login的接口很可能就必须带上相应的参数了，虽然这些不是<strong>登录</strong>所必须的。</p>
+<h3 id="3-长龙参数型"><a href="#3-长龙参数型" class="headerlink" title="3. 长龙参数型"></a>3. 长龙参数型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 情形1：长参数列表</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 登录。from, isForceLogin, isAd, adId 用于统计用户来源</span></span><br><span class="line"><span class="comment">* ...</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> isFromAd 是否为广告页面带来的登录</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> adId 广告id。只有 isFromAd = true 时才需要。默认0</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String userName, String password, Callback callback, Activity from, <span class="type">boolean</span> isForceLogin, <span class="type">boolean</span> isAd, <span class="type">int</span> adId)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 情形2： 分离接口</span></span><br><span class="line"><span class="comment">// 还是分为两个接口？让调用者保证调用login 之前调用 postLoginEvent?</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String userName, String password, Callback callback)</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postLoginEvent</span><span class="params">(String userName,  Activity from, <span class="type">boolean</span> isForceLogin, <span class="type">boolean</span> isAd, <span class="type">int</span> adId)</span>;</span><br></pre></td></tr></table></figure>
+<p>实际的开发场景中，<strong>长龙参数型</strong>并不少见，因为不断添加需求，不同的业务逻辑耦合在同一个接口里，<br>如登录的时候需要统计用户来源，到底是写在同一个接口里，还是另外写一个接口，让使用者调用login之前，先调用统计接口？</p>
+<p>最后，似乎没有一种实现方式符合<em>简洁易用</em>的评定标准。只能根据具体的参数依赖，数量等选择当前最合适的API实现方式，<br>不久之后，随着业务的更改，这种实现方式就会显得臃肿，不合适，需要一次重构。这就是理论与现实的距离。</p>
+<h2 id="标准-扩展性"><a href="#标准-扩展性" class="headerlink" title="标准: 扩展性"></a>标准: 扩展性</h2><p>易扩展的基础是，基于接口编程。依赖接口，并提供一个默认的接口实现，后期的更改&amp;扩展可以注入新的接口实现。  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ILogin</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String userName, String password)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DefaultLogin</span> <span class="keyword">implements</span> <span class="title class_">ILogin</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ApiLogin</span> <span class="keyword">implements</span> <span class="title class_">ILogin</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">ILogin</span> <span class="variable">loginImpl</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultLogin</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setLoginImpl</span><span class="params">(ILogin loginImpl)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.loginImpl = loginImpl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String userName, String password)</span> &#123;</span><br><span class="line">        loginImpl.login(userName, password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// .. inject you implement</span></span><br><span class="line">apiLogin.setLoginImpl(<span class="keyword">new</span> <span class="title class_">MyLoginImpl</span>());</span><br></pre></td></tr></table></figure>
+
+<p>又或者使用 <code>template/hook</code> 模式。这种适合在主流程不改动的情况下，扩展某一个步骤的实现。如登录完成执行的操作。<br>如Android View 的 draw -&gt; onDraw, layout -&gt; onLayout，使用者通过 hook 扩展自定义的行为。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onPreLogin</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 保存登录来源信息</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Overide</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onLogin</span><span class="params">(UserInfo info)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>.onLogin(info);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (info != <span class="literal">null</span> &amp;&amp; info.isLogin()) &#123;</span><br><span class="line">        <span class="comment">// 保存统计信息</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 发送登录失败</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onDraw</span><span class="params">(Canvas canvas)</span> &#123;</span><br><span class="line">    <span class="comment">// 自定义的绘制内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="API-集"><a href="#API-集" class="headerlink" title="API 集"></a>API 集</h1><p>我把 API 设计风格分为两种： 分布式，集中式<br>假设现在有个需求，账户模块。从业务逻辑上可以分为，登录注册逻辑，账户信息，数据存储 等子模块。</p>
+<h2 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h2><p>顾名思义，分布式的api是各自独立的，尽量减少不必要中间依赖模块。比如，登录模块，注册模块 可以各自独立，不必有一个中间模块把两者强行耦合在一块。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ApiLogin</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">()</span> &#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ApiData</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">(data)</span> &#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ApiSession</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSession</span><span class="params">(String token, <span class="type">int</span> timeOut)</span> &#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="集中式"><a href="#集中式" class="headerlink" title="集中式"></a>集中式</h2><p>可以理解为把分布式的接口集中到一块的方式。这是最常见的设计方式，也是最容易被滥用的方式。用得好，接口可以很易用，因为入口唯一；用得烂，接口容易变得臃肿。 </p>
+<p>集中式的设计分为:</p>
+<ul>
+<li><em>一层设计：core module 暴露所有api</em><br>core module 实现所有的 api 或者组合 子module，具体api由 子module 实现。<br>适合api少量的情况，如果api过多， core 模块容易臃肿，越到后期维护学习成本越大。一般我设计的API类，API 数量不超过10个, 以5个为标准；<br>另外，这种方式，每次添加接口都要改动 core api, 不相干的api也因为这个 core 类而存在被改动的风险。比如 core 包含了 登录，支付,<br>现在需要添加一个数据保存，而 登录支付 跟 数据保存 这些业务逻辑或api本应各自独立的。</li>
+<li><em>二层设计：core api 暴露 sub module + 各个 sub module 暴露&amp;实现各自的api</em><br>如果某个 sub module 包含的api 很多，可能也会采用分层的方式包含自己的子api层。递归地包含更多的层级。<br>core api 暴露这几个子模块，具体的api由子模块暴露。</li>
+</ul>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一层设计：</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CoreApi</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// login implement here</span></span><br><span class="line">        <span class="comment">// or  </span></span><br><span class="line">        <span class="comment">// apiLogin.login();</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUserInfo</span><span class="params">(UserInfo info)</span> &#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 二层</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CoreApi</span> &#123;</span><br><span class="line">    ApiLogin <span class="title function_">getApiLogin</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> apiLogin;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ApiUser <span class="title function_">getApiUser</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> apiUser;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ApiLogin</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// login implements</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ApiUser</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUserInfo</span><span class="params">(UserInfo info)</span> &#123;&#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ol>
+<li>observer pattern 的 API 注意内存泄露。考虑 WeakRefrence 等。最常见的如注册某个事件监听。</li>
+<li>Singleton &amp; static 谨慎使用。释放不及时，或者 static 对象过多，都是OOM的罪魁祸首。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/%E6%80%8E%E4%B9%88%E9%9D%A2%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/20/%E6%80%8E%E4%B9%88%E9%9D%A2%E8%AF%95/" class="post-title-link" itemprop="url">怎么面试</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-20 12:00:00 / Modified: 03:17:40" itemprop="dateCreated datePublished" datetime="2025-03-20T12:00:00+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="怎么当面试官"><a href="#怎么当面试官" class="headerlink" title="怎么当面试官"></a>怎么当面试官</h1><p>毕业之后，第一次 当面试官，总结一些心得。</p>
+<h2 id="目标差"><a href="#目标差" class="headerlink" title="目标差"></a>目标差</h2><p>作为面试官，你想知道什么？或者是说，面试官的目标是什么？<br>我希望知道面试者的这些方面</p>
+<ol>
+<li>技术水平<br>一个是深度，一个是广度。  </li>
+<li>自学能力<br>自学了什么？学到了什么水平？学了什么新技术？</li>
+<li>团队意识<br>Code Review 怎么执行？碰到有争议的代码，怎么处理?<br>怎么跟后端协商API? 怎么跟设计协商UI实现？</li>
+</ol>
+<h2 id="怎么问？"><a href="#怎么问？" class="headerlink" title="怎么问？"></a>怎么问？</h2><p>两个步骤</p>
+<ol>
+<li>广度<br>有没有更多的实现方案？有没有类似的东西？</li>
+<li>深度<br>原理，优缺点</li>
+</ol>
+<p>首先是一个简单的实现，随后就这个知识相关的知识点广度展开，然后深度展开。</p>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p>我需要实现一个动画，例如平移一个<code>TextView</code>。<br>有几种实现方式？(基础，广度)<br>还有其他的实现方式吗？(广度，扩散思维能力)<br>  每种的优劣？(深度)<br>  某种实现方式的原理？为什么要这样？比如，ValueAnimator 的实现原理. (深度)<br>动画的实现原理(深度)</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
+<li>推荐5本技术书籍</li>
+<li>非技术类的书</li>
+<li>常见工具的使用<ol>
+<li>Git 的常见操作，merge, rebase, reset</li>
+<li>基本的 Linux 命令行</li>
+</ol>
+</li>
+</ol>
+<h2 id="问题举例"><a href="#问题举例" class="headerlink" title="问题举例"></a>问题举例</h2><h3 id="多线程水平"><a href="#多线程水平" class="headerlink" title="多线程水平"></a>多线程水平</h3><ol>
+<li>怎么写一个线程安全的单例？为什么这样是线程安全的or不安全的？（基础）</li>
+<li>volatile, synchronized 的用法？(基础)</li>
+<li>synchronized 原理？存在的问题？(深度)</li>
+</ol>
+<h3 id="Android-相关多线程"><a href="#Android-相关多线程" class="headerlink" title="Android 相关多线程"></a>Android 相关多线程</h3><ol>
+<li>在 非UI线程可以更新 UI 吗？ 为什么？(广度)</li>
+<li>可以在子线程调Toast，Dialog吗？为什么? (广度)</li>
+<li>Handler 的实现原理（广度, 深度）</li>
+</ol>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><ol>
+<li>GC 回收的流程(基础)</li>
+<li>内存泄露原因？怎么查找？怎么解决？(基础)</li>
+<li>GC 算法，优劣(广度，深度)</li>
+<li>写一个缓存类(基础). 为什么这样写？GC的时候，存在什么问题？(实践能力)</li>
+</ol>
+<h3 id="class-加载"><a href="#class-加载" class="headerlink" title="class 加载"></a>class 加载</h3><p>这部分我也不懂。。</p>
+<ol>
+<li>什么时候加载？存在哪里？什么时候回收？会加载不到吗？(基础)</li>
+<li>有几种加载方式？优劣？(基础，广度)</li>
+</ol>
+<h2 id="Todo"><a href="#Todo" class="headerlink" title="Todo"></a>Todo</h2><p>结合其他人的面试经验，总结出适合我用的方式（套路）</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/20/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-03-20 03:04:38" itemprop="dateCreated datePublished" datetime="2025-03-20T03:04:38+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">石头汤</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xechoz.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="单个API评定的标准  简洁易用： 参数不超过4个，不需要注释就知道用途及使用方式 易扩展：更改逻辑不需要动原先的代码，只需要注入新的实现。比如注入新的接口实现。一般的做法是，预留一些可重载的接口，或提供注入的接口。例如OkHttp 提供了 addIntercetor 更改 Request, Response 流程的逻辑; Gson 的 addTypeAdapter 自定义类型转换。  如何检验？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="怎么设计API">
+<meta property="og:url" content="https://xechoz.github.io/2025/03/20/%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1API/index.html">
+<meta property="og:site_name" content="石头汤的博客">
+<meta property="og:description" content="单个API评定的标准  简洁易用： 参数不超过4个，不需要注释就知道用途及使用方式 易扩展：更改逻辑不需要动原先的代码，只需要注入新的实现。比如注入新的接口实现。一般的做法是，预留一些可重载的接口，或提供注入的接口。例如OkHttp 提供了 addIntercetor 更改 Request, Response 流程的逻辑; Gson 的 addTypeAdapter 自定义类型转换。  如何检验？">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-20T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-19T19:15:14.491Z">
+<meta property="article:author" content="石头汤">
+<meta property="article:tag" content="design">
+<meta property="article:tag" content="program">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xechoz.github.io/2025/03/20/%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1API/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xechoz.github.io/2025/03/20/%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1API/","path":"2025/03/20/怎么设计API/","title":"怎么设计API"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>怎么设计API | 石头汤的博客</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">石头汤的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E4%B8%AAAPI"><span class="nav-number">1.</span> <span class="nav-text">单个API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%87%86-%E7%AE%80%E6%B4%81%E6%98%93%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">标准: 简洁易用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A4%A7%E5%AF%B9%E8%B1%A1%E4%BC%A0%E8%BE%93%E5%8F%82%E6%95%B0%E5%9E%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 大对象传输参数型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%BD%97%E5%88%97%E5%8F%82%E6%95%B0%E5%9E%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 罗列参数型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%95%BF%E9%BE%99%E5%8F%82%E6%95%B0%E5%9E%8B"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 长龙参数型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%87%86-%E6%89%A9%E5%B1%95%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">标准: 扩展性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#API-%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">API 集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">分布式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E4%B8%AD%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">集中式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text">代码示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">注意事项</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">石头汤</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xechoz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xechoz" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1API/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="怎么设计API | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          怎么设计API
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-20 12:00:00 / Modified: 03:15:14" itemprop="dateCreated datePublished" datetime="2025-03-20T12:00:00+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="单个API"><a href="#单个API" class="headerlink" title="单个API"></a>单个API</h1><p>评定的标准</p>
+<ol>
+<li><em>简洁易用</em>： 参数不超过4个，不需要注释就知道用途及使用方式</li>
+<li><em>易扩展</em>：更改逻辑不需要动原先的代码，只需要注入新的实现。<br>比如注入新的接口实现。一般的做法是，预留一些可重载的接口，或提供注入的接口。<br>例如OkHttp 提供了 addIntercetor 更改 Request, Response 流程的逻辑; Gson 的 addTypeAdapter 自定义类型转换。</li>
+</ol>
+<p>如何检验？记住 ‘rule of three’。思考至少3个调用场景，3个扩展的情况。参考 Qt API 设计</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.qt.io/API_Design_Principles">Qt: API Design Principles</a></li>
+<li><a target="_blank" rel="noopener" href="http://www4.in.tum.de/~blanchet/api-design.pdf">The Little Manual of API Design</a></li>
+</ul>
+<p>例如登录接口，用户输入用户名，密码登录，对应的后台接口需要 用户名，加密sign，时间戳等。  </p>
+<h2 id="标准-简洁易用"><a href="#标准-简洁易用" class="headerlink" title="标准: 简洁易用"></a>标准: 简洁易用</h2><p>前端的API有以下几种写法：</p>
+<h3 id="1-大对象传输参数型"><a href="#1-大对象传输参数型" class="headerlink" title="1. 大对象传输参数型"></a>1. 大对象传输参数型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginParam</span> &#123;</span><br><span class="line">    String password;</span><br><span class="line">    String userName;</span><br><span class="line">    String sign;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(LoginParam param, Callback callback)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果参数少于5个，这种方式更像是过度封装了，多一个不必要的<strong>参数对象</strong>。如果参数过多，使用 <em>Builder Pattern</em> 更合适。<br>弊端是，阅读&amp;使用不方便，需要配合文档，否则使用者容易漏掉某些必选参数。<br>这种方式在某些动态语言中运用的较多，因为书写及其方便优雅，在PHP，JavaScript 中尤其常见. 例如  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JavaScript</span></span><br><span class="line"><span class="title function_">login</span>(&#123;</span><br><span class="line">    <span class="string">&#x27;user&#x27;</span>: <span class="string">&#x27;xechoz&#x27;</span></span><br><span class="line">    <span class="string">&#x27;password&#x27;</span>： <span class="string">&#x27;hello&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;from&#x27;</span>: <span class="string">&#x27;mainPage&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;autoLogin&#x27;</span>: <span class="literal">true</span></span><br><span class="line">&#125;, <span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>参见<a target="_blank" rel="noopener" href="https://nodejs.org/api/http.html#http_http_request_options_callback">Node.js Api: http.request(options[, callback])</a>, 其options包含了 10+ 个参数。</p>
+<h3 id="2-罗列参数型"><a href="#2-罗列参数型" class="headerlink" title="2. 罗列参数型"></a>2. 罗列参数型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 情形1：把计算参数的逻辑丢给调用者，如 sign = makeSign(...)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String userName, String sign, Callback callback)</span>；</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">makeSign</span><span class="params">(String userName, String passoword, <span class="type">long</span> timeStemp, ...)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 情形2：用最少的参数，不暴露底层接口细节</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String userName, String password, Callback callback)</span>;</span><br></pre></td></tr></table></figure>
+<p>简洁，易用。但是实际的开发中，只有一个逻辑的接口是比较少见的。更多的情况是，还有一个前置或后置的依赖流程接口，<br>这时login的接口很可能就必须带上相应的参数了，虽然这些不是<strong>登录</strong>所必须的。</p>
+<h3 id="3-长龙参数型"><a href="#3-长龙参数型" class="headerlink" title="3. 长龙参数型"></a>3. 长龙参数型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 情形1：长参数列表</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 登录。from, isForceLogin, isAd, adId 用于统计用户来源</span></span><br><span class="line"><span class="comment">* ...</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> isFromAd 是否为广告页面带来的登录</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> adId 广告id。只有 isFromAd = true 时才需要。默认0</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String userName, String password, Callback callback, Activity from, <span class="type">boolean</span> isForceLogin, <span class="type">boolean</span> isAd, <span class="type">int</span> adId)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 情形2： 分离接口</span></span><br><span class="line"><span class="comment">// 还是分为两个接口？让调用者保证调用login 之前调用 postLoginEvent?</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String userName, String password, Callback callback)</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postLoginEvent</span><span class="params">(String userName,  Activity from, <span class="type">boolean</span> isForceLogin, <span class="type">boolean</span> isAd, <span class="type">int</span> adId)</span>;</span><br></pre></td></tr></table></figure>
+<p>实际的开发场景中，<strong>长龙参数型</strong>并不少见，因为不断添加需求，不同的业务逻辑耦合在同一个接口里，<br>如登录的时候需要统计用户来源，到底是写在同一个接口里，还是另外写一个接口，让使用者调用login之前，先调用统计接口？</p>
+<p>最后，似乎没有一种实现方式符合<em>简洁易用</em>的评定标准。只能根据具体的参数依赖，数量等选择当前最合适的API实现方式，<br>不久之后，随着业务的更改，这种实现方式就会显得臃肿，不合适，需要一次重构。这就是理论与现实的距离。</p>
+<h2 id="标准-扩展性"><a href="#标准-扩展性" class="headerlink" title="标准: 扩展性"></a>标准: 扩展性</h2><p>易扩展的基础是，基于接口编程。依赖接口，并提供一个默认的接口实现，后期的更改&amp;扩展可以注入新的接口实现。  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ILogin</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String userName, String password)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DefaultLogin</span> <span class="keyword">implements</span> <span class="title class_">ILogin</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ApiLogin</span> <span class="keyword">implements</span> <span class="title class_">ILogin</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">ILogin</span> <span class="variable">loginImpl</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultLogin</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setLoginImpl</span><span class="params">(ILogin loginImpl)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.loginImpl = loginImpl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String userName, String password)</span> &#123;</span><br><span class="line">        loginImpl.login(userName, password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// .. inject you implement</span></span><br><span class="line">apiLogin.setLoginImpl(<span class="keyword">new</span> <span class="title class_">MyLoginImpl</span>());</span><br></pre></td></tr></table></figure>
+
+<p>又或者使用 <code>template/hook</code> 模式。这种适合在主流程不改动的情况下，扩展某一个步骤的实现。如登录完成执行的操作。<br>如Android View 的 draw -&gt; onDraw, layout -&gt; onLayout，使用者通过 hook 扩展自定义的行为。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onPreLogin</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 保存登录来源信息</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Overide</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onLogin</span><span class="params">(UserInfo info)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>.onLogin(info);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (info != <span class="literal">null</span> &amp;&amp; info.isLogin()) &#123;</span><br><span class="line">        <span class="comment">// 保存统计信息</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 发送登录失败</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onDraw</span><span class="params">(Canvas canvas)</span> &#123;</span><br><span class="line">    <span class="comment">// 自定义的绘制内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="API-集"><a href="#API-集" class="headerlink" title="API 集"></a>API 集</h1><p>我把 API 设计风格分为两种： 分布式，集中式<br>假设现在有个需求，账户模块。从业务逻辑上可以分为，登录注册逻辑，账户信息，数据存储 等子模块。</p>
+<h2 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h2><p>顾名思义，分布式的api是各自独立的，尽量减少不必要中间依赖模块。比如，登录模块，注册模块 可以各自独立，不必有一个中间模块把两者强行耦合在一块。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ApiLogin</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">()</span> &#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ApiData</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">(data)</span> &#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ApiSession</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSession</span><span class="params">(String token, <span class="type">int</span> timeOut)</span> &#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="集中式"><a href="#集中式" class="headerlink" title="集中式"></a>集中式</h2><p>可以理解为把分布式的接口集中到一块的方式。这是最常见的设计方式，也是最容易被滥用的方式。用得好，接口可以很易用，因为入口唯一；用得烂，接口容易变得臃肿。 </p>
+<p>集中式的设计分为:</p>
+<ul>
+<li><em>一层设计：core module 暴露所有api</em><br>core module 实现所有的 api 或者组合 子module，具体api由 子module 实现。<br>适合api少量的情况，如果api过多， core 模块容易臃肿，越到后期维护学习成本越大。一般我设计的API类，API 数量不超过10个, 以5个为标准；<br>另外，这种方式，每次添加接口都要改动 core api, 不相干的api也因为这个 core 类而存在被改动的风险。比如 core 包含了 登录，支付,<br>现在需要添加一个数据保存，而 登录支付 跟 数据保存 这些业务逻辑或api本应各自独立的。</li>
+<li><em>二层设计：core api 暴露 sub module + 各个 sub module 暴露&amp;实现各自的api</em><br>如果某个 sub module 包含的api 很多，可能也会采用分层的方式包含自己的子api层。递归地包含更多的层级。<br>core api 暴露这几个子模块，具体的api由子模块暴露。</li>
+</ul>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一层设计：</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CoreApi</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// login implement here</span></span><br><span class="line">        <span class="comment">// or  </span></span><br><span class="line">        <span class="comment">// apiLogin.login();</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUserInfo</span><span class="params">(UserInfo info)</span> &#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 二层</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CoreApi</span> &#123;</span><br><span class="line">    ApiLogin <span class="title function_">getApiLogin</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> apiLogin;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ApiUser <span class="title function_">getApiUser</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> apiUser;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ApiLogin</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// login implements</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ApiUser</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUserInfo</span><span class="params">(UserInfo info)</span> &#123;&#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ol>
+<li>observer pattern 的 API 注意内存泄露。考虑 WeakRefrence 等。最常见的如注册某个事件监听。</li>
+<li>Singleton &amp; static 谨慎使用。释放不及时，或者 static 对象过多，都是OOM的罪魁祸首。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/design/" rel="tag"># design</a>
+              <a href="/tags/program/" rel="tag"># program</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/20/%E6%80%8E%E4%B9%88%E9%9D%A2%E8%AF%95/" rel="prev" title="怎么面试">
+                  <i class="fa fa-angle-left"></i> 怎么面试
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/20/%E5%A4%B1%E8%B4%A5%E8%BD%AE%E5%AD%90-%E6%88%91%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1AIDL-API/" rel="next" title="How to Design a AIDL">
+                  How to Design a AIDL <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">石头汤</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

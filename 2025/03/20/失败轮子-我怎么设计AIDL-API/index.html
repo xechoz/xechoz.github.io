@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xechoz.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="单一入口api类似于后台的接口设计, 分为3层 1client -&gt; api service -&gt; router -&gt; controller    api: 实现 aidl stub 的 service。跨进程的调用入口，将请求重定向到本进程的 router router: 根据请求参数分发到各自的 controller  controller: 处理请求  为了扩展性，aidl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Design a AIDL">
+<meta property="og:url" content="https://xechoz.github.io/2025/03/20/%E5%A4%B1%E8%B4%A5%E8%BD%AE%E5%AD%90-%E6%88%91%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1AIDL-API/index.html">
+<meta property="og:site_name" content="石头汤的博客">
+<meta property="og:description" content="单一入口api类似于后台的接口设计, 分为3层 1client -&gt; api service -&gt; router -&gt; controller    api: 实现 aidl stub 的 service。跨进程的调用入口，将请求重定向到本进程的 router router: 根据请求参数分发到各自的 controller  controller: 处理请求  为了扩展性，aidl">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-20T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-19T19:14:39.224Z">
+<meta property="article:author" content="石头汤">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="binder">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xechoz.github.io/2025/03/20/%E5%A4%B1%E8%B4%A5%E8%BD%AE%E5%AD%90-%E6%88%91%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1AIDL-API/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xechoz.github.io/2025/03/20/%E5%A4%B1%E8%B4%A5%E8%BD%AE%E5%AD%90-%E6%88%91%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1AIDL-API/","path":"2025/03/20/失败轮子-我怎么设计AIDL-API/","title":"How to Design a AIDL"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>How to Design a AIDL | 石头汤的博客</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">石头汤的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E4%B8%80%E5%85%A5%E5%8F%A3api"><span class="nav-number">1.</span> <span class="nav-text">单一入口api</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%82%E5%90%88%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">适合场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8EMessenger%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%AF%B9%E6%AF%94"><span class="nav-number">3.</span> <span class="nav-text">与Messenger的设计对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#api-Messager-aidl-%E6%8E%A5%E5%8F%A3%E5%8F%8A%E9%80%BB%E8%BE%91%E5%B1%82"><span class="nav-number">3.1.</span> <span class="nav-text">api &amp; Messager aidl: 接口及逻辑层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Request-Message%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%B1%82"><span class="nav-number">3.2.</span> <span class="nav-text">Request &amp; Message：数据层</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#doc"><span class="nav-number">4.</span> <span class="nav-text">doc</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">石头汤</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xechoz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xechoz" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xechoz.github.io/2025/03/20/%E5%A4%B1%E8%B4%A5%E8%BD%AE%E5%AD%90-%E6%88%91%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1AIDL-API/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="石头汤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="How to Design a AIDL | 石头汤的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          How to Design a AIDL
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-20 12:00:00 / Modified: 03:14:39" itemprop="dateCreated datePublished" datetime="2025-03-20T12:00:00+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="单一入口api"><a href="#单一入口api" class="headerlink" title="单一入口api"></a>单一入口api</h1><p>类似于后台的接口设计, 分为3层</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">client -&gt; api service -&gt; router -&gt; controller </span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>api: 实现 aidl stub 的 service。跨进程的调用入口，将请求重定向到本进程的 router</li>
+<li>router: 根据请求参数分发到各自的 controller </li>
+<li>controller: 处理请求</li>
+</ol>
+<p>为了扩展性，aidl 提供的接口是通用的，必须可以接收后期各种新的功能。入口不能是 <code>doA(xx), doB(xx), doC(xx)</code> 这种具体的形式，</p>
+<p>而是 <code>do(request)</code>。为了使用方便，可以在client加一层 <strong>ApiSdk</strong> 负责 <code>doXX(xx) -&gt; do(request)</code>。</p>
+<p>之后更改功能，只需要改对应的Controller实现。</p>
+<p>这个设计的优点是，aidl 只需定义一次，之后的接口更改，不需要更新 aidl, 可以向下兼容; </p>
+<p>弊端也很明显，失去了 aidl <code>in， out， inout</code> 参数跨进程同步修改的能力，object 变成单向的，值传递的，而不是 <strong>引用</strong>。</p>
+<p>注意，aidl 的 <strong>引用object</strong> 实质是 binder 实现的实时双向 marshalling, unmashalling, 是两个进程间不同内存地址的对象同步，</p>
+<p>跟一般的<strong>Reference引用</strong> 使用同一个进程的同一处内存是不一样的。</p>
+<p>举例说，<strong>实现下载及上传文件功能</strong>。按照以往的习惯AIDL接口设计为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 使用 Callback 传输结果，callback 是需要 client 实现的 aidl 接口</span><br><span class="line">oneway api.download(String fileType, String url, String fileName, Callback response);</span><br><span class="line"></span><br><span class="line"># 或者 通过aidl 的 in, out 同步参数</span><br><span class="line"># 接口1</span><br><span class="line">api.download(in Request request, out Response response);</span><br><span class="line"># 接口2</span><br><span class="line">api.upload(in Request request, out Response response);</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line"># 接口N</span><br><span class="line">api.xx(x, y, z);</span><br></pre></td></tr></table></figure>
+
+<p>现在是，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"># aidl: remote api 只有一个</span><br><span class="line">oneway api.post(in request, Callback response);</span><br><span class="line"></span><br><span class="line"># Request</span><br><span class="line">class Request implement Parcelable &#123;</span><br><span class="line">    int code,</span><br><span class="line">    int apiCode,</span><br><span class="line">    String param</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Param json 格式的字符串</span><br><span class="line">param:</span><br><span class="line">&#123;</span><br><span class="line">    fileType: &#x27;string&#x27;,</span><br><span class="line">    url: &#x27;string&#x27;,</span><br><span class="line">    fileName: &#x27;string&#x27;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># java: 每次新加接口，都是 client 加上接口封装 java ApiSdk </span><br><span class="line">class ApiSdk &#123;</span><br><span class="line">    void download(String fileType, String url, String fileName, Callback response) &#123;</span><br><span class="line">        request.code = xx;</span><br><span class="line">        request.apiCode = ApiCode.DOWNLOAD;</span><br><span class="line">        request.param = &#123;</span><br><span class="line">            fileType,</span><br><span class="line">            url,</span><br><span class="line">            fileName</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        api.post(request, response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void upload(...) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void xx(x, y, z) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="适合场景"><a href="#适合场景" class="headerlink" title="适合场景"></a>适合场景</h1><p>不需要靠引用传参获取处理结果的情况。</p>
+<p>这个设计的api还是多线程的，入口单一却没处理多线程调用，似乎不合理，到底是要多线程还是单线程模型，可以根据具体的业务场景需要在remote 的入口统一处理，比如使用 <code>MessageQueue</code> 转成单线程模型。</p>
+<p>想到这里才发现，单线程的模型这个就是 <code>Messenger</code> 的实现。。。#_#。</p>
+<p>我所想到的特性, <code>Messenger</code>的设计者都考虑到了。对方真是高手。</p>
+<hr>
+<h1 id="与Messenger的设计对比"><a href="#与Messenger的设计对比" class="headerlink" title="与Messenger的设计对比"></a>与Messenger的设计对比</h1><h2 id="api-Messager-aidl-接口及逻辑层"><a href="#api-Messager-aidl-接口及逻辑层" class="headerlink" title="api &amp; Messager aidl: 接口及逻辑层"></a>api &amp; Messager aidl: 接口及逻辑层</h2><p><code>Messenger</code> 用于处理发送请求逻辑，相当于 api.aidl。核心接口及逻辑层。</p>
+<p>aidl 部分的实现是在  <code>Handler</code> 的内部类 实现了 <code>IMessenger.aidl</code> 定义的 <code>send</code> 接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private final class MessengerImpl extends IMessenger.Stub &#123;</span><br><span class="line">    public void send(Message msg) &#123;</span><br><span class="line">        msg.sendingUid = Binder.getCallingUid();</span><br><span class="line">        Handler.this.sendMessage(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>对应关系是: <code>Messenger.send(), IMessenger.send() &lt;--&gt; api.post()</code></p>
+<h2 id="Request-Message：数据层"><a href="#Request-Message：数据层" class="headerlink" title="Request &amp; Message：数据层"></a>Request &amp; Message：数据层</h2><p><code>Message</code> 作为实体类，存放请求数据，对应 <code>Request</code></p>
+<p><strong>Message</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public final class Message implements Parcelable &#123;</span><br><span class="line">    public int what; // 可用于区分接口</span><br><span class="line">    public int arg1; // 简单参数</span><br><span class="line">    public int arg2; </span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * An arbitrary object to send to the recipient.  When using</span><br><span class="line">     * &#123;@link Messenger&#125; to send the message across processes this can only</span><br><span class="line">     * be non-null if it contains a Parcelable of a framework class (not one</span><br><span class="line">     * implemented by the application).   For other data transfer use</span><br><span class="line">     * &#123;@link #setData&#125;.</span><br><span class="line">     * </span><br><span class="line">     * &lt;p&gt;Note that Parcelable objects here are not supported prior to</span><br><span class="line">     * the &#123;@link android.os.Build.VERSION_CODES#FROYO&#125; release.</span><br><span class="line">     */</span><br><span class="line">    public Object obj; // 复杂参数</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Optional Messenger where replies to this message can be sent.  The</span><br><span class="line">     * semantics of exactly how this is used are up to the sender and</span><br><span class="line">     * receiver.</span><br><span class="line">     */</span><br><span class="line">    public Messenger replyTo; // 相当于 Callback 或 Response </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">    public int sendingUid = -1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    // 传输复杂的参数。相当于 Request.params </span><br><span class="line">     /**</span><br><span class="line">     * Sets a Bundle of arbitrary data values. Use arg1 and arg2 members</span><br><span class="line">     * as a lower cost way to send a few simple integer values, if you can.</span><br><span class="line">     * @see #getData() </span><br><span class="line">     * @see #peekData()</span><br><span class="line">     */</span><br><span class="line">    public void setData(Bundle data) &#123;</span><br><span class="line">        this.data = data;</span><br><span class="line">    &#125; </span><br></pre></td></tr></table></figure>
+
+<p>Message 还设计了 arg1, arg2 用于只需要传输简单参数的情形。</p>
+<p><code>Messenger replyTo</code> 用于 remote 回调结果。client &amp; remote 的来回通讯都是 <code>Messenger</code>, </p>
+<p>用同一个机制实现了请求&amp;回调的功能。相比之下，我还特意实现了一个 <code>Callback.aidl</code>，有点多余。</p>
+<p>我又造了一个不及格的轮子。</p>
+<h1 id="doc"><a href="#doc" class="headerlink" title="doc"></a>doc</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Facade_pattern">API 常用设计模式：Facade pattern</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/android/" rel="tag"># android</a>
+              <a href="/tags/binder/" rel="tag"># binder</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/20/%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1API/" rel="prev" title="怎么设计API">
+                  <i class="fa fa-angle-left"></i> 怎么设计API
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/20/README/" rel="next" title="README">
+                  README <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">石头汤</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
