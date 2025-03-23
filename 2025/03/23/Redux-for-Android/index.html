@@ -1,105 +1,171 @@
 <!DOCTYPE html>
-<html>
+<html lang=en>
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Redux-for-Android | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="About一个精简的 Redux 库，去掉了一些 Redux 官方实例中冗余的设计 基础概念GUI 开发，通常有3个角色： state: 描述数据状态action: 管理 stateview: 消费 state，触发 action 逻辑换成 Android 开发容易理解的话，就是 state &#x3D; immutable data classactions &#x3D; repository,">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="About一个精简的 Redux 库，去掉了一些 Redux 官方实例中冗余的设计 基础概念  GUI 开发，通常有3个角色： state: 描述数据状态action: 管理 stateview: 消费 state，触发 action 逻辑换成 Android 开发容易理解的话，就是 state &#x3D; immutable data classactions &#x3D; repositor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redux-for-Android">
 <meta property="og:url" content="http://example.com/2025/03/23/Redux-for-Android/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="About一个精简的 Redux 库，去掉了一些 Redux 官方实例中冗余的设计 基础概念GUI 开发，通常有3个角色： state: 描述数据状态action: 管理 stateview: 消费 state，触发 action 逻辑换成 Android 开发容易理解的话，就是 state &#x3D; immutable data classactions &#x3D; repository,">
+<meta property="og:description" content="About一个精简的 Redux 库，去掉了一些 Redux 官方实例中冗余的设计 基础概念  GUI 开发，通常有3个角色： state: 描述数据状态action: 管理 stateview: 消费 state，触发 action 逻辑换成 Android 开发容易理解的话，就是 state &#x3D; immutable data classactions &#x3D; repositor">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2025/03/23/Redux-for-Android/one-way-data-flow.png">
 <meta property="article:published_time" content="2025-03-23T08:08:30.000Z">
-<meta property="article:modified_time" content="2025-03-23T08:17:12.055Z">
+<meta property="article:modified_time" content="2025-03-23T08:36:53.113Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="android">
 <meta property="article:tag" content="redux">
 <meta property="article:tag" content="kotlin">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
+<meta name="twitter:image" content="http://example.com/2025/03/23/Redux-for-Android/one-way-data-flow.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Redux-for-Android</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
 <link rel="stylesheet" href="/css/style.css">
 
-  
+    <!-- persian styles -->
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
-
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
 <meta name="generator" content="Hexo 7.3.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/03/23/Redux-for-Android/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/03/23/Redux-for-Android/&text=Redux-for-Android"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/03/23/Redux-for-Android/&is_video=false&description=Redux-for-Android"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Redux-for-Android&body=Check out this article: http://example.com/2025/03/23/Redux-for-Android/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/03/23/Redux-for-Android/&name=Redux-for-Android&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/03/23/Redux-for-Android/&t=Redux-for-Android"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#About"><span class="toc-number">1.</span> <span class="toc-text">About</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83"><span class="toc-number">3.</span> <span class="toc-text">核心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Demo"><span class="toc-number">5.</span> <span class="toc-text">使用 Demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
       </div>
-    </div>
-  </div>
-</header>
+    
+  </span>
+</div>
 
-      <div class="outer">
-        <section id="main"><article id="post-Redux-for-Android" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/23/Redux-for-Android/" class="article-date">
-  <time class="dt-published" datetime="2025-03-23T08:08:30.000Z" itemprop="datePublished">2025-03-23</time>
-</a>
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="content index py4 ">
         
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      Redux-for-Android
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Redux-for-Android
     </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-23T08:08:30.000Z" class="dt-published" itemprop="datePublished">2025-03-23</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/android/" rel="tag">android</a>, <a class="p-category" href="/tags/kotlin/" rel="tag">kotlin</a>, <a class="p-category" href="/tags/redux/" rel="tag">redux</a>
+    </div>
+
+
+    </div>
+  </header>
   
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="About"><a href="#About" class="headerlink" title="About"></a>About</h2><p>一个精简的 Redux 库，去掉了一些 Redux 官方实例中冗余的设计</p>
-<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>GUI 开发，通常有3个角色：</p>
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="About"><a href="#About" class="headerlink" title="About"></a>About</h2><p>一个精简的 Redux 库，去掉了一些 Redux 官方实例中冗余的设计</p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><img src="/2025/03/23/Redux-for-Android/one-way-data-flow.png" class="" title="数据流图">
+
+<p>GUI 开发，通常有3个角色：</p>
 <p>state: 描述数据状态<br>action: 管理 state<br>view: 消费 state，触发 action 逻辑<br>换成 Android 开发容易理解的话，就是</p>
 <p>state &#x3D; immutable data class<br>actions &#x3D; repository, viewmodel, presenter, service, controller, manager<br>view &#x3D; view, activity, fragment<br>一个简单的 counter 示例：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// state</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">State</span>(</span><br><span class="line">    <span class="keyword">val</span> count: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// action</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CounterViewModel</span> &#123;</span><br><span class="line">    privte <span class="keyword">val</span> stateListeners = mutableList&lt;(State)-&gt;<span class="built_in">Unit</span>&gt;()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> state = State()</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">set</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">increment</span><span class="params">()</span></span> &#123;</span><br><span class="line">        state = state.copy(count = state.count + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        stateListeners.foreach &#123;</span><br><span class="line">            it(state)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">onStateChange</span><span class="params">(listener: (<span class="type">State</span>)-&gt;<span class="type">Unit</span>)</span></span> &#123;</span><br><span class="line">        stateListeners.add(listener)</span><br><span class="line"></span><br><span class="line">        listenter(state)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// view</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CounterFrament</span>(viewModel: CounterViewModel) &#123;</span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        viewMode.onStateChange &#123;</span><br><span class="line">            counterText =  viewmodel.state.count</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        setOnClickListener &#123;</span><br><span class="line">            viewModel.increment()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -133,133 +199,143 @@
 <li><a target="_blank" rel="noopener" href="https://github.com/xechoz/android-kotlin-redux/tree/master">源码:RxState for Android</a></li>
 </ol>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/03/23/Redux-for-Android/" data-id="cm8ldb8nx0000eivv72icgdaj" data-title="Redux-for-Android" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/" rel="tag">kotlin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redux/" rel="tag">redux</a></li></ul>
-
-    </footer>
   </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2025/03/23/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
-
-  
 </article>
 
 
-</section>
+
         
-          <aside id="sidebar">
-  
-    
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/" rel="tag">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layout/" rel="tag">layout</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/" rel="tag">redux</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/kotlin/" style="font-size: 10px;">kotlin</a> <a href="/tags/layout/" style="font-size: 10px;">layout</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
+    <div id="nav-footer" style="display: none">
       <ul>
         
-          <li>
-            <a href="/2025/03/23/Redux-for-Android/">Redux-for-Android</a>
-          </li>
+          <li><a href="/">Home</a></li>
         
-          <li>
-            <a href="/2025/03/23/hello-world/">Hello World</a>
-          </li>
+          <li><a href="/about/">About</a></li>
         
-          <li>
-            <a href="/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/">实现：一种极低成本的Android屏幕适配方式</a>
-          </li>
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
         
       </ul>
     </div>
-  </div>
 
-  
-</aside>
-        
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#About"><span class="toc-number">1.</span> <span class="toc-text">About</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83"><span class="toc-number">3.</span> <span class="toc-text">核心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Demo"><span class="toc-number">5.</span> <span class="toc-text">使用 Demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/03/23/Redux-for-Android/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/03/23/Redux-for-Android/&text=Redux-for-Android"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/03/23/Redux-for-Android/&is_video=false&description=Redux-for-Android"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Redux-for-Android&body=Check out this article: http://example.com/2025/03/23/Redux-for-Android/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/03/23/Redux-for-Android/&name=Redux-for-Android&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/03/23/Redux-for-Android/&t=Redux-for-Android"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
     </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
   </div>
 </footer>
 
     </div>
-    <nav id="mobile-nav">
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
 
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+<script src="/js/main.js"></script>
 
+<!-- search -->
 
+<!-- Baidu Analytics -->
 
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+<!-- Cloudflare Analytics -->
 
+<!-- Disqus Comments -->
 
+<!-- utterances Comments -->
 
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
 </html>
