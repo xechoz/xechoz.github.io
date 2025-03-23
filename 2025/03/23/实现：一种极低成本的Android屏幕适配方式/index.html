@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>实现：一种极低成本的Android屏幕适配方式 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="实现： 一种极低成本的Android屏幕适配方式参考 一种极低成本的Android屏幕适配方式 实现代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现：一种极低成本的Android屏幕适配方式">
+<meta property="og:url" content="http://example.com/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="实现： 一种极低成本的Android屏幕适配方式参考 一种极低成本的Android屏幕适配方式 实现代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-23T06:41:43.000Z">
+<meta property="article:modified_time" content="2025-03-23T08:04:38.780Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="layout">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-实现：一种极低成本的Android屏幕适配方式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2025-03-23T06:41:43.000Z" itemprop="datePublished">2025-03-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      实现：一种极低成本的Android屏幕适配方式
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="实现：-一种极低成本的Android屏幕适配方式"><a href="#实现：-一种极低成本的Android屏幕适配方式" class="headerlink" title="实现： 一种极低成本的Android屏幕适配方式"></a>实现： 一种极低成本的Android屏幕适配方式</h2><p>参考 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/d9QCoBP6kV9VSWvVldVVwA?mode=light">一种极低成本的Android屏幕适配方式</a></p>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xechoz.lib</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.app.Application</span><br><span class="line"><span class="keyword">import</span> android.content.ComponentCallbacks</span><br><span class="line"><span class="keyword">import</span> android.content.Context</span><br><span class="line"><span class="keyword">import</span> android.content.res.Configuration</span><br><span class="line"><span class="keyword">import</span> android.util.AttributeSet</span><br><span class="line"><span class="keyword">import</span> android.util.DisplayMetrics</span><br><span class="line"><span class="keyword">import</span> android.widget.FrameLayout</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以 uiWidthDp 为基准，按比例适配 整个 Layout 里的元素</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 原理是 用 uiWidthDp 跟实际的屏幕 dp 比例，</span></span><br><span class="line"><span class="comment"> * 计算出新的 density, 替换 DisplayMetrics 的 density</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * usage:</span></span><br><span class="line"><span class="comment"> * 在 xml 布局里用</span></span><br><span class="line"><span class="comment"> * &lt;CustomDensityLayout&gt;</span></span><br><span class="line"><span class="comment"> *     &lt;your view&gt;</span></span><br><span class="line"><span class="comment"> * &lt;/CustomDensityLayout&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 在自定义 View里用:</span></span><br><span class="line"><span class="comment"> * FooView: BarView(context = context.asDensityContext(your_target_width_dp))</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 参考：</span></span><br><span class="line"><span class="comment"> * [一种极低成本的Android屏幕适配方式](https://mp.weixin.qq.com/s/d9QCoBP6kV9VSWvVldVVwA?mode=light)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CustomDensityLayout</span> <span class="meta">@JvmOverloads</span> <span class="keyword">constructor</span>(</span><br><span class="line">    context: Context, attrs: AttributeSet? = <span class="literal">null</span></span><br><span class="line">) : FrameLayout(context.createCustomDensityContext(uiWidthDp), attrs) &#123;</span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> uiWidthDp = <span class="number">360</span> <span class="comment">// 设计稿屏幕 宽度 的dp，默认 360 dp</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 创建一个 新的 context 适配 Density</span></span><br><span class="line"><span class="comment"> * [uiWidthDp] 设计稿屏幕 宽度 的dp，默认 360 dp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * usage:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * // 单个 Activity 适配</span></span><br><span class="line"><span class="comment"> * class MainActivity : ComponentActivity() &#123;</span></span><br><span class="line"><span class="comment"> *     override fun attachBaseContext(newBase: Context) &#123;</span></span><br><span class="line"><span class="comment"> *         super.attachBaseContext(newBase.createCustomDensityContext())</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * // 全部 Activity 都换掉</span></span><br><span class="line"><span class="comment"> * class MainActivity : ComponentActivity() &#123;</span></span><br><span class="line"><span class="comment"> *     override fun attachBaseContext(newBase: Context) &#123;</span></span><br><span class="line"><span class="comment"> *         newBase.setCustomDensity()</span></span><br><span class="line"><span class="comment"> *         super.attachBaseContext(newBase)</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * // 只适配 这个 View 及其 子 view</span></span><br><span class="line"><span class="comment"> * class FooView <span class="doctag">@JvmOverloads</span> constructor(</span></span><br><span class="line"><span class="comment"> *     context: Context, attrs: AttributeSet? = null</span></span><br><span class="line"><span class="comment"> * ) : FrameLayout(context.createCustomDensityContext(), attrs)</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span> setCustomDensity</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">createCustomDensityContext</span><span class="params">(uiWidthDp: <span class="type">Int</span> = <span class="number">360</span>)</span></span>: Context &#123;</span><br><span class="line">    <span class="keyword">val</span> custom = newCustomDensity(uiWidthDp)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> copyConfiguration = Configuration()</span><br><span class="line">    copyConfiguration.densityDpi = custom.targetDensityDpi</span><br><span class="line">    copyConfiguration.setTo(resources.configuration)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> copyContext = createConfigurationContext(copyConfiguration)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> copyMetrics = DisplayMetrics()</span><br><span class="line">    copyMetrics.setTo(resources.displayMetrics)</span><br><span class="line">    copyMetrics.setCustomDensity(custom)</span><br><span class="line"></span><br><span class="line">    copyContext.resources.displayMetrics.setTo(copyMetrics)</span><br><span class="line">    <span class="keyword">return</span> copyContext</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// private ////</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> nonCompatDensity = <span class="number">0f</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> nonCompatScaledDensity = <span class="number">0f</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> Context.<span class="title">newCustomDensity</span><span class="params">(toWidthDp: <span class="type">Int</span>)</span></span>: CustomDensity &#123;</span><br><span class="line">    (<span class="keyword">this</span> <span class="keyword">as</span>? Application ?: applicationContext <span class="keyword">as</span>? Application)?.let(::updateNonCompatDensity)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> targetDensity = <span class="number">1f</span> * resources.displayMetrics.widthPixels / toWidthDp</span><br><span class="line">    <span class="keyword">val</span> targetScaleDensity = <span class="number">1f</span> * targetDensity * (nonCompatScaledDensity / nonCompatDensity)</span><br><span class="line">    <span class="keyword">val</span> targetDensityDpi = (<span class="number">160</span> * targetScaleDensity).toInt()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> CustomDensity(</span><br><span class="line">        targetDensity = targetDensity,</span><br><span class="line">        targetScaledDensity = targetScaleDensity,</span><br><span class="line">        targetDensityDpi = targetDensityDpi</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">updateNonCompatDensity</span><span class="params">(application: <span class="type">Application</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> displayMetrics = application.resources.displayMetrics</span><br><span class="line">    <span class="keyword">if</span> (nonCompatDensity == <span class="number">0f</span>) &#123;</span><br><span class="line">        nonCompatDensity = displayMetrics.density</span><br><span class="line">        nonCompatScaledDensity = displayMetrics.scaledDensity</span><br><span class="line"></span><br><span class="line">        application.registerComponentCallbacks(<span class="keyword">object</span> : ComponentCallbacks &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onConfigurationChanged</span><span class="params">(newConfig: <span class="type">Configuration</span>)</span></span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (newConfig.fontScale &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    nonCompatScaledDensity = application.resources.displayMetrics.scaledDensity</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onLowMemory</span><span class="params">()</span></span> &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 适用  全局适配的 场景</span></span><br><span class="line"><span class="comment"> * 适配 整个 Resources， Activity resources 是共享的，改了一个会全部改掉。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * // 有些代码使用的 application 获取 resource, 这个也要适配</span></span><br><span class="line"><span class="comment"> * class MainApplication: Application() &#123;</span></span><br><span class="line"><span class="comment"> *     override fun attachBaseContext(base: Context) &#123;</span></span><br><span class="line"><span class="comment"> *         base.setCustomDensity()</span></span><br><span class="line"><span class="comment"> *         super.attachBaseContext(base)</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * // 全部 Activity 都适配。 或者在 BaseActivity</span></span><br><span class="line"><span class="comment"> * class MainActivity : ComponentActivity() &#123;</span></span><br><span class="line"><span class="comment"> *     override fun attachBaseContext(newBase: Context) &#123;</span></span><br><span class="line"><span class="comment"> *         newBase.setCustomDensity()</span></span><br><span class="line"><span class="comment"> *         super.attachBaseContext(newBase)</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">setCustomDensity</span><span class="params">(uiWidthDp: <span class="type">Int</span> = <span class="number">360</span>)</span></span> &#123;</span><br><span class="line">    resources.displayMetrics.setCustomDensity(newCustomDensity(uiWidthDp))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> DisplayMetrics.<span class="title">setCustomDensity</span><span class="params">(custom: <span class="type">CustomDensity</span>)</span></span> &#123;</span><br><span class="line">    density = custom.targetDensity</span><br><span class="line">    scaledDensity = custom.targetScaledDensity</span><br><span class="line">    densityDpi = custom.targetDensityDpi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">CustomDensity</span>(</span><br><span class="line">    <span class="keyword">val</span> targetDensity: <span class="built_in">Float</span>,</span><br><span class="line">    <span class="keyword">val</span> targetScaledDensity: <span class="built_in">Float</span>,</span><br><span class="line">    <span class="keyword">val</span> targetDensityDpi: <span class="built_in">Int</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/" data-id="cm8ldb8o90003eivvaua1bgdb" data-title="实现：一种极低成本的Android屏幕适配方式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/layout/" rel="tag">layout</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/03/23/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/" rel="tag">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layout/" rel="tag">layout</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/" rel="tag">redux</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/kotlin/" style="font-size: 10px;">kotlin</a> <a href="/tags/layout/" style="font-size: 10px;">layout</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/03/23/Redux-for-Android/">Redux-for-Android</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/23/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/">实现：一种极低成本的Android屏幕适配方式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
