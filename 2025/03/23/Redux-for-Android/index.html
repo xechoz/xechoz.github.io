@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="About一个精简的 Redux 库，去掉了一些 Redux 官方实例中冗余的设计 基础概念  GUI 开发，通常有3个角色： state: 描述数据状态action: 管理 stateview: 消费 state，触发 action 逻辑换成 Android 开发容易理解的话，就是 state &#x3D; immutable data classactions &#x3D; repositor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redux-for-Android">
+<meta property="og:url" content="https://xechoz.github.io/2025/03/23/Redux-for-Android/index.html">
+<meta property="og:site_name" content="石头汤的博客">
+<meta property="og:description" content="About一个精简的 Redux 库，去掉了一些 Redux 官方实例中冗余的设计 基础概念  GUI 开发，通常有3个角色： state: 描述数据状态action: 管理 stateview: 消费 state，触发 action 逻辑换成 Android 开发容易理解的话，就是 state &#x3D; immutable data classactions &#x3D; repositor">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xechoz.github.io/2025/03/23/Redux-for-Android/one-way-data-flow.png">
+<meta property="article:published_time" content="2025-03-23T08:08:30.000Z">
+<meta property="article:modified_time" content="2025-03-23T08:36:53.113Z">
+<meta property="article:author" content="xechoz">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="redux">
+<meta property="article:tag" content="kotlin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xechoz.github.io/2025/03/23/Redux-for-Android/one-way-data-flow.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Redux-for-Android</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xechoz">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://xechoz.github.io/2025/03/23/Redux-for-Android/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&text=Redux-for-Android"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&is_video=false&description=Redux-for-Android"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Redux-for-Android&body=Check out this article: https://xechoz.github.io/2025/03/23/Redux-for-Android/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&name=Redux-for-Android&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://xechoz.github.io/2025/03/23/Redux-for-Android/&t=Redux-for-Android"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#About"><span class="toc-number">1.</span> <span class="toc-text">About</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83"><span class="toc-number">3.</span> <span class="toc-text">核心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Demo"><span class="toc-number">5.</span> <span class="toc-text">使用 Demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Redux-for-Android
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">xechoz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-23T08:08:30.000Z" class="dt-published" itemprop="datePublished">2025-03-23</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/android/" rel="tag">android</a>, <a class="p-category" href="/tags/kotlin/" rel="tag">kotlin</a>, <a class="p-category" href="/tags/redux/" rel="tag">redux</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="About"><a href="#About" class="headerlink" title="About"></a>About</h2><p>一个精简的 Redux 库，去掉了一些 Redux 官方实例中冗余的设计</p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><img src="/2025/03/23/Redux-for-Android/one-way-data-flow.png" class="" title="数据流图">
+
+<p>GUI 开发，通常有3个角色：</p>
+<p>state: 描述数据状态<br>action: 管理 state<br>view: 消费 state，触发 action 逻辑<br>换成 Android 开发容易理解的话，就是</p>
+<p>state &#x3D; immutable data class<br>actions &#x3D; repository, viewmodel, presenter, service, controller, manager<br>view &#x3D; view, activity, fragment<br>一个简单的 counter 示例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// state</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">State</span>(</span><br><span class="line">    <span class="keyword">val</span> count: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// action</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CounterViewModel</span> &#123;</span><br><span class="line">    privte <span class="keyword">val</span> stateListeners = mutableList&lt;(State)-&gt;<span class="built_in">Unit</span>&gt;()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> state = State()</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">set</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">increment</span><span class="params">()</span></span> &#123;</span><br><span class="line">        state = state.copy(count = state.count + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        stateListeners.foreach &#123;</span><br><span class="line">            it(state)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">onStateChange</span><span class="params">(listener: (<span class="type">State</span>)-&gt;<span class="type">Unit</span>)</span></span> &#123;</span><br><span class="line">        stateListeners.add(listener)</span><br><span class="line"></span><br><span class="line">        listenter(state)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// view</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CounterFrament</span>(viewModel: CounterViewModel) &#123;</span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        viewMode.onStateChange &#123;</span><br><span class="line">            counterText =  viewmodel.state.count</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        setOnClickListener &#123;</span><br><span class="line">            viewModel.increment()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为 Android Architect 里边，把数据层称为 Repository，为了更符合Android 平台的称呼，所以接下来说的 Repsitory &#x3D; Action。</p>
+<h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><p>看了上面的示例，就会发现，核心只有两个:</p>
+<ol>
+<li>immutable data class( &#x3D; state)</li>
+<li>Repository( &#x3D; action)： 管理数据</li>
+</ol>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>state 是 任意 immutable data class 就可以。不需要另外多余的抽象。</p>
+<p>所以把实现的重点放到 Repository</p>
+<p>Repository 需要关心:</p>
+<ol>
+<li>存储 state</li>
+<li>分发 state</li>
+<li>更新 state</li>
+</ol>
+<p>逻辑的生命周期管理<br>分发 state，对应就有 接收state，这里是 1:N 的关系，1 个 state 可能有 N 个接收者,<br>Repository 作为 state 生产者，定位类似 kotlin flow, 只管分发数据，消费者决定怎么使用数据，<br>通常只有使用者知道什么时候不需要数据了，所以我们可以把监听数据这部分的生命周期管理交给使用者，这样就可以借助 kotlin coroutine scope，消费者自己管理监听&amp;取消监听数据。</p>
+<p>Repository 作为数据容器，action 可能很简单，也可能很复杂，<br>业务上很可能是需要有 诸如 启动，销毁的流程，但是 RxStateRepository 不知道如何处理，这部分属于不能抽象的部分，只能留给使用方（RxStateRepository 的 子类等）处理</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">typealias</span> RxState = Any</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> &lt;State: RxState&gt; RxStateRepository &#123;</span><br><span class="line">    <span class="comment">// 存储 state，对外 只读</span></span><br><span class="line">    <span class="keyword">val</span> state: State</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分发 state</span></span><br><span class="line">    <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;A:Any&gt;</span> <span class="title">onEach</span><span class="params">(property: <span class="type">KProperty1</span>&lt;<span class="type">State</span>, A&gt;, reducer: (<span class="type">A</span>)-&gt;<span class="type">Unit</span>)</span></span> </span><br><span class="line"></span><br><span class="line">    <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">onEach</span><span class="params">(reducer: (<span class="type">State</span>)-&gt;<span class="type">Unit</span>)</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">asFlow</span><span class="params">()</span></span>: Flow&lt;State&gt;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新 state，限制 只能在 RxStateRepository 的实现类 或者 \</span></span><br><span class="line">    extension 方法可用</span><br><span class="line">    <span class="comment">// data 是 immutable 的，每次 setState 都是 copy 一个新的数据</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> RxStateRepository<span class="type">&lt;State&gt;</span>.<span class="title">setState</span><span class="params">(reducer: <span class="type">State</span>.()-&gt;<span class="type">State</span>)</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>实现类</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> &lt;State: RxState&gt; RxStateRepositoryImpl(initState: State) : RxStateRepository&lt;State&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> stateFlow = mutableStateFlow(initState)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span></span><br><span class="line">    <span class="keyword">val</span> state: State = stateFlow.value</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">setState</span><span class="params">(reducer: <span class="type">State</span>.()-&gt;<span class="type">State</span>)</span></span> &#123;</span><br><span class="line">        stateFlow.value = reducer(state)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span></span><br><span class="line">    <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">onEach</span><span class="params">()</span></span> &#123;</span><br><span class="line">         supervisorScope &#123; chilScope -&gt;</span><br><span class="line">            childScope.launch &#123;</span><br><span class="line">                stateFlow.</span><br><span class="line">                .collectLatest(reducer)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-Demo"><a href="#使用-Demo" class="headerlink" title="使用 Demo"></a>使用 Demo</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">CounterState</span>(</span><br><span class="line">    <span class="keyword">val</span> count:<span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CounterRepository</span>: <span class="type">RxStateRepository</span>(CounterState(<span class="number">0</span>)) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">increment</span><span class="params">()</span></span> &#123;</span><br><span class="line">        setState &#123;</span><br><span class="line">            copy( count = count + <span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CounterView</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> counter = CounterRepository()</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> scope = MainScope()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        scope.launch &#123;</span><br><span class="line">            counter.onEach(CounterState::count) &#123;</span><br><span class="line">                text = <span class="string">&quot;Click <span class="variable">$it</span>&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        setOnClickListener &#123;</span><br><span class="line">            counter.increment()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结合 ViewModel 使用</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FooViewModel</span>: <span class="type">ViewModel</span>(), </span><br><span class="line">                    RxStateRepository <span class="keyword">by</span> RxStateRepositoryImpl(FooState()) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">updateFooToBar</span><span class="params">(bar: <span class="type">Any</span>)</span></span> &#123;</span><br><span class="line">        setState &#123;</span><br><span class="line">            copy(foo = bar)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://redux.js.org/tutorials/essentials/part-1-overview-concepts">Redux Essentials</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/airbnb/mavericks">Mavericks: Android on Autopilot</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/xechoz/android-kotlin-redux/tree/master">源码:RxState for Android</a></li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/xechoz">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#About"><span class="toc-number">1.</span> <span class="toc-text">About</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83"><span class="toc-number">3.</span> <span class="toc-text">核心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Demo"><span class="toc-number">5.</span> <span class="toc-text">使用 Demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://xechoz.github.io/2025/03/23/Redux-for-Android/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&text=Redux-for-Android"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&is_video=false&description=Redux-for-Android"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Redux-for-Android&body=Check out this article: https://xechoz.github.io/2025/03/23/Redux-for-Android/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&title=Redux-for-Android"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://xechoz.github.io/2025/03/23/Redux-for-Android/&name=Redux-for-Android&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://xechoz.github.io/2025/03/23/Redux-for-Android/&t=Redux-for-Android"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    xechoz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xechoz">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
