@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="实现： 一种极低成本的Android屏幕适配方式参考 一种极低成本的Android屏幕适配方式 单个 Activity 适配12345class MainActivity : ComponentActivity() &#123;    override fun attachBaseContext(newBase: Context) &#123;        super.attachBaseCon">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实现：一种极低成本的Android屏幕适配方式">
-<meta property="og:url" content="https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:title" content="Android屏幕适配">
+<meta property="og:url" content="https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/index.html">
 <meta property="og:site_name" content="石头汤的博客">
 <meta property="og:description" content="实现： 一种极低成本的Android屏幕适配方式参考 一种极低成本的Android屏幕适配方式 单个 Activity 适配12345class MainActivity : ComponentActivity() &#123;    override fun attachBaseContext(newBase: Context) &#123;        super.attachBaseCon">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-23T06:41:43.000Z">
-<meta property="article:modified_time" content="2025-03-24T15:56:07.827Z">
+<meta property="article:modified_time" content="2025-03-24T18:15:25.203Z">
 <meta property="article:author" content="xechoz">
 <meta property="article:tag" content="android">
 <meta property="article:tag" content="layout">
@@ -38,7 +38,7 @@
       
     
     <!-- title -->
-    <title>实现：一种极低成本的Android屏幕适配方式</title>
+    <title>Android屏幕适配</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -97,17 +97,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&text=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&title=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&is_video=false&description=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=实现：一种极低成本的Android屏幕适配方式&body=Check out this article: https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&title=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&title=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&title=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&title=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&name=实现：一种极低成本的Android屏幕适配方式&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&t=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&text=Android屏幕适配"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&title=Android屏幕适配"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&is_video=false&description=Android屏幕适配"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android屏幕适配&body=Check out this article: https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&title=Android屏幕适配"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&title=Android屏幕适配"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&title=Android屏幕适配"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&title=Android屏幕适配"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&name=Android屏幕适配&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&t=Android屏幕适配"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -127,7 +127,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        实现：一种极低成本的Android屏幕适配方式
+        Android屏幕适配
     </h1>
 
 
@@ -201,17 +201,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&text=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&title=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&is_video=false&description=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=实现：一种极低成本的Android屏幕适配方式&body=Check out this article: https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&title=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&title=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&title=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&title=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&name=实现：一种极低成本的Android屏幕适配方式&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://xechoz.github.io/2025/03/23/%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9E%81%E4%BD%8E%E6%88%90%E6%9C%AC%E7%9A%84Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E5%BC%8F/&t=实现：一种极低成本的Android屏幕适配方式"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&text=Android屏幕适配"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&title=Android屏幕适配"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&is_video=false&description=Android屏幕适配"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android屏幕适配&body=Check out this article: https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&title=Android屏幕适配"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&title=Android屏幕适配"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&title=Android屏幕适配"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&title=Android屏幕适配"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&name=Android屏幕适配&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://xechoz.github.io/2025/03/23/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/&t=Android屏幕适配"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
