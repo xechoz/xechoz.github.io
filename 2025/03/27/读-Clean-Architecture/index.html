@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="这周在看 《Clean Architeture》。 读这本书，我是想获得什么？我应该怎么读？ Top to Down: 我先过一边目录，有了大概的了解。 关于 clean Architecture, 我在很多场景都看过，但是一直没 get 到他的核心。 我能理解 mvxx，redux，但是无法理解 clean。这是一个困扰了我很多年的问题。 最近在写 redux for android。已经在项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读 Clean Architecture">
+<meta property="og:url" content="https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/index.html">
+<meta property="og:site_name" content="石头汤的博客">
+<meta property="og:description" content="这周在看 《Clean Architeture》。 读这本书，我是想获得什么？我应该怎么读？ Top to Down: 我先过一边目录，有了大概的了解。 关于 clean Architecture, 我在很多场景都看过，但是一直没 get 到他的核心。 我能理解 mvxx，redux，但是无法理解 clean。这是一个困扰了我很多年的问题。 最近在写 redux for android。已经在项目">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-26T17:08:12.000Z">
+<meta property="article:modified_time" content="2025-03-26T19:04:21.809Z">
+<meta property="article:author" content="xechoz">
+<meta property="article:tag" content="architecture">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>读 Clean Architecture</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xechoz">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/25/Update-Redux-for-android/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&text=读 Clean Architecture"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&title=读 Clean Architecture"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&is_video=false&description=读 Clean Architecture"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=读 Clean Architecture&body=Check out this article: https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&title=读 Clean Architecture"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&title=读 Clean Architecture"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&title=读 Clean Architecture"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&title=读 Clean Architecture"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&name=读 Clean Architecture&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&t=读 Clean Architecture"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        读 Clean Architecture
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">xechoz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-26T17:08:12.000Z" class="dt-published" itemprop="datePublished">2025-03-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/architecture/" rel="tag">architecture</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>这周在看 《Clean Architeture》。</p>
+<p>读这本书，我是想获得什么？我应该怎么读？</p>
+<p>Top to Down: 我先过一边目录，有了大概的了解。</p>
+<p>关于 clean Architecture, 我在很多场景都看过，但是一直没 get 到他的核心。</p>
+<p>我能理解 mvxx，redux，但是无法理解 clean。这是一个困扰了我很多年的问题。</p>
+<p>最近在写 redux for android。已经在项目上用了。在写的过程中，我又重新审视了几年前写的 mvvm 架构。</p>
+<p>那是入职 YY 第一年，写的一个 MVVM。大概是一个 魔改版的 android live data，view model。</p>
+<p>我写的时候预想的很多设计，后来都废弃了，或者没被好好使用起来。从现在使用的情况来看，是一个失败的设计。</p>
+<p>但是从给项目带来的价值看，也还算不多。能够在 10M 级代码里的项目大量使用，支持了5年的项目开发，也不算太烂。</p>
+<p>至于有一些经常被大家吐槽的问题，例如 3000 行的类，看不懂的面条代码。<br>这不是架构的问题，架构提供了解决多人协同合作的方法，提供了方便的分模块功能，<br>但是很多人偷懒，把所有功能写到一个类里，导致代码职责不明，callback 漫天飞。耶稣都救不了。</p>
+<p>我已经看到多很多 3000 的类了，不管换什么架构，永远解决不了有些代码变成屎山的趋势。这不是编程问题，而是社会问题。你永远管不了有人喜欢到处拉屎。</p>
+<p>软件架构是必须按使用者来量身设计。我以前不知道这个定律的专业术语，后来看到 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Conway%27s_law">Conway’s law</a>:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[O]rganizations which design systems (in the broad sense used here) are constrained to produce designs which are copies of the communication structures of these organizations.</span><br><span class="line"></span><br><span class="line">— Melvin E. Conway, How Do Committees Invent?</span><br></pre></td></tr></table></figure>
+
+<p>这是最贴近我做设计的想法。组织的规模，交互，决定了软件架构的设计整体框架。为5人小团队设计的架构，跟为20人团队设计的架构，考虑的就不是同一回事。</p>
+<p>很久以前我在荔枝FM做架构设计，我想的达到的目标是 简单，快速交付。我把 mvp 简化到只有2-3个分层。因为这是只有5-6人的团队，创业公司需要的是低成本，快速迭代，验证，试错，复盘。</p>
+<p>我在唯品会摸鱼的时候用的是不同的架构。但是我没有拿到荔枝FM，因为规模不同，目标不同。大公司要的是稳定，统一，不要出错，所有人按相同的模板写代码，甚至到处都是冗余的模板代码，<br>看起来写了很多代码，其实是在 copy parse，会打螺丝就行，最重要是不要犯错。这跟创业公司是完全不同的目标。</p>
+<p>创业公司不怕大家犯错，甚至鼓励大家尝试各种可以提效的方案，尝试，然后找到更好的。在荔枝FM，不断尝试各种项目管理工具，团队协作工具，代码管理工具，敢在高速上边开边换轮胎。</p>
+<p>YY 的团队规模，其实是比唯品会更大，但却是一个原始的状态。用着是乱来的MVC。Controller 是世界的中心，全部的功能在一个类，没写5000行都不好意思拿出来。很多人都不知道有 UI session data，UI session logic。</p>
+<p>当我要在YY做架构，第一个要解决的就是分工，协作，但是不能像荔枝那样分。现在第一个目标要的不是快速交付，而是易于维护，扩展。（易于维护，扩展的代码，通常也意味着后续更快的交付）。所以需要解耦，分层，分模块，模块交互，协作，同时需要更多约束。但是又不能用起来太麻烦。<br>人多了，花在维护的成本远比开发的成本更高。这就是需要根据使用者来设计架构。这样我想起我们的后台设计，我们只有一个App的业务，10人的后台开发，却照着阿里搞大中台。而在两年后，阿里自己去中台了。</p>
+<p>5 年后，我再次考虑客户端的这个架构。有些过度的设计，有些很好，却没推广的设计。我设想的，每个业务都分 核心功能core，分离的边界功能，context 共享状态。这些设计都在多次的App改版后被遗忘了。<br>后来推广的单例 service 架构，同时也继承了单例的缺点，需要多实例就很头疼，大部分场景确实简单易用。但是丢掉了我设想的 核心-边界-context 共享的模式。</p>
+<p>当我再次写 Redux for android 的时候，我又想起这个 context 的模式。这是给5人小团队使用的架构。<br>我想保留模块交互，管理，共享，也想有单例的简单，我还没写出来。应该综合两者的优点。</p>
+<p>我上周看 hilt 的 module，context 这个的定位有些像 Hilt 的 module，但是我不熟悉 hilt，没法深入对比。</p>
+<p>我还不知道业界怎么称呼这个。可能看完 Clean Architecture 后我会找到答案。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/xechoz">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&text=读 Clean Architecture"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&title=读 Clean Architecture"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&is_video=false&description=读 Clean Architecture"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=读 Clean Architecture&body=Check out this article: https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&title=读 Clean Architecture"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&title=读 Clean Architecture"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&title=读 Clean Architecture"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&title=读 Clean Architecture"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&name=读 Clean Architecture&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://xechoz.github.io/2025/03/27/%E8%AF%BB-Clean-Architecture/&t=读 Clean Architecture"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    xechoz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xechoz">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
