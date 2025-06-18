@@ -14,7 +14,7 @@
 <meta property="og:description" content="这周在看 《Clean Architeture》。 读这本书，我是想获得什么？我应该怎么读？ Top to Down: 我先过一边目录，有了大概的了解。 关于 clean Architecture, 我在很多场景都看过，但是一直没 get 到他的核心。 我能理解 mvxx，redux，但是无法理解 clean。这是一个困扰了我很多年的问题。 最近在写 redux for android。已经在项目">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-26T17:08:12.000Z">
-<meta property="article:modified_time" content="2025-03-30T16:34:51.808Z">
+<meta property="article:modified_time" content="2025-04-13T18:04:22.833Z">
 <meta property="article:author" content="xechoz">
 <meta property="article:tag" content="architecture">
 <meta name="twitter:card" content="summary">
@@ -82,6 +82,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" aria-label="Previous post" href="/2025/06/19/%E5%8A%A0%E7%8F%AD/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" aria-label="Next post" href="/2025/03/25/Update-Redux-for-android/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -113,7 +115,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2025-3-31"><span class="toc-number">1.</span> <span class="toc-text">2025-3-31</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2025-3-31"><span class="toc-number">1.</span> <span class="toc-text">2025-3-31</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2025-4-14"><span class="toc-number">2.</span> <span class="toc-text">2025-4-14</span></a></li></ol>
       </div>
     
   </span>
@@ -186,6 +188,7 @@
 <p>clean 更接近是 设计思想，redux 是编码实现。看 clean architecture 这本书就发现，clean 是从很多简单实用的 pattern 发展而来，而这些 patter，例如 SOLID,<br>是 coding 中的基础，在 redux，mvxx 也大量使用。clean 对这些基础 pattern 做了 更高的抽象，使其更贴近实际的开发流程，但是又不至于像 redux，mvvm 那么具体。</p>
 <p>clean 很注重 依赖规则，DIP 是其很核心的一个 pattern。理解 依赖，DIP 是理解 clean 的关键。但是我想，这也是 clean 难以理解，被人诟病的地方。<br>过于注重抽象层级，抽象依赖，DIP，导致 曾经非常多。Redux，MVVM 可能 3-4 个层级，到了 clean，核心层级都分 interface，DIP 两部分，层级翻倍。导致常常觉得 是 过度设计。</p>
 <p>过度设计 是个需要时间才能证伪的命题。因为是否过度，这个跟时间相关，今天的过度设计，到了明天，变更来了，刚好用上这个过度设计。</p>
+<h2 id="2025-4-14"><a href="#2025-4-14" class="headerlink" title="2025-4-14"></a>2025-4-14</h2><p>读完了 clean architecture. 作者也意识到了 层级过多，可能存在过度设计的问题。后面的章节 给出了一些，简化或者渐进clean 的方式，不完全边界。<br>确实如我之前所想，clean 是一种思想，比 solid 更具体，但是比 redux 更抽象。在 clean 的很多原则，可以拿到 redux 使用。redux 可以是其中一种实现方式。</p>
 
   </div>
 </article>
@@ -213,7 +216,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2025-3-31"><span class="toc-number">1.</span> <span class="toc-text">2025-3-31</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2025-3-31"><span class="toc-number">1.</span> <span class="toc-text">2025-3-31</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2025-4-14"><span class="toc-number">2.</span> <span class="toc-text">2025-4-14</span></a></li></ol>
       </div>
     
 
