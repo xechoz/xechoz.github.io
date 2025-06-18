@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="About最近 一个月，在用 Redux-for-Android 写真实的项目。 有些问题，吹 Functianal Programming 的人不会告诉你，只有掉坑了才知道。 函数式编程的坑immutable data，当 业务很复杂，状态层级很深的时候，immutable 的弊端就出来了。不仅更改深层的状态非常繁琐，另外即使更改一个很小的状态，也会导致整个状态发生变化。一连串的连锁反映，最终的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Functional in Kotlin">
+<meta property="og:url" content="https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/index.html">
+<meta property="og:site_name" content="石头汤的博客">
+<meta property="og:description" content="About最近 一个月，在用 Redux-for-Android 写真实的项目。 有些问题，吹 Functianal Programming 的人不会告诉你，只有掉坑了才知道。 函数式编程的坑immutable data，当 业务很复杂，状态层级很深的时候，immutable 的弊端就出来了。不仅更改深层的状态非常繁琐，另外即使更改一个很小的状态，也会导致整个状态发生变化。一连串的连锁反映，最终的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-18T16:56:06.000Z">
+<meta property="article:modified_time" content="2025-06-18T17:42:28.585Z">
+<meta property="article:author" content="xechoz">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Kotlin">
+<meta property="article:tag" content="技术博客">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Functional in Kotlin</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xechoz">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/06/19/%E5%8A%A0%E7%8F%AD/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&text=Functional in Kotlin"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&title=Functional in Kotlin"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&is_video=false&description=Functional in Kotlin"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Functional in Kotlin&body=Check out this article: https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&title=Functional in Kotlin"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&title=Functional in Kotlin"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&title=Functional in Kotlin"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&title=Functional in Kotlin"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&name=Functional in Kotlin&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&t=Functional in Kotlin"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#About"><span class="toc-number">1.</span> <span class="toc-text">About</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E5%9D%91"><span class="toc-number">2.</span> <span class="toc-text">函数式编程的坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#todo"><span class="toc-number">4.</span> <span class="toc-text">todo</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Functional in Kotlin
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">xechoz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-06-18T16:56:06.000Z" class="dt-published" itemprop="datePublished">2025-06-19</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="About"><a href="#About" class="headerlink" title="About"></a>About</h2><p>最近 一个月，在用 <a href="/2025/03/23/Redux-for-Android/" title="Redux-for-Android">Redux-for-Android</a> 写真实的项目。</p>
+<p>有些问题，吹 Functianal Programming 的人不会告诉你，只有掉坑了才知道。</p>
+<h2 id="函数式编程的坑"><a href="#函数式编程的坑" class="headerlink" title="函数式编程的坑"></a>函数式编程的坑</h2><p>immutable data，当 业务很复杂，状态层级很深的时候，immutable 的弊端就出来了。<br>不仅更改深层的状态非常繁琐，另外即使更改一个很小的状态，也会导致整个状态发生变化。<br>一连串的连锁反映，最终的问题就是，不仅内存，性能也会受影响。<br>真的是牵一发而动全身，业务逻辑很复杂的时候，很难维护。</p>
+<p>举个例子:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用户资料页的数据模型</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">UserProfileState</span>(</span><br><span class="line">    <span class="keyword">val</span> me: User, <span class="comment">// 这个用户</span></span><br><span class="line">    <span class="keyword">val</span> friends: List&lt;User&gt;, <span class="comment">// 好友</span></span><br><span class="line">    <span class="keyword">val</span> posts: List&lt;Post&gt; <span class="comment">// 帖子</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用户基本信息</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">User</span>(</span><br><span class="line">    <span class="keyword">val</span> uid: String,</span><br><span class="line">    <span class="keyword">val</span> name: String,</span><br><span class="line">    <span class="keyword">val</span> age: <span class="built_in">Int</span>,</span><br><span class="line">    ...</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用户发的帖子</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">Post</span>(</span><br><span class="line">    <span class="keyword">val</span> id: String,</span><br><span class="line">    <span class="keyword">val</span> content: String,</span><br><span class="line">    <span class="keyword">val</span> user: User,</span><br><span class="line">    <span class="keyword">val</span> comments: List&lt;Comment&gt;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 帖子下的评论</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">Comment</span>(</span><br><span class="line">    <span class="keyword">val</span> id: String,</span><br><span class="line">    <span class="keyword">val</span> content: String,</span><br><span class="line">    <span class="keyword">val</span> user: User</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>实际会用到的几个逻辑, 写起来是这样的:</p>
+<p><code>class UserProfileModel</code></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">addPost</span><span class="params">(post: <span class="type">Post</span>)</span></span> &#123;</span><br><span class="line">    setState &#123;</span><br><span class="line">        copy(</span><br><span class="line">            posts = posts + post</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">addComment</span><span class="params">(postId: <span class="type">String</span>, comment: <span class="type">Comment</span>)</span></span> &#123;</span><br><span class="line">    setState &#123;</span><br><span class="line">        copy(</span><br><span class="line">            posts = posts.map &#123;</span><br><span class="line">                <span class="keyword">if</span> (it.id == postId) &#123;</span><br><span class="line">                    it.copy(</span><br><span class="line">                        comments = it.comments + comment</span><br><span class="line">                    )</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    it</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 看到这个缩进，就知道事情不简单了。这个代码读起来已经很复杂了，但是做的事情很简单，就是更新评论。</span></span><br><span class="line"><span class="comment">// 但是，这个代码有个问题，就是每次更新评论，都会导致整个帖子的状态发生变化。</span></span><br><span class="line"><span class="comment">// 虽然这个例子只有两级状态，但是如果状态层级很深，那么这个问题就会很严重。</span></span><br><span class="line"><span class="comment">// 所以，这个代码是有问题的，但是问题也很明显，就是状态层级很深。</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">updateComment</span><span class="params">(postId: <span class="type">String</span>, comment: <span class="type">Comment</span>)</span></span> &#123;</span><br><span class="line">    setState &#123;</span><br><span class="line">        copy(</span><br><span class="line">            posts = posts.map &#123;</span><br><span class="line">                <span class="keyword">if</span> (it.id == postId) &#123;</span><br><span class="line">                    it.copy(</span><br><span class="line">                        comments = it.comments.map &#123;</span><br><span class="line">                            <span class="keyword">if</span> (it.id == comment.id) &#123;</span><br><span class="line">                                comment</span><br><span class="line">                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                it</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    )</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    it</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>每个数据都带上 ‘id’, 通过 id 缩减 嵌套的 数据类型</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用户资料页的数据模型</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">UserProfileState</span>(</span><br><span class="line">    <span class="keyword">val</span> me: UserId, <span class="comment">// 这个用户</span></span><br><span class="line">    <span class="keyword">val</span> friends: List&lt;UserId&gt;, <span class="comment">// 好友</span></span><br><span class="line">    <span class="keyword">val</span> posts: List&lt;PostId&gt; <span class="comment">// 帖子</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用户基本信息</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">User</span>(</span><br><span class="line">    <span class="keyword">val</span> uid: UserId,</span><br><span class="line">    <span class="keyword">val</span> name: String,</span><br><span class="line">    <span class="keyword">val</span> age: <span class="built_in">Int</span>,</span><br><span class="line">    ...</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用户发的帖子</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">Post</span>(</span><br><span class="line">    <span class="keyword">val</span> id: PostId,</span><br><span class="line">    <span class="keyword">val</span> content: String,</span><br><span class="line">    <span class="keyword">val</span> user: UserId,</span><br><span class="line">    <span class="keyword">val</span> comments: List&lt;CommentId&gt;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 帖子下的评论</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">Comment</span>(</span><br><span class="line">    <span class="keyword">val</span> id: CommentId,</span><br><span class="line">    <span class="keyword">val</span> content: String,</span><br><span class="line">    <span class="keyword">val</span> user: UserId</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>数据结构的定义 跟之前差别不大。只是用 Id 替换了 目标的数据类型。这样就可以把逻辑 分开，按各自的 类型处理, 例如 可以拆成<br>ProfileModel, UserModel, PostModel, CommentModel 基本上每个 data 的逻辑 只有一个 Model 负责，<br>其他的 Model 负责 处理 数据的 转换。</p>
+<p>例如 ProfileModel 负责 处理 用户资料页的数据，UserModel 负责 处理 用户的基本信息，PostModel 负责 处理 帖子的信息，CommentModel 负责 处理 评论的信息。不需要像 UserProfileModel 处理全部的 state 逻辑。现在的 UserProfileModel 只需要组合 各个 model</p>
+<p>这样的好处是，我们的 数据 state 模型 还是对应 业务的功能的，从 data state 很容易看出来这个业务的核心数据，拆分的只是逻辑。<br>而 核心 流程 还是在 UserProfileModel, 只是拆分了各自的子数据处理逻辑</p>
+<h2 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h2><p>补充更多的 相关理论基础，例如 mongo db 的 懒加载优化：类似MongoDB的投影(projection)机制，减少初始数据量<br>行业解决方案等，例如 Arrow.kt 怎么解决的深层级的 modify 数据</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/xechoz">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#About"><span class="toc-number">1.</span> <span class="toc-text">About</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E5%9D%91"><span class="toc-number">2.</span> <span class="toc-text">函数式编程的坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#todo"><span class="toc-number">4.</span> <span class="toc-text">todo</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&text=Functional in Kotlin"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&title=Functional in Kotlin"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&is_video=false&description=Functional in Kotlin"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Functional in Kotlin&body=Check out this article: https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&title=Functional in Kotlin"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&title=Functional in Kotlin"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&title=Functional in Kotlin"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&title=Functional in Kotlin"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&name=Functional in Kotlin&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://xechoz.github.io/2025/06/19/Functional-in-Kotlin/&t=Functional in Kotlin"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    xechoz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xechoz">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
