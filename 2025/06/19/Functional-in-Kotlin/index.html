@@ -14,7 +14,7 @@
 <meta property="og:description" content="About最近 一个月，在用 Redux-for-Android 写真实的项目。 有些问题，吹 Functianal Programming 的人不会告诉你，只有掉坑了才知道。 函数式编程的坑immutable data，当 业务很复杂，状态层级很深的时候，immutable 的弊端就出来了。不仅更改深层的状态非常繁琐，另外即使更改一个很小的状态，也会导致整个状态发生变化。一连串的连锁反映，最终的">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-18T16:56:06.000Z">
-<meta property="article:modified_time" content="2025-06-18T17:50:53.068Z">
+<meta property="article:modified_time" content="2025-06-30T02:52:52.352Z">
 <meta property="article:author" content="xechoz">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="Kotlin">
@@ -115,7 +115,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#About"><span class="toc-number">1.</span> <span class="toc-text">About</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E5%9D%91"><span class="toc-number">2.</span> <span class="toc-text">函数式编程的坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#todo"><span class="toc-number">4.</span> <span class="toc-text">todo</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#About"><span class="toc-number">1.</span> <span class="toc-text">About</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E5%9D%91"><span class="toc-number">2.</span> <span class="toc-text">函数式编程的坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-ArrowKt-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">4.</span> <span class="toc-text">关于 ArrowKt 的解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kotlin-DSL"><span class="toc-number">5.</span> <span class="toc-text">Kotlin DSL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90-%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">推荐&amp;参考</span></a></li></ol>
       </div>
     
   </span>
@@ -171,12 +171,22 @@
 <p>数据结构的定义 跟之前差别不大。只是用 Id 替换了 目标的数据类型。这样就可以把逻辑 分开，按各自的 类型处理, 例如 可以拆成<br>ProfileModel, UserModel, PostModel, CommentModel 基本上每个 data 的逻辑 只有一个 Model 负责，<br>其他的 Model 负责 处理 数据的 转换。</p>
 <p>例如 ProfileModel 负责 处理 用户资料页的数据，UserModel 负责 处理 用户的基本信息，PostModel 负责 处理 帖子的信息，CommentModel 负责 处理 评论的信息。不需要像 UserProfileModel 处理全部的 state 逻辑。现在的 UserProfileModel 只需要组合 各个 model</p>
 <p>这样的好处是，我们的 数据 state 模型 还是对应 业务的功能的，从 data state 很容易看出来这个业务的核心数据，拆分的只是逻辑。<br>而 核心 流程 还是在 UserProfileModel, 只是拆分了各自的子数据处理逻辑</p>
-<h2 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h2><p>补充更多的 相关理论基础，例如 mongo db 的 懒加载优化：类似MongoDB的投影(projection)机制，减少初始数据量<br>行业解决方案等，例如 Arrow.kt 怎么解决的深层级的 modify 数据</p>
-<p><a target="_blank" rel="noopener" href="https://redux.js.org/usage/structuring-reducers/normalizing-state-shape">https://redux.js.org/usage/structuring-reducers/normalizing-state-shape</a></p>
-<p>行业方案认知缺口</p>
-<p>行业方案认知缺口<br>Redux归一化标准 <a target="_blank" rel="noopener" href="https://redux.js.org/usage/structuring-reducers/normalizing-state-shape">https://redux.js.org/usage/structuring-reducers/normalizing-state-shape</a><br>未引用Redux官方文档中的Normalizing State Shape</p>
-<p>Kotlin生态方案</p>
-<p>Arrow.kt的Optics系统<br>Kotlinx.collections.immutable的持久化集合<br>Android架构指南<br>未关联Jetpack Compose的状态提升模式</p>
+<p>推荐阅读 <a target="_blank" rel="noopener" href="https://redux.js.org/usage/structuring-reducers/normalizing-state-shape">Redux Normalization State Shape</a>, 虽然 Android 开发用不到 Redux，但是 Redux 的很多思想，在 kotlin state flow 中都有应用, 特别是 复杂的状态管理方面，Redux 的很多思想是可以直接借鉴的。</p>
+<p>例如 上面的使用 id flatten 数据层级，我在一开始只想到 mongo db 的 projection，直到写这个的时候查资料，才发现 Redux 已经实现了一整套方案。</p>
+<h2 id="关于-ArrowKt-的解决方案"><a href="#关于-ArrowKt-的解决方案" class="headerlink" title="关于 ArrowKt 的解决方案"></a>关于 ArrowKt 的解决方案</h2><p>Arrow 也有完整的解决方案。我没使用过 Arrow，不能深入评价。如果只从 入门使用者的角度看，我认为 Arrow 为了更符合函数式编程的 概念，例如 lens，引入了不必要的复杂度。而这些复杂度，在 OOP 里本来是不存在的。lens 更应该是到了特定的，明确需要的场景再使用。很多时候 lens 引入的复杂度 还不如 直接用 data class 的嵌套 copy.</p>
+<p>Funtional Program 在我看来，经常犯的错就是，过于注重形式，而不是解决问题。如果要用函数式的思想，就不能用面向对象的思想。使用 OOP 的是个异类，放火烧死他。《人月神话》里很早就说过了，不存在银弹。但是很多 FP 的使用者 却认为 只有 FP 是正确的，只能用 FP 去解决问题。<br>但是我是实用派，我不关心是 FP，还是 OOP，我更关心的是，如何用最简洁高效的方式，解决问题。</p>
+<p>例如官方给的读写 Data:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> me = Person(</span><br><span class="line">  <span class="string">&quot;Alejandro&quot;</span>, <span class="number">35</span>, </span><br><span class="line">  Address(Street(<span class="string">&quot;Kotlinstraat&quot;</span>, <span class="number">1</span>), City(<span class="string">&quot;Hilversum&quot;</span>, <span class="string">&quot;Netherlands&quot;</span>))</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">Person.name.<span class="keyword">get</span>(me) shouldBe <span class="string">&quot;Alejandro&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> meAfterBirthdayParty = Person.age.modify(me) &#123; it + <span class="number">1</span> &#125;</span><br><span class="line">Person.age.<span class="keyword">get</span>(meAfterBirthdayParty) shouldBe <span class="number">36</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> newAddress = Address(Street(<span class="string">&quot;Kotlinplein&quot;</span>, <span class="literal">null</span>), City(<span class="string">&quot;Amsterdam&quot;</span>, <span class="string">&quot;Netherlands&quot;</span>))</span><br><span class="line"><span class="keyword">val</span> meAfterMoving = Person.address.<span class="keyword">set</span>(me, newAddress)</span><br><span class="line">Person.address.<span class="keyword">get</span>(meAfterMoving) shouldBe newAddress</span><br></pre></td></tr></table></figure>
+
+<p>读取 <code>name</code> 从 <code>me.name</code> 变成了 <code>Person.name.get(me)</code>， 为了更符合FP的定义，FP 经常干这种脱裤子放屁的事。</p>
+<h2 id="Kotlin-DSL"><a href="#Kotlin-DSL" class="headerlink" title="Kotlin DSL"></a>Kotlin DSL</h2><p>AI 提到 可以用 DSL, 这个还没用过:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user update &#123;</span><br><span class="line">    name <span class="keyword">set</span> <span class="string">&quot;新名称&quot;</span></span><br><span class="line">    address update &#123;</span><br><span class="line">        street <span class="keyword">set</span> <span class="string">&quot;新街道&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="推荐-参考"><a href="#推荐-参考" class="headerlink" title="推荐&amp;参考"></a>推荐&amp;参考</h2><ol>
+<li>mongo db 的 懒加载优化：类似MongoDB的投影(projection)机制，减少初始数据量</li>
+<li><a target="_blank" rel="noopener" href="https://redux.js.org/usage/structuring-reducers/normalizing-state-shape">Redux Normalization State Shape</a></li>
+<li><a target="_blank" rel="noopener" href="https://arrow-kt.io/learn/immutable-data/intro">Arrow.kt Immutable Data</a></li>
+</ol>
 
   </div>
 </article>
@@ -204,7 +214,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#About"><span class="toc-number">1.</span> <span class="toc-text">About</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E5%9D%91"><span class="toc-number">2.</span> <span class="toc-text">函数式编程的坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#todo"><span class="toc-number">4.</span> <span class="toc-text">todo</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#About"><span class="toc-number">1.</span> <span class="toc-text">About</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E5%9D%91"><span class="toc-number">2.</span> <span class="toc-text">函数式编程的坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-ArrowKt-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">4.</span> <span class="toc-text">关于 ArrowKt 的解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kotlin-DSL"><span class="toc-number">5.</span> <span class="toc-text">Kotlin DSL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90-%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">推荐&amp;参考</span></a></li></ol>
       </div>
     
 
